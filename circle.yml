@@ -17,12 +17,10 @@ dependencies:
         - ~/.gradle
         - ~/.android
     override:
-        - yes | android update sdk --no-ui --all --filter "tools,android-25,build-tools-25.0.1,platform-tools,extra-google-m2repository,extra-android-m2repository,extra-android-support"
+        - ./circle/install_dependencies.sh
 
 test:
     override:
-        - mkdir $HOME/.gradle/init.d
-        - cp circle.gradle $HOME/.gradle/init.d/
         - ./gradlew build --console=plain
         - if [ -d teach/build/outputs ]; then cp -r teach/build/outputs $CIRCLE_ARTIFACTS; fi
         - if [ -d teach/build/reports ]; then cp -r teach/build/reports $CIRCLE_TEST_REPORTS; fi
