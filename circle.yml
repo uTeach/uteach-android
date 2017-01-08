@@ -1,0 +1,31 @@
+machine:
+    java:
+        version: oraclejdk8
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+
+general:
+    branches:
+        only:
+            - master
+            - develop
+            - /test-.*/
+
+dependencies:
+    cache_directories:
+        - ~/.gradle
+        - ~/.android
+    
+    override:
+        - yes | android update sdk --no-ui --filter "android-25-build-tools-25.0.1"
+        - yes | android update sdk --no-ui --all --filter "platform-tools, tools"
+        - yes | android update sdk --no-ui --all --filter "android-25, build-tools-25.0.1"
+        - yes | android update sdk --no-ui --all --filter "extra-android-m2repository"
+        - yes | android update sdk --no-ui --all --filter "extra-android-support"
+
+test:
+    override:
+        - cp circle.gradle $USER_HOME/.gradle/init.d/
+        - ./gradlew build --console=plain
+        - cp -r teach/build/outputs $CIRCLE_ARTIFACTS
+        - cp -r teach/build/reports $CIRCLE_TEST_REPORTS
