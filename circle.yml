@@ -17,8 +17,7 @@ dependencies:
         - ~/.gradle
         - ~/.android
     override:
-        - echo $PWD
-        - circle/install_dependencies.sh
+        - bash circle/install_depenencies.sh
 
 test:
     override:
