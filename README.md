@@ -1,6 +1,6 @@
-### uTeach
+# uTeach
 
-[![CircleCI](https://circleci.com/gh/uTeach/uteach-android/tree/develop.svg?style=svg)](https://circleci.com/gh/uTeach/uteach-android/tree/develop)
+CI Status: [![CircleCI](https://circleci.com/gh/uTeach/uteach-android/tree/develop.svg?style=svg)](https://circleci.com/gh/uTeach/uteach-android/tree/develop)
 
 #### Repository
 

@@ -1,7 +1,21 @@
 ext {
     supportAppcompatVersion = '25.0.1'
 
+    gifVersion = '1.2.3'
+
+    retrofitVersion = '2.1.0'
+    gsonVersion = '2.8.0'
+
     support = [
         appcompat : "com.android.support:appcompat-v7:$supportAppcompatVersion"
+    ]
+
+    misc = [
+        gif : "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
+    ]
+
+    http = [
+        retrofit : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+        gson : "com.google.code.gson:gson:$gsonVersion"
     ]
 }

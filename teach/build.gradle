@@ -25,4 +25,9 @@ android {
 
 dependencies {
     compile support.appcompat
+
+    compile misc.gif
+
+    compile http.retrofit
+    compile http.gson
 }
