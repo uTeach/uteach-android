@@ -5,13 +5,6 @@ machine:
         ANDROID_HOME: /usr/local/android-sdk-linux
         PATH: "~/teach/gradle-3.3/all:$PATH"
 
-general:
-    branches:
-        only:
-            - master
-            - develop
-            - /test-.*/
-
 dependencies:
     cache_directories:
         - ~/.gradle
