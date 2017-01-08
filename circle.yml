@@ -17,15 +17,16 @@ dependencies:
         - ~/.android
     
     override:
-        - yes | android update sdk --no-ui --filter "android-25-build-tools-25.0.1"
-        - yes | android update sdk --no-ui --all --filter "platform-tools, tools"
-        - yes | android update sdk --no-ui --all --filter "android-25, build-tools-25.0.1"
+        - yes | android update sdk --no-ui --filter "android-25,build-tools-25.0.1"
+        - yes | android update sdk --no-ui --all --filter "platform-tools,tools"
+        - yes | android update sdk --no-ui --all --filter "android-25,build-tools-25.0.1"
         - yes | android update sdk --no-ui --all --filter "extra-android-m2repository"
         - yes | android update sdk --no-ui --all --filter "extra-android-support"
 
 test:
     override:
-        - cp circle.gradle $USER_HOME/.gradle/init.d/
+        - mkdirs $HOME/.gradle/init.d
+        - cp circle.gradle $HOME/.gradle/init.d/
         - ./gradlew build --console=plain
-        - cp -r teach/build/outputs $CIRCLE_ARTIFACTS
-        - cp -r teach/build/reports $CIRCLE_TEST_REPORTS
+        - if [ -d teach/build/outputs ]; then cp -r teach/build/outputs $CIRCLE_ARTIFACTS; fi
+        - if [ -d teach/build/reports ]; then cp -r teach/build/reports $CIRCLE_TEST_REPORTS; fi
