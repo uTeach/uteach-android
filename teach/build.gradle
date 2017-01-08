@@ -20,6 +20,7 @@ android {
 
     lintOptions {
         disable 'NewApi' // CircleCI Complaints about it when its correct. Bypass it. We still check it here that its ok
+        warning 'InvalidPackage' // Android bug with okio :)
     }
 }
 
