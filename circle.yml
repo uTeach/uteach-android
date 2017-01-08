@@ -3,7 +3,7 @@ machine:
         version: oraclejdk8
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
-        PATH: "~/teach/gradle-2.14.1/bin:$PATH"
+        PATH: "~/teach/gradle-3.3/all:$PATH"
 
 general:
     branches:
