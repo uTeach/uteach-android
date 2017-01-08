@@ -3,6 +3,7 @@ machine:
         version: oraclejdk8
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
+        PATH: "~/teach/gradle-2.14.1/bin:$PATH"
 
 general:
     branches:
@@ -15,8 +16,7 @@ dependencies:
     cache_directories:
         - ~/.gradle
         - ~/.android
-    
-    pre:
+    override:
         - yes | android update sdk --no-ui --all --filter "tools,android-25,build-tools-25.0.1,platform-tools,extra-google-m2repository,extra-android-m2repository,extra-android-support"
 
 test:
