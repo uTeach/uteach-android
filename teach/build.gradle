@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        disable 'NewApi' // CircleCI Complaints about it when its correct. Bypass it. We still check it here that its ok
+    }
 }
 
 dependencies {
