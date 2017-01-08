@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleBuildtools"
+    }
+}
+
+wrapper {
+    gradleVersion = "$gradleWrapperVersion"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+apply from: 'dependencies.gradle'

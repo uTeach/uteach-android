@@ -1,0 +1,7 @@
+ext {
+    supportAppcompatVersion = '25.0.1'
+
+    support = [
+        appcompat : "com.android.support:appcompat-v7:$supportAppcompatVersion"
+    ]
+}
