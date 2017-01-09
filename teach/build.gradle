@@ -30,5 +30,4 @@ dependencies {
     compile misc.gif
 
     compile http.retrofit
-    compile http.gson
 }
