@@ -25,8 +25,6 @@ public class SplashActivity extends Activity {
 
     private static final long SPLASH_DEFAULT_TIME = 6L;
 
-    private GifImageView gifImageView;
-
     @Nullable User me;
 
     boolean defaultLoopFinished;
@@ -36,8 +34,6 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash);
-
-        gifImageView = (GifImageView) findViewById(R.id.activity_splash_loading_gif_view);
 
         if (AccessTokenManager.getInstance().read(this) != null) {
             // If we have an access token, log the user
