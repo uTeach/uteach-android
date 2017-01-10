@@ -4,11 +4,13 @@ buildscript {
     }
     
     dependencies {
+        def gradleBuildtools = '2.2.0'
         classpath "com.android.tools.build:gradle:$gradleBuildtools"
     }
 }
 
 wrapper {
+    def gradleWrapperVersion = '3.3'
     gradleVersion = "$gradleWrapperVersion"
     distributionType = Wrapper.DistributionType.ALL
 }
