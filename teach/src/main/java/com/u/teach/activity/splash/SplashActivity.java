@@ -1,15 +1,16 @@
 package com.u.teach.activity.splash;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 import com.u.teach.R;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.LogIn.LogInService;
 import com.u.teach.networking.RestClient;
 import java.util.concurrent.TimeUnit;
+import pl.droidsonroids.gif.GifImageView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -22,7 +23,9 @@ import rx.schedulers.Schedulers;
  */
 public class SplashActivity extends Activity {
 
-    private static final long SPLASH_DEFAULT_TIME = 4000L;
+    private static final long SPLASH_DEFAULT_TIME = 6L;
+
+    private GifImageView gifImageView;
 
     @Nullable User me;
 
@@ -34,7 +37,7 @@ public class SplashActivity extends Activity {
 
         setContentView(R.layout.activity_splash);
 
-        // Some logic for the gif
+        gifImageView = (GifImageView) findViewById(R.id.activity_splash_loading_gif_view);
 
         if (AccessTokenManager.getInstance().read(this) != null) {
             // If we have an access token, log the user
@@ -75,13 +78,15 @@ public class SplashActivity extends Activity {
             // A request for the user was available
             if (me != null) {
                 // The request already finished, go to home with credentials
-                startActivity(new Intent()); // TODO
+                // startActivity(new Intent()); // TODO
             }
             // If not wait the request to finish
         } else {
             // If no request was able to perform, go to home directly
-            startActivity(new Intent()); // TODO
+            // startActivity(new Intent()); // TODO
         }
+
+        Toast.makeText(this, "sup homies", Toast.LENGTH_LONG).show();
     }
 
 }

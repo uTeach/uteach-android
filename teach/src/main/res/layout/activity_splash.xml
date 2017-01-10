@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
 
-              android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:background="@color/colorPrimary">
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/activity_splash_loading_gif_view"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:adjustViewBounds="true"
 
-        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+
+        android:src="@drawable/gif_loading_loop"
 
         android:layout_margin="@dimen/splash_gif_padding" />
 
-</LinearLayout>
+</FrameLayout>
