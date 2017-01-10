@@ -10,7 +10,6 @@ import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.LogIn.LogInService;
 import com.u.teach.networking.RestClient;
 import java.util.concurrent.TimeUnit;
-import pl.droidsonroids.gif.GifImageView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -23,11 +22,20 @@ import rx.schedulers.Schedulers;
  */
 public class SplashActivity extends Activity {
 
+    /**
+     * Default minimum time for the activity to be shown
+     */
     private static final long SPLASH_DEFAULT_TIME = 6L;
 
+    /**
+     * Current user, if available
+     */
     @Nullable User me;
 
-    boolean defaultLoopFinished;
+    /**
+     * Flag for knowing if the default minimum time has been achieved
+     */
+    boolean defaultTimePassed;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,7 +58,7 @@ public class SplashActivity extends Activity {
                     @Override
                     public void call(final User user) {
                         me = user;
-                        if (defaultLoopFinished) {
+                        if (defaultTimePassed) {
                             SplashActivity.this.onFinish();
                         }
                     }
@@ -63,12 +71,16 @@ public class SplashActivity extends Activity {
             .subscribe(new Action1<Long>() {
                 @Override
                 public void call(final Long aLong) {
-                    defaultLoopFinished = true;
+                    defaultTimePassed = true;
                     SplashActivity.this.onFinish();
                 }
             });
     }
 
+    /**
+     * Logic for finishing the splash.
+     * This should only be called either when all requirements are fullfilled and the minimum time has passed.
+     */
     void onFinish() {
         if (AccessTokenManager.getInstance().read(this) != null) {
             // A request for the user was available

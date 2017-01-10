@@ -8,8 +8,6 @@
     android:background="@color/colorPrimary">
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/activity_splash_loading_gif_view"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
