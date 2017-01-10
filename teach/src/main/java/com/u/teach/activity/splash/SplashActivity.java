@@ -3,13 +3,14 @@ package com.u.teach.activity.splash;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import com.u.teach.R;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.LogIn.LogInService;
 import com.u.teach.networking.RestClient;
+import java.util.concurrent.TimeUnit;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -57,16 +58,16 @@ public class SplashActivity extends Activity {
                 }).subscribe();
         }
 
-        new CountDownTimer(SPLASH_DEFAULT_TIME, SPLASH_DEFAULT_TIME) {
-            @Override
-            public void onTick(final long l) {}
-
-            @Override
-            public void onFinish() {
-                defaultLoopFinished = true;
-                SplashActivity.this.onFinish();
-            }
-        }.start();
+        Observable.timer(SPLASH_DEFAULT_TIME, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Action1<Long>() {
+                @Override
+                public void call(final Long aLong) {
+                    defaultLoopFinished = true;
+                    SplashActivity.this.onFinish();
+                }
+            });
     }
 
     void onFinish() {
