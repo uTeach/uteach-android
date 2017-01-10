@@ -8,6 +8,8 @@ import com.u.teach.model.Rating;
 import java.util.List;
 
 /**
+ * Model for the professor
+ *
  * Created by saguilera on 1/9/17.
  */
 public class Professor extends User {

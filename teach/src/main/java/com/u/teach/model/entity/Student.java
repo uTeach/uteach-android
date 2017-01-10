@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import java.util.List;
 
 /**
+ * Model for the student
+ *
  * Created by saguilera on 1/9/17.
  */
 public class Student extends User {

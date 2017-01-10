@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 /**
+ * Location model
+ *
  * Created by saguilera on 1/9/17.
  */
 public class Location {

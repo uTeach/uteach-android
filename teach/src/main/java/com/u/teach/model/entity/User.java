@@ -6,6 +6,11 @@ import com.u.teach.model.Gender;
 import java.util.Date;
 
 /**
+ * Model for the user
+ *
+ * This is an abstract class. For more information please see:
+ * {@link Professor} {@link Student}
+ *
  * Created by saguilera on 1/8/17.
  */
 public abstract class User extends Entity {

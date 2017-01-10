@@ -4,6 +4,12 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 /**
+ * Rating model
+ *
+ * Rating is a ranking for knowing how good or bad a
+ * professor is performing. Being A+ the best and
+ * F the worst.
+ *
  * Created by saguilera on 1/9/17.
  */
 public enum Rating {

@@ -4,6 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
+ * Model for a picture.
+ *
+ * They will be available in three different sizes
+ *
  * Created by saguilera on 1/9/17.
  */
 public class Picture extends Entity {
