@@ -3,16 +3,22 @@ package com.u.teach.networking;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import com.google.gson.GsonBuilder;
+import com.u.teach.model.AccessToken;
+import com.u.teach.networking.login.LogInService;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import okhttp3.Authenticator;
 import okhttp3.Cache;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.Route;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 /**
  * Utility class to create http services with the correct params.
@@ -79,7 +85,7 @@ public class RestClient {
             .client(new OkHttpClient.Builder()
                 .cache(new Cache(new File(context.getCacheDir(), CACHE_DIR), CACHE_MAX_SIZE))
                 .addInterceptor(createCacheMaxAgeInterceptor())
-                .addInterceptor(createAuthenticatorInterceptor(context, needsAuth))
+                .authenticator(createAuthenticator(context, needsAuth))
                 .cookieJar(CookieJar.NO_COOKIES)
                 .connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT_WRITE, TimeUnit.SECONDS)
@@ -106,21 +112,33 @@ public class RestClient {
     /**
      * Creates an interceptor for setting the auth params to each (authored) request
      */
-    private @NonNull Interceptor createAuthenticatorInterceptor(final @NonNull Context context, final boolean needsAuth) {
-        return new Interceptor() {
+    private @NonNull Authenticator createAuthenticator(final @NonNull Context context, final boolean needsAuth) {
+        return new Authenticator() {
             @Override
-            public Response intercept(final Chain chain) throws IOException {
-                if (!needsAuth) return chain.proceed(chain.request());
+            public Request authenticate(final Route route, final Response response) throws IOException {
+                if (!needsAuth) return null;
 
-                String token = AccessTokenManager.getInstance().read(context);
-                if (token == null) throw new IllegalStateException("No access token available for authored request");
+                AccessToken accessToken = AccessTokenManager.getInstance().read(context);
+                if (accessToken == null)
+                    throw new IllegalStateException("Trying to auth with no available access token");
 
-                Response originalResponse = chain.proceed(chain.request());
-                return originalResponse.newBuilder()
-                    .addHeader("grant_type", "assertion")
-                    .addHeader("assertion", token)
-                    .addHeader("type", "google or facebook") // TODO
-                    .build();
+                if (accessToken.hasExpired()) {
+                    //TODO Use a service with the refresh token
+                    accessToken = RestClient.create(context, false).create(LogInService.class).logIn()
+                        .observeOn(Schedulers.immediate())
+                        .subscribeOn(Schedulers.immediate())
+                        .toBlocking()
+                        .first();
+                }
+
+                if (accessToken != null) {
+                    AccessTokenManager.getInstance().write(context, accessToken);
+                    return response.request().newBuilder()
+                        .addHeader("Authorization", accessToken.tokenType() + " " + accessToken.accessToken())
+                        .build();
+                }
+
+                return null;
             }
         };
     }

@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 import com.u.teach.R;
+import com.u.teach.activity.DefaultActivity;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
-import com.u.teach.networking.LogIn.LogInService;
+import com.u.teach.networking.login.LogInService;
 import com.u.teach.networking.RestClient;
+import com.u.teach.networking.user.UserService;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -20,7 +24,7 @@ import rx.schedulers.Schedulers;
  *
  * Created by saguilera on 1/8/17.
  */
-public class SplashActivity extends Activity {
+public class SplashActivity extends DefaultActivity {
 
     /**
      * Default minimum time for the activity to be shown
@@ -44,9 +48,9 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
 
         if (AccessTokenManager.getInstance().read(this) != null) {
-            // If we have an access token, log the user
-            LogInService service = RestClient.create(this, true).create(LogInService.class);
-            service.logIn().subscribeOn(Schedulers.newThread())
+            // If we have an access token, get the user
+            UserService service = RestClient.create(this, true).create(UserService.class);
+            addSubscription(service.currentUser().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(new Action1<Throwable>() {
                     @Override
@@ -62,10 +66,10 @@ public class SplashActivity extends Activity {
                             SplashActivity.this.onFinish();
                         }
                     }
-                }).subscribe();
+                }).subscribe());
         }
 
-        Observable.timer(SPLASH_DEFAULT_TIME, TimeUnit.SECONDS)
+        addSubscription(Observable.timer(SPLASH_DEFAULT_TIME, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Action1<Long>() {
@@ -74,7 +78,7 @@ public class SplashActivity extends Activity {
                     defaultTimePassed = true;
                     SplashActivity.this.onFinish();
                 }
-            });
+            }));
     }
 
     /**

@@ -14,7 +14,7 @@ import com.u.teach.model.entity.Picture;
  *
  * Created by saguilera on 1/9/17.
  */
-public class Expertise {
+public final class Expertise {
 
     private long value;
     private @NonNull Picture badge;

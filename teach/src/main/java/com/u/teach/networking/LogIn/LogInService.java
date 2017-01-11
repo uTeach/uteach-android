@@ -1,6 +1,6 @@
-package com.u.teach.networking.LogIn;
+package com.u.teach.networking.login;
 
-import com.u.teach.model.entity.User;
+import com.u.teach.model.AccessToken;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -19,6 +19,6 @@ public interface LogInService {
      * @return The user logging.
      */
     @POST("oauth/token")
-    Observable<User> logIn();
+    Observable<AccessToken> logIn();
 
 }
