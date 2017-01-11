@@ -45,6 +45,8 @@ public class SplashActivity extends DefaultActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        hideActionBar();
+
         setContentView(R.layout.activity_splash);
 
         if (AccessTokenManager.getInstance().read(this) != null) {

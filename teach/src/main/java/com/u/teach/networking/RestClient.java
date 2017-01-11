@@ -136,6 +136,9 @@ public class RestClient {
                     return response.request().newBuilder()
                         .addHeader("Authorization", accessToken.tokenType() + " " + accessToken.accessToken())
                         .build();
+                } else {
+                    //TODO Should we remove the old access token ??
+                    AccessTokenManager.getInstance().clear(context);
                 }
 
                 return null;

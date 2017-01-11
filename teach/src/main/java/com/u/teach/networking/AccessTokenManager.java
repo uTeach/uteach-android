@@ -76,4 +76,15 @@ public class AccessTokenManager {
         sharedPreferences.edit().putString(SHARED_PREFERENCIES_KEY, new Gson().toJson(token)).apply();
     }
 
+    /**
+     * Clear the access token.
+     *
+     * @param context of the scope that wants to write
+     */
+    public void clear(@NonNull Context context) {
+        this.token = null;
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_DIR, Context.MODE_PRIVATE);
+        sharedPreferences.edit().remove(SHARED_PREFERENCIES_KEY).apply();
+    }
+
 }
