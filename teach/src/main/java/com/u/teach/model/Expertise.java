@@ -1,9 +1,11 @@
 package com.u.teach.model;
 
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import com.u.teach.model.entity.Picture;
 
 /**
- * Enum for the expertise model
+ * Expertise model
  *
  * Expertise is a measure for knowing
  * how much a Professor has already taught.
@@ -12,21 +14,70 @@ import com.google.gson.annotations.SerializedName;
  *
  * Created by saguilera on 1/9/17.
  */
-public enum Expertise {
+public class Expertise {
 
-    @SerializedName("0")
-    STARTER,
-    @SerializedName("50")
-    ASSOCIATE_LECTURER,
-    @SerializedName("100")
-    LECTURER,
-    @SerializedName("250")
-    SENIOR_LECTURER,
-    @SerializedName("500")
-    ASSOCIATE_PROFESSOR,
-    @SerializedName("1000")
-    PROFESSOR,
-    @SerializedName("2000")
-    SENIOR_PROFESSOR
+    private long value;
+    private @NonNull Picture badge;
+
+    Expertise() {
+        super();
+    }
+
+    Expertise(@NonNull Builder builder) {
+        this.value = builder.value;
+        this.badge = builder.badge;
+    }
+
+    public @NonNull Picture badge() {
+        return badge;
+    }
+
+    public @NonNull long value() {
+        return value;
+    }
+
+    public @NonNull Builder newBuilder() {
+        return new Builder(this);
+    }
+
+    public static class Builder implements Preconditions<Expertise> {
+
+        @Nullable
+        Picture badge;
+
+        long value = NO_VALUE;
+
+        public Builder() {
+        }
+
+        public Builder(@NonNull Expertise expertise) {
+            value(expertise.value());
+            badge(expertise.badge());
+        }
+
+        public final @NonNull Builder value(final @NonNull long value) {
+            this.value = value;
+            return this;
+        }
+
+        public final @NonNull Builder badge(final @NonNull Picture badge) {
+            this.badge = badge;
+            return this;
+        }
+
+        @Override
+        public @NonNull Expertise build() {
+            if (buildable())
+                return new Expertise(this);
+            else throw new IllegalStateException("Builder has an illegal state");
+        }
+
+        @Override
+        public boolean buildable() {
+            boolean buildable = value != NO_VALUE;
+            buildable &= badge != null;
+            return buildable;
+        }
+    }
 
 }
