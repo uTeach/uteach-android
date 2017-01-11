@@ -1,7 +1,30 @@
 ext {
     supportAppcompatVersion = '25.0.1'
 
+    gifVersion = '1.2.3'
+
+    rxAndroidVersion = '1.2.1'
+    rxJavaVersion = '1.1.6'
+
+    retrofitVersion = '2.1.0'
+    gsonVersion = '2.8.0'
+
     support = [
         appcompat : "com.android.support:appcompat-v7:$supportAppcompatVersion"
+    ]
+
+    misc = [
+        gif : "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
+    ]
+
+    rx = [
+        android : "io.reactivex:rxandroid:$rxAndroidVersion",
+        java : "io.reactivex:rxjava:$rxJavaVersion"
+    ]
+
+    http = [
+        core : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+        parser : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+        rx : "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
     ]
 }
