@@ -1,6 +1,8 @@
 package com.u.teach.activity.register;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.ViewOutlineProvider;
 import com.u.teach.R;
 import com.u.teach.activity.DefaultActivity;
 
@@ -19,6 +21,13 @@ public class RegisterActivity extends DefaultActivity {
             getSupportActionBar().setTitle(getString(R.string.toolbar_register));
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setIcon(getDrawable(R.mipmap.ic_launcher));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            findViewById(R.id.activity_register_professor_container).setElevation(6);
+            findViewById(R.id.activity_register_professor_container).setOutlineProvider(ViewOutlineProvider.BOUNDS);
+            findViewById(R.id.activity_register_student_container).setElevation(6);
+            findViewById(R.id.activity_register_student_container).setOutlineProvider(ViewOutlineProvider.BOUNDS);
         }
     }
 
