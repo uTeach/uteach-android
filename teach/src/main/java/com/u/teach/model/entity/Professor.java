@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.u.teach.model.Expertise;
 import com.u.teach.model.Location;
 import com.u.teach.model.Rating;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * Created by saguilera on 1/9/17.
  */
-public class Professor extends User {
+public class Professor extends User implements Serializable {
 
     private @NonNull Location location;
     private @NonNull Rating rating;

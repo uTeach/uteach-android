@@ -3,6 +3,7 @@ package com.u.teach.model.entity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.u.teach.model.Gender;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  *
  * Created by saguilera on 1/8/17.
  */
-public abstract class User extends Entity {
+public abstract class User extends Entity implements Serializable {
 
     private @NonNull String name;
     private @NonNull String email;

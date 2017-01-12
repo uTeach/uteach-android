@@ -2,13 +2,14 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  * Location model
  *
  * Created by saguilera on 1/9/17.
  */
-public final class Location {
+public final class Location implements Serializable {
 
     @SerializedName("lat")
     private long latitude;

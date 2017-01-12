@@ -2,6 +2,7 @@ package com.u.teach.model.entity;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import java.io.Serializable;
 
 /**
  * Model for a picture.
@@ -10,7 +11,7 @@ import android.support.annotation.Nullable;
  *
  * Created by saguilera on 1/9/17.
  */
-public class Picture extends Entity {
+public class Picture extends Entity implements Serializable {
 
     private @NonNull String large;
     private @NonNull String medium;

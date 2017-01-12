@@ -3,6 +3,7 @@ package com.u.teach.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.u.teach.model.entity.Picture;
+import java.io.Serializable;
 
 /**
  * Expertise model
@@ -14,7 +15,7 @@ import com.u.teach.model.entity.Picture;
  *
  * Created by saguilera on 1/9/17.
  */
-public final class Expertise {
+public final class Expertise implements Serializable {
 
     private long value;
     private @NonNull Picture badge;

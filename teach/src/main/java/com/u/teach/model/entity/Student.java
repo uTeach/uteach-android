@@ -2,6 +2,7 @@ package com.u.teach.model.entity;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * Created by saguilera on 1/9/17.
  */
-public class Student extends User {
+public class Student extends User implements Serializable {
 
     private @NonNull List<Professor> availableProfessors;
     private @NonNull List<Professor> pendingProfessors;

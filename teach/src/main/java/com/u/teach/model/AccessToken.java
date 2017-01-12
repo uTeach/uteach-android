@@ -1,9 +1,11 @@
 package com.u.teach.model;
 
+import java.io.Serializable;
+
 /**
  * Created by saguilera on 1/11/17.
  */
-public final class AccessToken {
+public final class AccessToken implements Serializable {
 
     private String tokenType;
 

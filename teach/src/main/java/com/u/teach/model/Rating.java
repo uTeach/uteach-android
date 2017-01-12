@@ -2,6 +2,7 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  * Rating model
@@ -12,7 +13,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * Created by saguilera on 1/9/17.
  */
-public enum Rating {
+public enum Rating implements Serializable {
 
     @SerializedName(Rating.RATING_A_PLUS)
     A_PLUS(Rating.RATING_A_PLUS),

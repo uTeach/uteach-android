@@ -2,6 +2,7 @@ package com.u.teach.model.entity;
 
 import android.support.annotation.NonNull;
 import com.u.teach.model.Preconditions;
+import java.io.Serializable;
 
 /**
  * Base model of an entity.
@@ -21,7 +22,7 @@ import com.u.teach.model.Preconditions;
  *
  * Created by saguilera on 1/8/17.
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
     private long id;
 
