@@ -31,6 +31,8 @@ dependencies {
 
     compile rx.java
     compile rx.android
+    compile rx.lifecycleCore
+    compile rx.lifecycleComponents
 
     compile http.core
     compile http.parser

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
+import com.trello.rxlifecycle.android.ActivityEvent;
 import com.u.teach.R;
 import com.u.teach.activity.DefaultActivity;
 import com.u.teach.activity.register.RegisterActivity;
@@ -54,12 +55,16 @@ public class SplashActivity extends DefaultActivity {
         if (AccessTokenManager.getInstance().read(this) != null) {
             // If we have an access token, get the user
             UserService service = RestClient.create(this, true).create(UserService.class);
-            addSubscription(service.currentUser().subscribeOn(Schedulers.newThread())
+            service.currentUser().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<User>bindUntilEvent(ActivityEvent.DESTROY))
                 .doOnError(new Action1<Throwable>() {
                     @Override
                     public void call(final Throwable throwable) {
                         // TODO handle error
+                        if (defaultTimePassed) {
+                            SplashActivity.this.onFinish();
+                        }
                     }
                 })
                 .doOnNext(new Action1<User>() {
@@ -70,19 +75,20 @@ public class SplashActivity extends DefaultActivity {
                             SplashActivity.this.onFinish();
                         }
                     }
-                }).subscribe());
+                }).subscribe();
         }
 
-        addSubscription(Observable.timer(SPLASH_DEFAULT_TIME, TimeUnit.SECONDS)
+        Observable.timer(SPLASH_DEFAULT_TIME, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
+            .compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))
             .subscribe(new Action1<Long>() {
                 @Override
                 public void call(final Long aLong) {
                     defaultTimePassed = true;
                     SplashActivity.this.onFinish();
                 }
-            }));
+            });
     }
 
     /**

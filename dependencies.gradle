@@ -5,6 +5,7 @@ ext {
 
     rxAndroidVersion = '1.2.1'
     rxJavaVersion = '1.1.6'
+    rxLifecycleVersion = '1.0'
 
     retrofitVersion = '2.1.0'
     gsonVersion = '2.8.0'
@@ -19,7 +20,9 @@ ext {
 
     rx = [
         android : "io.reactivex:rxandroid:$rxAndroidVersion",
-        java : "io.reactivex:rxjava:$rxJavaVersion"
+        java : "io.reactivex:rxjava:$rxJavaVersion",
+        lifecycleCore : "com.trello:rxlifecycle-android:$rxLifecycleVersion",
+        lifecycleComponents : "com.trello:rxlifecycle-components:$rxLifecycleVersion"
     ]
 
     http = [
