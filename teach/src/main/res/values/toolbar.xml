@@ -3,6 +3,7 @@
 
     <!-- Dimens -->
     <dimen name="action_bar_elevation">1dp</dimen>
+    <dimen name="action_bar_height">42dp</dimen>
 
     <!-- Strings -->
     <string name="toolbar_register">Registro</string>
