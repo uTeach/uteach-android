@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings -->
+    <string name="register_pick_a_model">Elegir un modelo</string>
+
+    <!-- Dimens -->
+    <dimen name="register_pick_a_model_text_size">16sp</dimen>
+    <dimen name="register_pick_a_model_text_margin">18dp</dimen>
+    <dimen name="register_model_container_margin">@dimen/register_pick_a_model_text_margin</dimen>
+
+</resources>

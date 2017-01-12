@@ -7,10 +7,11 @@ import java.util.List;
 import rx.Subscription;
 
 /**
+ * Abstract activity in charge of managing the reactive common stuff
+ *
  * Created by saguilera on 1/11/17.
  */
-
-public class RxActivity extends AppCompatActivity {
+public abstract class RxActivity extends AppCompatActivity {
 
     private List<Subscription> subscriptions;
 

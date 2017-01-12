@@ -1,11 +1,13 @@
 package com.u.teach.activity.splash;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 import com.u.teach.R;
 import com.u.teach.activity.DefaultActivity;
+import com.u.teach.activity.register.RegisterActivity;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.login.LogInService;
@@ -100,7 +102,7 @@ public class SplashActivity extends DefaultActivity {
             // startActivity(new Intent()); // TODO
         }
 
-        Toast.makeText(this, "sup homies", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
 }
