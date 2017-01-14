@@ -8,7 +8,6 @@ machine:
 dependencies:
     cache_directories:
         - ~/.android
-        - ~/android
     override:
         - bash circle/install_depenencies.sh
         - ./gradlew teach:dependencies --console=plain
