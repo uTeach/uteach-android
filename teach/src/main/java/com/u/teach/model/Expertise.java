@@ -15,6 +15,7 @@ import java.io.Serializable;
  *
  * Created by saguilera on 1/9/17.
  */
+@SuppressWarnings("unused")
 public final class Expertise implements Serializable {
 
     private long value;

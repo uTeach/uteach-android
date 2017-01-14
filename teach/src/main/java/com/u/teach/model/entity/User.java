@@ -14,6 +14,7 @@ import java.util.Date;
  *
  * Created by saguilera on 1/8/17.
  */
+@SuppressWarnings("unused")
 public abstract class User extends Entity implements Serializable {
 
     private @NonNull String name;

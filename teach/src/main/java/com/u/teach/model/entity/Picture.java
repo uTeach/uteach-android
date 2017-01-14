@@ -11,6 +11,7 @@ import java.io.Serializable;
  *
  * Created by saguilera on 1/9/17.
  */
+@SuppressWarnings("unused")
 public class Picture extends Entity implements Serializable {
 
     private @NonNull String large;

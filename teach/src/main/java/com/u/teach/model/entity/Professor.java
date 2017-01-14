@@ -13,6 +13,7 @@ import java.util.List;
  *
  * Created by saguilera on 1/9/17.
  */
+@SuppressWarnings("unused")
 public class Professor extends User implements Serializable {
 
     private @NonNull Location location;

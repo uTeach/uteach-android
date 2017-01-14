@@ -49,7 +49,7 @@ public class SplashActivity extends DefaultActivity {
 
         if (AccessTokenManager.getInstance().read(this) != null) {
             // If we have an access token, get the user
-            UserService service = RestClient.create(this, true).create(UserService.class);
+            UserService service = RestClient.with(this).create(UserService.class);
             service.currentUser().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<User>bindUntilEvent(ActivityEvent.DESTROY))

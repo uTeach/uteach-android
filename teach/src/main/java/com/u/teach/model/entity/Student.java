@@ -10,6 +10,7 @@ import java.util.List;
  *
  * Created by saguilera on 1/9/17.
  */
+@SuppressWarnings("unused")
 public class Student extends User implements Serializable {
 
     private @NonNull List<Professor> availableProfessors;

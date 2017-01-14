@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  * Created by saguilera on 1/9/17.
  */
+@SuppressWarnings("unused")
 public enum Gender implements Serializable {
 
     @SerializedName("male")

@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by saguilera on 1/11/17.
  */
+@SuppressWarnings("unused")
 public final class AccessToken implements Serializable {
 
     private String tokenType;

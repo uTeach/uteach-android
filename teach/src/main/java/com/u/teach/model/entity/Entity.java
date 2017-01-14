@@ -22,6 +22,7 @@ import java.io.Serializable;
  *
  * Created by saguilera on 1/8/17.
  */
+@SuppressWarnings("unused")
 public abstract class Entity implements Serializable {
 
     private long id;

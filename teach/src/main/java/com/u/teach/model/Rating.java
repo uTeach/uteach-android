@@ -13,6 +13,7 @@ import java.io.Serializable;
  *
  * Created by saguilera on 1/9/17.
  */
+@SuppressWarnings("unused")
 public enum Rating implements Serializable {
 
     @SerializedName(Rating.RATING_A_PLUS)
