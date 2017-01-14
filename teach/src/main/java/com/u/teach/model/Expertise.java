@@ -19,7 +19,6 @@ import java.io.Serializable;
 public final class Expertise implements Serializable {
 
     private long value;
-    private @NonNull Picture badge;
 
     Expertise() {
         super();
@@ -27,11 +26,23 @@ public final class Expertise implements Serializable {
 
     Expertise(@NonNull Builder builder) {
         this.value = builder.value;
-        this.badge = builder.badge;
     }
 
-    public @NonNull Picture badge() {
-        return badge;
+    public @NonNull String badgeUrl() {
+        //TODO
+        if (value < 50)
+            return "img1-%density";
+        if (value < 100)
+            return "img2-%density";
+        if (value < 250)
+            return "img3-%density";
+        if (value < 500)
+            return "img4-%density";
+        if (value < 1000)
+            return "img5-%density";
+        if (value < 2500)
+            return "img6-%density";
+        return "img7-%density";
     }
 
     public @NonNull long value() {
@@ -44,9 +55,6 @@ public final class Expertise implements Serializable {
 
     public static class Builder implements Preconditions<Expertise> {
 
-        @Nullable
-        Picture badge;
-
         long value = NO_VALUE;
 
         public Builder() {
@@ -54,16 +62,10 @@ public final class Expertise implements Serializable {
 
         public Builder(@NonNull Expertise expertise) {
             value(expertise.value());
-            badge(expertise.badge());
         }
 
         public final @NonNull Builder value(final @NonNull long value) {
             this.value = value;
-            return this;
-        }
-
-        public final @NonNull Builder badge(final @NonNull Picture badge) {
-            this.badge = badge;
             return this;
         }
 
@@ -76,9 +78,7 @@ public final class Expertise implements Serializable {
 
         @Override
         public boolean buildable() {
-            boolean buildable = value != NO_VALUE;
-            buildable &= badge != null;
-            return buildable;
+            return value != NO_VALUE;
         }
     }
 
