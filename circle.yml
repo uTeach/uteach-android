@@ -7,8 +7,8 @@ machine:
 
 dependencies:
     cache_directories:
-        - ~/.gradle
         - ~/.android
+        - ~/android
     override:
         - bash circle/install_depenencies.sh
 
