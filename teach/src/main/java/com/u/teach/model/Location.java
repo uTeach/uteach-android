@@ -12,9 +12,7 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public final class Location implements Serializable {
 
-    @SerializedName("lat")
     private long latitude;
-    @SerializedName("lng")
     private long longitude;
 
     Location() {

@@ -9,11 +9,19 @@ import java.io.Serializable;
  * Created by saguilera on 1/9/17.
  */
 @SuppressWarnings("unused")
-public enum Gender implements Serializable {
+public class Gender implements Serializable {
 
-    @SerializedName("male")
-    MALE,
-    @SerializedName("female")
-    FEMALE
+    private Status gender;
+
+    public Status gender() {
+        return gender;
+    }
+
+    public enum Status {
+        @SerializedName("male")
+        MALE,
+        @SerializedName("female")
+        FEMALE
+    }
 
 }

@@ -1,8 +1,6 @@
 package com.u.teach.model;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import com.u.teach.model.entity.Picture;
 import java.io.Serializable;
 
 /**
@@ -29,7 +27,7 @@ public final class Expertise implements Serializable {
     }
 
     public @NonNull String badgeUrl() {
-        //TODO
+        //TODO hacer expertise con value == color
         if (value < 50)
             return "img1-%density";
         if (value < 100)

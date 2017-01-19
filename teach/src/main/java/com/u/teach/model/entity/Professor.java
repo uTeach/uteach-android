@@ -19,7 +19,9 @@ public class Professor extends User implements Serializable {
     private @NonNull Location location;
     private @NonNull Rating rating;
     private @NonNull Expertise expertise;
+    private double classCost;
     private @NonNull List<Student> pendingRequests;
+    //TODO subjects/tags
 
     Professor() {
         super();
@@ -31,13 +33,12 @@ public class Professor extends User implements Serializable {
         this.rating = builder.rating;
         this.expertise = builder.expertise;
         this.pendingRequests = builder.pendings;
+        this.classCost = builder.classCost;
     }
 
-    /**
-     * Faltaria:
-     * - TAGS
-     * ??
-     */
+    public double classCost() {
+        return classCost;
+    }
 
     public @NonNull Expertise expertise() {
         return expertise;
@@ -65,6 +66,7 @@ public class Professor extends User implements Serializable {
         @Nullable Rating rating;
         @Nullable Expertise expertise;
         @Nullable List<Student> pendings;
+        double classCost = NO_VALUE;
 
         public Builder() {
             super();
@@ -76,6 +78,7 @@ public class Professor extends User implements Serializable {
             expertise(professor.expertise());
             pendings(professor.pendingRequests());
             rating(professor.rating());
+            classCost(professor.classCost());
         }
 
         public final @NonNull Builder location(@NonNull Location location) {
@@ -98,6 +101,11 @@ public class Professor extends User implements Serializable {
             return this;
         }
 
+        public final @NonNull Builder classCost(double classCost) {
+            this.classCost = classCost;
+            return this;
+        }
+
         @Override
         public @NonNull Professor build() {
             if (buildable())
@@ -112,6 +120,7 @@ public class Professor extends User implements Serializable {
             buildable &= rating != null;
             buildable &= expertise != null;
             buildable &= pendings != null;
+            buildable &= classCost != NO_VALUE;
             return buildable;
         }
 
