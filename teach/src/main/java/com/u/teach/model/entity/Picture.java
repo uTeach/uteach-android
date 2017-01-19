@@ -46,8 +46,7 @@ public class Picture extends Entity implements Serializable {
 
     public static class Builder extends Entity.Builder<Picture> {
 
-        @Nullable
-        String large, medium, thumb;
+        @Nullable String large, medium, thumb;
 
         public Builder() {
         }

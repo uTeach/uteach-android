@@ -21,7 +21,7 @@ public class Professor extends User implements Serializable {
     private @NonNull Expertise expertise;
     private double classCost;
     private @NonNull List<Student> pendingRequests;
-    //TODO subjects/tags
+    private @NonNull List<Tag> tags;
 
     Professor() {
         super();
@@ -34,6 +34,7 @@ public class Professor extends User implements Serializable {
         this.expertise = builder.expertise;
         this.pendingRequests = builder.pendings;
         this.classCost = builder.classCost;
+        this.tags = builder.tags;
     }
 
     public double classCost() {
@@ -56,6 +57,10 @@ public class Professor extends User implements Serializable {
         return rating;
     }
 
+    public @NonNull List<Tag> tags() {
+        return tags;
+    }
+
     public @NonNull Builder newBuilder() {
         return new Builder(this);
     }
@@ -66,6 +71,7 @@ public class Professor extends User implements Serializable {
         @Nullable Rating rating;
         @Nullable Expertise expertise;
         @Nullable List<Student> pendings;
+        @Nullable List<Tag> tags;
         double classCost = NO_VALUE;
 
         public Builder() {
@@ -79,6 +85,7 @@ public class Professor extends User implements Serializable {
             pendings(professor.pendingRequests());
             rating(professor.rating());
             classCost(professor.classCost());
+            tags(professor.tags());
         }
 
         public final @NonNull Builder location(@NonNull Location location) {
@@ -106,6 +113,11 @@ public class Professor extends User implements Serializable {
             return this;
         }
 
+        public final @NonNull Builder tags(@NonNull List<Tag> tags) {
+            this.tags = tags;
+            return this;
+        }
+
         @Override
         public @NonNull Professor build() {
             if (buildable())
@@ -120,6 +132,7 @@ public class Professor extends User implements Serializable {
             buildable &= rating != null;
             buildable &= expertise != null;
             buildable &= pendings != null;
+            buildable &= tags != null;
             buildable &= classCost != NO_VALUE;
             return buildable;
         }
