@@ -1,5 +1,6 @@
 package com.u.teach.model;
 
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
@@ -9,28 +10,28 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public final class AccessToken implements Serializable {
 
-    private String tokenType;
+    private @NonNull String tokenType;
 
-    private String accessToken;
-    private String refreshToken;
+    private @NonNull String accessToken;
+    private @NonNull String refreshToken;
 
     private long createdAt;
     private long expiresIn;
 
-    private UserType userType;
+    private @NonNull UserType userType;
 
     private AccessToken() {
     }
 
-    public String tokenType() {
+    public @NonNull String tokenType() {
         return tokenType;
     }
 
-    public String accessToken() {
+    public @NonNull String accessToken() {
         return accessToken;
     }
 
-    public String refreshToken() {
+    public @NonNull String refreshToken() {
         return refreshToken;
     }
 
@@ -38,7 +39,7 @@ public final class AccessToken implements Serializable {
         return System.currentTimeMillis() / 1000 > createdAt + expiresIn;
     }
 
-    public UserType userType() {
+    public @NonNull UserType userType() {
         return userType;
     }
 

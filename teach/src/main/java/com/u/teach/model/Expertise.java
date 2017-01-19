@@ -1,6 +1,7 @@
 package com.u.teach.model;
 
 import android.support.annotation.NonNull;
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 /**
@@ -16,68 +17,32 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public final class Expertise implements Serializable {
 
-    private long value;
+    private static final String EXPERTISE_YELLOW = "yellow";
+    private static final String EXPERTISE_ORANGE = "orange";
+    private static final String EXPERTISE_GREEN = "green";
+    private static final String EXPERTISE_BLUE = "blue";
+    private static final String EXPERTISE_PURPLE = "purple";
+    private static final String EXPERTISE_BLACK = "black";
 
-    Expertise() {
-        super();
-    }
+    private @NonNull Type value;
 
-    Expertise(@NonNull Builder builder) {
-        this.value = builder.value;
-    }
-
-    public @NonNull String badgeUrl() {
-        //TODO hacer expertise con value == color
-        if (value < 50)
-            return "img1-%density";
-        if (value < 100)
-            return "img2-%density";
-        if (value < 250)
-            return "img3-%density";
-        if (value < 500)
-            return "img4-%density";
-        if (value < 1000)
-            return "img5-%density";
-        if (value < 2500)
-            return "img6-%density";
-        return "img7-%density";
-    }
-
-    public @NonNull long value() {
+    public @NonNull Type value() {
         return value;
     }
 
-    public @NonNull Builder newBuilder() {
-        return new Builder(this);
-    }
-
-    public static class Builder implements Preconditions<Expertise> {
-
-        long value = NO_VALUE;
-
-        public Builder() {
-        }
-
-        public Builder(@NonNull Expertise expertise) {
-            value(expertise.value());
-        }
-
-        public final @NonNull Builder value(final @NonNull long value) {
-            this.value = value;
-            return this;
-        }
-
-        @Override
-        public @NonNull Expertise build() {
-            if (buildable())
-                return new Expertise(this);
-            else throw new IllegalStateException("Builder has an illegal state");
-        }
-
-        @Override
-        public boolean buildable() {
-            return value != NO_VALUE;
-        }
+    public enum Type {
+        @SerializedName(EXPERTISE_YELLOW)
+        YELLOW,
+        @SerializedName(EXPERTISE_ORANGE)
+        ORANGE,
+        @SerializedName(EXPERTISE_GREEN)
+        GREEN,
+        @SerializedName(EXPERTISE_BLUE)
+        BLUE,
+        @SerializedName(EXPERTISE_PURPLE)
+        PURPLE,
+        @SerializedName(EXPERTISE_BLACK)
+        BLACK
     }
 
 }

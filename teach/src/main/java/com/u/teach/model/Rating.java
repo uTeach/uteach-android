@@ -14,22 +14,7 @@ import java.io.Serializable;
  * Created by saguilera on 1/9/17.
  */
 @SuppressWarnings("unused")
-public enum Rating implements Serializable {
-
-    @SerializedName(Rating.RATING_A_PLUS)
-    A_PLUS(Rating.RATING_A_PLUS),
-    @SerializedName(Rating.RATING_A)
-    A(Rating.RATING_A),
-    @SerializedName(Rating.RATING_B)
-    B(Rating.RATING_B),
-    @SerializedName(Rating.RATING_C)
-    C(Rating.RATING_C),
-    @SerializedName(Rating.RATING_D)
-    D(Rating.RATING_D),
-    @SerializedName(Rating.RATING_E)
-    E(Rating.RATING_E),
-    @SerializedName(Rating.RATING_F)
-    F(Rating.RATING_F);
+public class Rating implements Serializable {
 
     private static final String RATING_A_PLUS = "A+";
     private static final String RATING_A = "A";
@@ -39,14 +24,27 @@ public enum Rating implements Serializable {
     private static final String RATING_E = "E";
     private static final String RATING_F = "F";
 
-    private @NonNull String rating;
+    private @NonNull Type rating;
 
-    Rating(@NonNull String rating) {
-        this.rating = rating;
+    private @NonNull Type rating() {
+        return rating;
     }
 
-    private @NonNull String rating() {
-        return rating;
+    public enum Type {
+        @SerializedName(Rating.RATING_A_PLUS)
+        A_PLUS,
+        @SerializedName(Rating.RATING_A)
+        A,
+        @SerializedName(Rating.RATING_B)
+        B,
+        @SerializedName(Rating.RATING_C)
+        C,
+        @SerializedName(Rating.RATING_D)
+        D,
+        @SerializedName(Rating.RATING_E)
+        E,
+        @SerializedName(Rating.RATING_F)
+        F;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.u.teach.model;
 
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
@@ -11,16 +12,19 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public class Gender implements Serializable {
 
-    private Status gender;
+    private static final String GENDER_MALE = "male";
+    private static final String GENDER_FEMALE = "female";
 
-    public Status gender() {
+    private @NonNull Type gender;
+
+    public @NonNull Type gender() {
         return gender;
     }
 
-    public enum Status {
-        @SerializedName("male")
+    public enum Type {
+        @SerializedName(Gender.GENDER_MALE)
         MALE,
-        @SerializedName("female")
+        @SerializedName(Gender.GENDER_FEMALE)
         FEMALE
     }
 
