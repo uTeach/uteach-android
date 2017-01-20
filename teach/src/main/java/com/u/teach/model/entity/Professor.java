@@ -2,6 +2,7 @@ package com.u.teach.model.entity;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.google.gson.annotations.SerializedName;
 import com.u.teach.model.Expertise;
 import com.u.teach.model.Location;
 import com.u.teach.model.Rating;
@@ -19,8 +20,10 @@ public class Professor extends User implements Serializable {
     private @NonNull Location location;
     private @NonNull Rating rating;
     private @NonNull Expertise expertise;
-    private double classCost;
+    @SerializedName("class_cost")
+    private double fee;
     private @NonNull List<Student> pendingRequests;
+    @SerializedName("subjects")
     private @NonNull List<Tag> tags;
 
     protected Professor() {
@@ -33,12 +36,12 @@ public class Professor extends User implements Serializable {
         this.rating = builder.rating;
         this.expertise = builder.expertise;
         this.pendingRequests = builder.pendings;
-        this.classCost = builder.classCost;
+        this.fee = builder.fee;
         this.tags = builder.tags;
     }
 
-    public double classCost() {
-        return classCost;
+    public double fee() {
+        return fee;
     }
 
     public @NonNull Expertise expertise() {
@@ -72,7 +75,7 @@ public class Professor extends User implements Serializable {
         @Nullable Expertise expertise;
         @Nullable List<Student> pendings;
         @Nullable List<Tag> tags;
-        double classCost = NO_VALUE;
+        double fee = NO_VALUE;
 
         public Builder() {
             super();
@@ -84,7 +87,7 @@ public class Professor extends User implements Serializable {
             expertise(professor.expertise());
             pendings(professor.pendingRequests());
             rating(professor.rating());
-            classCost(professor.classCost());
+            fee(professor.fee());
             tags(professor.tags());
         }
 
@@ -108,8 +111,8 @@ public class Professor extends User implements Serializable {
             return this;
         }
 
-        public final @NonNull Builder classCost(double classCost) {
-            this.classCost = classCost;
+        public final @NonNull Builder fee(double fee) {
+            this.fee = fee;
             return this;
         }
 
@@ -133,7 +136,7 @@ public class Professor extends User implements Serializable {
             buildable &= expertise != null;
             buildable &= pendings != null;
             buildable &= tags != null;
-            buildable &= classCost != NO_VALUE;
+            buildable &= fee != NO_VALUE;
             return buildable;
         }
 

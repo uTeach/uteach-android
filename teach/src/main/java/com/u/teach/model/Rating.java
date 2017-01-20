@@ -27,7 +27,7 @@ public final class Rating implements Serializable {
 
     private @NonNull Type value;
 
-    public @NonNull Type rating() {
+    public @NonNull Type value() {
         return value;
     }
 

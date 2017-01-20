@@ -20,7 +20,7 @@ public class RatingTest {
         Rating rating = ResourceUtils.fromRaw("model_rating.json", Rating.class);
 
         Assert.assertNotNull(rating);
-        Assert.assertEquals(Rating.Type.B.name(), rating.rating().name());
+        Assert.assertEquals(Rating.Type.B.name(), rating.value().name());
     }
 
 }

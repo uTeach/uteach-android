@@ -1,5 +1,6 @@
 package com.u.teach.model.entity;
 
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import com.u.teach.model.Preconditions;
 import java.io.Serializable;
@@ -49,7 +50,7 @@ public abstract class Entity implements Serializable {
             id(t.id());
         }
 
-        public final @NonNull Builder id(final long id) {
+        public final @NonNull Builder<T> id(final long id) {
             this.id = id;
             return this;
         }

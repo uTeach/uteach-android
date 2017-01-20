@@ -77,27 +77,27 @@ public abstract class User extends Entity implements Serializable {
             picture(user.picture());
         }
 
-        public final @NonNull Builder birthday(@NonNull final Date birthday) {
+        public final @NonNull Builder<T> birthday(@NonNull final Date birthday) {
             this.birthday = birthday;
             return this;
         }
 
-        public final @NonNull Builder email(@NonNull final String email) {
+        public final @NonNull Builder<T> email(@NonNull final String email) {
             this.email = email;
             return this;
         }
 
-        public final @NonNull Builder gender(@NonNull final Gender gender) {
+        public final @NonNull Builder<T> gender(@NonNull final Gender gender) {
             this.gender = gender;
             return this;
         }
 
-        public final @NonNull Builder name(@NonNull final String name) {
+        public final @NonNull Builder<T> name(@NonNull final String name) {
             this.name = name;
             return this;
         }
 
-        public final @NonNull Builder picture(@NonNull final Picture picture) {
+        public final @NonNull Builder<T> picture(@NonNull final Picture picture) {
             this.picture = picture;
             return this;
         }

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by saguilera on 1/19/17.
@@ -17,23 +18,24 @@ public class Tag extends Entity implements Serializable {
     private static final String LEVEL_UNIVERSITY = "college";
 
     private @NonNull String name;
-    private @NonNull Level level;
+    private @NonNull List<Level> levels;
 
     protected Tag() {
         super();
     }
 
     protected Tag(@NonNull Builder builder) {
+        super(builder);
         this.name = builder.name;
-        this.level = builder.level;
+        this.levels = builder.levels;
     }
 
     public @NonNull String name() {
         return name;
     }
 
-    public @NonNull Level level() {
-        return level;
+    public @NonNull List<Level> levels() {
+        return levels;
     }
 
     public @NonNull Builder newBuilder() {
@@ -44,14 +46,14 @@ public class Tag extends Entity implements Serializable {
 
         @Nullable String name;
 
-        @Nullable Level level;
+        @Nullable List<Level> levels;
 
         public Builder() {
         }
 
         public Builder(@NonNull Tag tag) {
             super(tag);
-            level(tag.level());
+            levels(tag.levels());
             name(tag.name());
         }
 
@@ -60,8 +62,8 @@ public class Tag extends Entity implements Serializable {
             return this;
         }
 
-        public final @NonNull Builder level(final @NonNull Level level) {
-            this.level = level;
+        public final @NonNull Builder levels(final @NonNull List<Level> levels) {
+            this.levels = levels;
             return this;
         }
 
@@ -76,7 +78,12 @@ public class Tag extends Entity implements Serializable {
         public boolean buildable() {
             boolean buildable = super.buildable();
             buildable &= name != null;
-            buildable &= level != null;
+            buildable &= levels != null;
+
+            if (levels != null) {
+                buildable &= !levels.isEmpty();
+            }
+
             return buildable;
         }
     }
