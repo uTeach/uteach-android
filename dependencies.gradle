@@ -9,6 +9,9 @@ ext {
 
     retrofitVersion = '2.1.0'
 
+    robolectricVersion = '3.2.2'
+    junitVersion = '4.12'
+
     support = [
         appcompat : "com.android.support:appcompat-v7:$supportAppcompatVersion"
     ]
@@ -28,5 +31,10 @@ ext {
         core : "com.squareup.retrofit2:retrofit:$retrofitVersion",
         parser : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
         rx : "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    ]
+
+    test = [
+        junit : "junit:junit:$junitVersion",
+        robolectric : "org.robolectric:robolectric:$robolectricVersion"
     ]
 }

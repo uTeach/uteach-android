@@ -12,8 +12,8 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public final class Location implements Serializable {
 
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
 
     Location() {
     }
@@ -23,11 +23,11 @@ public final class Location implements Serializable {
         this.longitude = builder.longitude;
     }
 
-    public long latitude() {
+    public double latitude() {
         return latitude;
     }
 
-    public long longitude() {
+    public double longitude() {
         return longitude;
     }
 
@@ -37,8 +37,8 @@ public final class Location implements Serializable {
 
     public static class Builder implements Preconditions<Location> {
 
-        long latitude = NO_VALUE;
-        long longitude = NO_VALUE;
+        double latitude = NO_VALUE;
+        double longitude = NO_VALUE;
 
         public Builder() {
         }
@@ -48,12 +48,12 @@ public final class Location implements Serializable {
             longitude(location.longitude());
         }
 
-        public @NonNull Builder latitude(final long latitude) {
+        public @NonNull Builder latitude(final double latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public @NonNull Builder longitude(final long longitude) {
+        public @NonNull Builder longitude(final double longitude) {
             this.longitude = longitude;
             return this;
         }

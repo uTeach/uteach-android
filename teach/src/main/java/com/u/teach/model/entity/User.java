@@ -2,7 +2,6 @@ package com.u.teach.model.entity;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.google.gson.annotations.SerializedName;
 import com.u.teach.model.Gender;
 import java.io.Serializable;
 import java.util.Date;

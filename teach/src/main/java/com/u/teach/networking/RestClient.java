@@ -2,6 +2,7 @@ package com.u.teach.networking;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 import com.u.teach.model.AccessToken;
 import com.u.teach.networking.credentials.CredentialsService;
@@ -171,7 +172,7 @@ public class RestClient {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
                     .setDateFormat(DATE_FORMAT)
-                    .disableInnerClassSerialization()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .create()))
                 .client(new OkHttpClient.Builder()
                     .cache(new Cache(new File(context.get().getCacheDir(), CACHE_DIR), CACHE_MAX_SIZE))

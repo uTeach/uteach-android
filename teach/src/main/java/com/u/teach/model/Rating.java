@@ -24,10 +24,10 @@ public class Rating implements Serializable {
     private static final String RATING_E = "E";
     private static final String RATING_F = "F";
 
-    private @NonNull Type rating;
+    private @NonNull Type value;
 
-    private @NonNull Type rating() {
-        return rating;
+    public @NonNull Type rating() {
+        return value;
     }
 
     public enum Type {
@@ -44,7 +44,7 @@ public class Rating implements Serializable {
         @SerializedName(Rating.RATING_E)
         E,
         @SerializedName(Rating.RATING_F)
-        F;
+        F
     }
 
 }

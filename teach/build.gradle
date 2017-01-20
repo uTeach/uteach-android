@@ -37,4 +37,7 @@ dependencies {
     compile http.core
     compile http.parser
     compile http.rx
+
+    testCompile test.robolectric
+    testCompile test.junit
 }
