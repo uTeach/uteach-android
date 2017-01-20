@@ -2,14 +2,15 @@ package com.u.teach.activity.register;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewOutlineProvider;
 import com.u.teach.R;
-import com.u.teach.activity.DefaultActivity;
 
 /**
  * Created by saguilera on 1/11/17.
  */
-public class RegisterActivity extends DefaultActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class RegisterActivity extends DefaultActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getString(R.string.toolbar_register));
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setIcon(getDrawable(R.mipmap.ic_launcher));
+            getSupportActionBar().setIcon(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

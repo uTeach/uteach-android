@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     defaultConfig {
         applicationId "com.u.teach"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -25,14 +25,15 @@ android {
 }
 
 dependencies {
-    compile support.appcompat
+    compile support.design
 
     compile misc.gif
 
     compile rx.java
     compile rx.android
-    compile rx.lifecycleCore
-    compile rx.lifecycleComponents
+
+    compile structure.conductor
+    compile structure.lifecycle
 
     compile http.core
     compile http.parser
