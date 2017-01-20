@@ -16,11 +16,11 @@ public class Student extends User implements Serializable {
     private @NonNull List<Professor> availableProfessors;
     private @NonNull List<Professor> pendingProfessors;
 
-    Student() {
+    protected Student() {
         super();
     }
 
-    Student(@NonNull Builder builder) {
+    protected Student(@NonNull Builder builder) {
         super(builder);
         this.availableProfessors = builder.availableProfessors;
         this.pendingProfessors = builder.pendingProfessors;

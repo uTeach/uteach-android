@@ -15,10 +15,10 @@ public final class Location implements Serializable {
     private double latitude;
     private double longitude;
 
-    Location() {
+    private Location() {
     }
 
-    Location(@NonNull Builder builder) {
+    private Location(@NonNull Builder builder) {
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
     }

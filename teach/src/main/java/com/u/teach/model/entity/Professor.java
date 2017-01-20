@@ -23,11 +23,11 @@ public class Professor extends User implements Serializable {
     private @NonNull List<Student> pendingRequests;
     private @NonNull List<Tag> tags;
 
-    Professor() {
+    protected Professor() {
         super();
     }
 
-    Professor(@NonNull Builder builder) {
+    protected Professor(@NonNull Builder builder) {
         super(builder);
         this.location = builder.location;
         this.rating = builder.rating;

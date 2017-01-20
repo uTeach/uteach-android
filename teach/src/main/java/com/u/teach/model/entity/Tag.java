@@ -19,11 +19,11 @@ public class Tag extends Entity implements Serializable {
     private @NonNull String name;
     private @NonNull Level level;
 
-    Tag() {
+    protected Tag() {
         super();
     }
 
-    Tag(@NonNull Builder builder) {
+    protected Tag(@NonNull Builder builder) {
         this.name = builder.name;
         this.level = builder.level;
     }

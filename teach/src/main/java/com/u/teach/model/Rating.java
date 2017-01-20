@@ -2,6 +2,7 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
+import com.u.teach.model.entity.Picture;
 import java.io.Serializable;
 
 /**
@@ -14,7 +15,7 @@ import java.io.Serializable;
  * Created by saguilera on 1/9/17.
  */
 @SuppressWarnings("unused")
-public class Rating implements Serializable {
+public final class Rating implements Serializable {
 
     private static final String RATING_A_PLUS = "A+";
     private static final String RATING_A = "A";
