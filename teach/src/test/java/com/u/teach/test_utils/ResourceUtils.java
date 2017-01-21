@@ -10,7 +10,6 @@ import java.io.Reader;
 /**
  * Created by saguilera on 1/19/17.
  */
-
 public class ResourceUtils {
 
     public static <T> T fromRaw(String resource, Class<T> tClass) throws Exception {

@@ -1,12 +1,15 @@
-package com.u.teach.activity.splash;
+package com.u.teach.controller.splash;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import com.trello.rxlifecycle.android.ActivityEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.rxlifecycle.ControllerEvent;
 import com.u.teach.R;
-import com.u.teach.activity.register.RegisterActivity;
+import com.u.teach.controller.BaseController;
+import com.u.teach.controller.register.RegisterController;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.RestClient;
@@ -18,44 +21,44 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
- * Splash Activity
- *
- * Created by saguilera on 1/8/17.
+ * Created by saguilera on 1/20/17.
  */
-public class SplashActivity extends AppCompatActivity {
+
+public class SplashController extends BaseController {
 
     /**
      * Default minimum time for the activity to be shown
      */
     private static final long SPLASH_DEFAULT_TIME = 6L;
 
+    @NonNull
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
+        return inflater.inflate(R.layout.controller_splash, container, false);
+    }
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    protected void onAttach(@NonNull final View view) {
+        super.onAttach(view);
 
-        setContentView(R.layout.activity_splash);
-
-        if (AccessTokenManager.getInstance().read(this) != null) {
+        if (AccessTokenManager.getInstance().read(getActivity()) != null) {
             // If we have an access token, get the user
-            UserService service = RestClient.with(this).create(UserService.class);
+            UserService service = RestClient.with(getActivity()).create(UserService.class);
             service.currentUser().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                //.compose(this.<User>bindUntilEvent(ActivityEvent.DESTROY))
+                .compose(this.<User>bindUntilEvent(ControllerEvent.DESTROY_VIEW))
                 .doOnError(new Action1<Throwable>() {
                     @Override
                     public void call(final Throwable throwable) {
                         // TODO handle error
-                        SplashActivity.this.onFinish(throwable, null);
+                        SplashController.this.onFinish(throwable, null);
                     }
                 })
                 .doOnNext(new Action1<User>() {
                     @Override
                     public void call(final User user) {
-                        SplashActivity.this.onFinish(null, user);
+                        SplashController.this.onFinish(null, user);
                     }
                 }).subscribe();
         }
@@ -63,21 +66,33 @@ public class SplashActivity extends AppCompatActivity {
         Observable.timer(SPLASH_DEFAULT_TIME, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            //.compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))
+            .compose(this.<Long>bindUntilEvent(ControllerEvent.DESTROY_VIEW))
             .subscribe(new Action1<Long>() {
                 @Override
                 public void call(final Long aLong) {
-                    SplashActivity.this.onFinish(null, null);
+                    SplashController.this.onFinish(null, null);
                 }
             });
+    }
+
+    @Override
+    protected boolean hasActionBar() {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    protected String title() {
+        return null;
     }
 
     /**
      * Logic for finishing the splash.
      * This should only be called either when all requirements are fullfilled and the minimum time has passed.
      */
+    @SuppressWarnings("ConstantConditions")
     void onFinish(@Nullable Throwable ex, @Nullable User user) {
-        if (AccessTokenManager.getInstance().read(this) != null) {
+        if (AccessTokenManager.getInstance().read(getActivity()) != null) {
             // A request for the user was available
             if (user != null) {
                 // The request already finished, go to home with credentials
@@ -94,7 +109,7 @@ public class SplashActivity extends AppCompatActivity {
             // startActivity(new Intent()); // TODO
         }
 
-        startActivity(new Intent(this, RegisterActivity.class));
+        getRouter().pushController(RouterTransaction.with(new RegisterController()));
     }
 
 }

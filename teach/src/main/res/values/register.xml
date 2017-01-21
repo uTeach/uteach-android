@@ -7,5 +7,7 @@
     <dimen name="register_pick_a_model_text_size">16sp</dimen>
     <dimen name="register_pick_a_model_text_margin">16dp</dimen>
     <dimen name="register_model_container_margin">@dimen/register_pick_a_model_text_margin</dimen>
+    <dimen name="register_card_elevation">8dp</dimen>
+    <dimen name="register_card_padding">8dp</dimen>
 
 </resources>
