@@ -32,9 +32,10 @@ dependencies {
 
     compile rx.java
     compile rx.android
+    compile rx.bindings
+    compile rx.lifecycle
 
     compile structure.conductor
-    compile structure.lifecycle
 
     compile http.core
     compile http.parser

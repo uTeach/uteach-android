@@ -5,6 +5,7 @@ ext {
 
     rxAndroidVersion = '1.2.1'
     rxJavaVersion = '1.1.6'
+    rxBindingsVersion = '1.0.0'
 
     retrofitVersion = '2.1.0'
 
@@ -24,12 +25,13 @@ ext {
 
     rx = [
         android : "io.reactivex:rxandroid:$rxAndroidVersion",
-        java : "io.reactivex:rxjava:$rxJavaVersion"
+        java : "io.reactivex:rxjava:$rxJavaVersion",
+        bindings : "com.jakewharton.rxbinding:rxbinding:$rxBindingsVersion",
+        lifecycle : "com.bluelinelabs:conductor-rxlifecycle:$conductorVersion"
     ]
 
     structure = [
-        conductor : "com.bluelinelabs:conductor:$conductorVersion",
-        lifecycle : "com.bluelinelabs:conductor-rxlifecycle:$conductorVersion"
+        conductor : "com.bluelinelabs:conductor:$conductorVersion"
     ]
 
     http = [

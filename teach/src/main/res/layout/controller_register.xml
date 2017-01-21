@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
 
-     android:orientation="vertical"
+    android:orientation="vertical"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,12 +21,30 @@
         android:text="@string/register_pick_a_model"
         android:textSize="@dimen/register_pick_a_model_text_size"/>
 
-    <include
-        layout="@layout/view_card_register_user_type"
-        android:id="@+id/controller_register_student_view"/>
+    <com.u.teach.view.card.PickUserTypeCardView
+        android:id="@+id/controller_register_view_card_student"
 
-    <include
-        layout="@layout/view_card_register_user_type"
-        android:id="@+id/controller_register_professor_view"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        card:user_type="student"
+
+        android:layout_marginLeft="@dimen/register_model_container_margin"
+        android:layout_marginRight="@dimen/register_model_container_margin"
+        android:layout_marginBottom="@dimen/register_model_container_margin"/>
+
+    <com.u.teach.view.card.PickUserTypeCardView
+        android:id="@+id/controller_register_view_card_professor"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        card:user_type="professor"
+
+        android:layout_marginLeft="@dimen/register_model_container_margin"
+        android:layout_marginRight="@dimen/register_model_container_margin"
+        android:layout_marginBottom="@dimen/register_model_container_margin"/>
 
 </LinearLayout>
