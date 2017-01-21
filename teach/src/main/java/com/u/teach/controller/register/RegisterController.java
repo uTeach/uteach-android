@@ -2,14 +2,20 @@ package com.u.teach.controller.register;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.u.teach.R;
 import com.u.teach.contract.card.PickUserTypeCardContract;
 import com.u.teach.controller.BaseController;
+import com.u.teach.model.AccessToken;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.card.PickUserTypeCardPresenter;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by saguilera on 1/20/17.
@@ -31,6 +37,22 @@ public class RegisterController extends BaseController {
         professorCardPresenter = new PickUserTypeCardPresenter(
             (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_professor));
         professorCardPresenter.setUserType(UserType.PROFESSOR);
+
+        Observable.merge(
+            studentCardPresenter.onTypeSelected(),
+            professorCardPresenter.onTypeSelected())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<UserType>bindToLifecycle())
+                .first()
+                .subscribe(new Action1<UserType>() {
+                    @Override
+                    public void call(final UserType userType) {
+                        //TODO
+                        // We have the selected usertype, do something.
+                        Log.w("RegisterController", userType.name());
+                    }
+                });
 
         return view;
     }

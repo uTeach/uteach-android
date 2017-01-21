@@ -1,14 +1,14 @@
 package com.u.teach.presenter.card;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 import com.u.teach.contract.card.PickUserTypeCardContract;
+import com.u.teach.model.AccessToken;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.Presenter;
+import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action1;
+import rx.subjects.PublishSubject;
 
 /**
  * Created by saguilera on 1/21/17.
@@ -17,9 +17,11 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
         implements PickUserTypeCardContract.Presenter {
 
     private UserType type;
+    private PublishSubject<UserType> subject;
 
     public PickUserTypeCardPresenter(PickUserTypeCardContract.View view) {
         super(view);
+        subject = PublishSubject.create();
     }
 
     @Override
@@ -40,14 +42,14 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     }
 
     @Override
+    public Observable<UserType> onTypeSelected() {
+        return subject;
+    }
+
+    @Override
     public void onCardPicked() {
-        switch (type) {
-            case PROFESSOR:
-            case STUDENT:
-                //TODO
-                Log.w("Card picked", type.name() + " clicked!");
-                break;
-        }
+        subject.onNext(type);
+        subject.onCompleted();
 
         clearSubscriptions();
     }
