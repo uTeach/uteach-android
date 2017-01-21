@@ -69,7 +69,7 @@ public class PickUserTypeCardView extends CardView implements PickUserTypeCardCo
     }
 
     @Override
-    public Subscription subscribeOnCardPicked(final Action1<Void> onCardPicked) {
+    public Subscription subscribeOnCardPickedEvent(final Action1<Void> onCardPicked) {
         return RxView.clicks(this)
             .take(1)
             .subscribe(onCardPicked);

@@ -10,19 +10,18 @@ import rx.functions.Action1;
 /**
  * Created by saguilera on 1/21/17.
  */
-
 public interface PickUserTypeCardContract {
 
     interface View extends ContractView {
 
-        Subscription subscribeOnCardPicked(final Action1<Void> onCardPicked);
+        Subscription subscribeOnCardPickedEvent(final Action1<Void> onCardPicked);
 
     }
 
     interface Presenter extends ContractPresenter<View> {
 
         void onCardPicked();
-        Observable<UserType> onTypeSelected();
+        Observable<UserType> getCardPickEvent();
 
     }
 

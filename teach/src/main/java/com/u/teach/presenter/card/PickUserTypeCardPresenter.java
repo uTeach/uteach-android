@@ -1,5 +1,6 @@
 package com.u.teach.presenter.card;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import com.u.teach.contract.card.PickUserTypeCardContract;
 import com.u.teach.model.AccessToken.UserType;
@@ -18,8 +19,10 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     private final @NonNull UserType type;
     private PublishSubject<UserType> subject;
 
-    public PickUserTypeCardPresenter(@NonNull UserType type) {
-        super();
+    public PickUserTypeCardPresenter(@NonNull Context context,
+        @NonNull UserType type) {
+        super(context);
+
         this.type = type;
 
         subject = PublishSubject.create();
@@ -29,7 +32,7 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     public void onAttach(@NonNull PickUserTypeCardContract.View view) {
         super.onAttach(view);
 
-        Subscription clickSubscription = view.subscribeOnCardPicked(new Action1<Void>() {
+        Subscription clickSubscription = view.subscribeOnCardPickedEvent(new Action1<Void>() {
             @Override
             public void call(final Void aVoid) {
                 onCardPicked();
@@ -40,7 +43,7 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     }
 
     @Override
-    public Observable<UserType> onTypeSelected() {
+    public Observable<UserType> getCardPickEvent() {
         return subject;
     }
 

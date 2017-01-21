@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.bluelinelabs.conductor.RouterTransaction;
 import com.u.teach.R;
 import com.u.teach.contract.card.PickUserTypeCardContract;
 import com.u.teach.controller.BaseController;
-import com.u.teach.model.AccessToken;
+import com.u.teach.controller.dialog.DialogController;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.card.PickUserTypeCardPresenter;
+import com.u.teach.presenter.dialog.DialogPresenter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -31,12 +33,12 @@ public class RegisterController extends BaseController {
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
         View view = inflater.inflate(R.layout.controller_register, container, false);
 
-        studentCardPresenter = new PickUserTypeCardPresenter(UserType.STUDENT);
-        professorCardPresenter = new PickUserTypeCardPresenter(UserType.PROFESSOR);
+        studentCardPresenter = new PickUserTypeCardPresenter(getApplicationContext(), UserType.STUDENT);
+        professorCardPresenter = new PickUserTypeCardPresenter(getApplicationContext(), UserType.PROFESSOR);
 
         Observable.merge(
-            studentCardPresenter.onTypeSelected(),
-            professorCardPresenter.onTypeSelected())
+            studentCardPresenter.getCardPickEvent(),
+            professorCardPresenter.getCardPickEvent())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<UserType>bindToLifecycle())
@@ -47,6 +49,10 @@ public class RegisterController extends BaseController {
                         //TODO
                         // We have the selected usertype, do something.
                         Log.w("RegisterController", userType.name());
+                        getRouter().pushController(RouterTransaction.with(
+                            new DialogController()
+                                .severity(DialogPresenter.Severity.ERROR, userType.name())
+                        ));
                     }
                 });
 
