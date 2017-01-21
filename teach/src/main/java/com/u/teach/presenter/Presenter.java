@@ -1,6 +1,7 @@
 package com.u.teach.presenter;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.u.teach.contract.ContractView;
 import com.u.teach.view.ViewSubscriptionsManager;
 import rx.Subscription;
@@ -10,16 +11,14 @@ import rx.Subscription;
  */
 public abstract class Presenter<T extends ContractView> {
 
-    //TODO Check if this might leak
-    private @NonNull T view;
+    private @Nullable T view;
     private @NonNull ViewSubscriptionsManager subscriptionsManager;
 
-    public Presenter(@NonNull T view) {
-        this.view = view;
+    public Presenter() {
         subscriptionsManager = new ViewSubscriptionsManager();
     }
 
-    protected @NonNull T getView() {
+    protected @Nullable T getView() {
         return view;
     }
 
@@ -31,8 +30,12 @@ public abstract class Presenter<T extends ContractView> {
         subscriptionsManager.clear();
     }
 
-    public void onAttach() {}
+    public void onAttach(@NonNull T view) {
+        this.view = view;
+    }
+
     public void onDetach() {
+        this.view = null;
         clearSubscriptions();
     }
 

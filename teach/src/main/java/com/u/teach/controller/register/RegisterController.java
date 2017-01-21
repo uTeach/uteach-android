@@ -31,12 +31,8 @@ public class RegisterController extends BaseController {
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
         View view = inflater.inflate(R.layout.controller_register, container, false);
 
-        studentCardPresenter = new PickUserTypeCardPresenter(
-            (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_student));
-        studentCardPresenter.setUserType(UserType.STUDENT);
-        professorCardPresenter = new PickUserTypeCardPresenter(
-            (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_professor));
-        professorCardPresenter.setUserType(UserType.PROFESSOR);
+        studentCardPresenter = new PickUserTypeCardPresenter(UserType.STUDENT);
+        professorCardPresenter = new PickUserTypeCardPresenter(UserType.PROFESSOR);
 
         Observable.merge(
             studentCardPresenter.onTypeSelected(),
@@ -61,8 +57,10 @@ public class RegisterController extends BaseController {
     protected void onAttach(@NonNull final View view) {
         super.onAttach(view);
 
-        studentCardPresenter.onAttach();
-        professorCardPresenter.onAttach();
+        studentCardPresenter.onAttach(
+            (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_student));
+        professorCardPresenter.onAttach(
+            (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_professor));
     }
 
     @Override

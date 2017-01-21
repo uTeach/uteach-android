@@ -19,10 +19,9 @@ public interface PickUserTypeCardContract {
 
     }
 
-    interface Presenter extends ContractPresenter {
+    interface Presenter extends ContractPresenter<View> {
 
         void onCardPicked();
-        void setUserType(UserType userType);
         Observable<UserType> onTypeSelected();
 
     }

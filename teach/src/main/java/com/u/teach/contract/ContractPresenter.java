@@ -3,10 +3,9 @@ package com.u.teach.contract;
 /**
  * Created by saguilera on 1/21/17.
  */
+public interface ContractPresenter<T extends ContractView> {
 
-public interface ContractPresenter {
-
-    void onAttach();
+    void onAttach(T view);
     void onDetach();
 
 }

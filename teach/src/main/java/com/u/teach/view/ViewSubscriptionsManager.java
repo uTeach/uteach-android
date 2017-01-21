@@ -1,9 +1,13 @@
 package com.u.teach.view;
 
 import android.support.annotation.NonNull;
+import android.view.View;
+import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.RxLifecycle;
 import java.util.ArrayList;
 import java.util.List;
 import rx.Subscription;
+import rx.subjects.BehaviorSubject;
 
 /**
  * Created by saguilera on 1/21/17.
@@ -33,6 +37,30 @@ public class ViewSubscriptionsManager {
         for (Subscription subscription : new ArrayList<>(subscriptions)) {
             remove(subscription);
         }
+    }
+
+    public static <T> LifecycleTransformer<T> bindToLifecycle(@NonNull View view) {
+        final BehaviorSubject<Event> subject = BehaviorSubject.create(Event.ATTACH);
+
+        view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+
+            @Override
+            public void onViewAttachedToWindow(final View view) {
+                subject.onNext(Event.ATTACH);
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(final View view) {
+                subject.onNext(Event.DETACH);
+            }
+        });
+
+        return RxLifecycle.bindUntilEvent(subject, Event.DETACH);
+    }
+
+    private enum Event {
+        ATTACH,
+        DETACH
     }
 
 }
