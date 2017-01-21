@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.bluelinelabs.conductor.rxlifecycle.ControllerEvent;
 import com.u.teach.R;
 import com.u.teach.controller.BaseController;
@@ -109,6 +110,7 @@ public class SplashController extends BaseController {
             // startActivity(new Intent()); // TODO
         }
 
+        setRetainViewMode(RetainViewMode.RELEASE_DETACH);
         getRouter().pushController(RouterTransaction.with(new RegisterController()));
     }
 
