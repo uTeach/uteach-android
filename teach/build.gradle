@@ -16,16 +16,17 @@ android {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-            storeFile file('/Users/saguilera/AndroidStudioProjects/keystores/uteach/keystore.jks')
-            storePassword 'esimposible'
-            keyAlias 'uTeach'
-            keyPassword 'esimposible'
+            storeFile file(properties.getProperty('signingStoreFile'))
+            storePassword properties.getProperty('signingStorePassword')
+            keyAlias properties.getProperty('signingKeyAlias')
+            keyPassword properties.getProperty('signingKeyPassword')
         }
     }
 
     buildTypes {
         release {
             minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
