@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.u.teach.R;
 import com.u.teach.contract.card.PickUserTypeCardContract;
-import com.u.teach.controller.BaseController;
+import com.u.teach.controller.FlowController;
 import com.u.teach.controller.dialog.DialogController;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.card.PickUserTypeCardPresenter;
@@ -23,7 +23,7 @@ import rx.schedulers.Schedulers;
  * Created by saguilera on 1/20/17.
  */
 
-public class RegisterController extends BaseController {
+public class RegisterController extends FlowController {
 
     private PickUserTypeCardContract.Presenter professorCardPresenter;
     private PickUserTypeCardContract.Presenter studentCardPresenter;
@@ -49,10 +49,8 @@ public class RegisterController extends BaseController {
                         //TODO
                         // We have the selected usertype, do something.
                         Log.w("RegisterController", userType.name());
-                        getRouter().pushController(RouterTransaction.with(
-                            new DialogController()
-                                .severity(DialogPresenter.Severity.ERROR, userType.name())
-                        ));
+                        showDialog(new DialogController()
+                            .severity(DialogPresenter.Severity.ERROR, userType.name()));
                     }
                 });
 

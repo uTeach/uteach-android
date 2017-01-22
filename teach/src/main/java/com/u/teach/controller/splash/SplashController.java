@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bluelinelabs.conductor.RouterTransaction;
-import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.bluelinelabs.conductor.rxlifecycle.ControllerEvent;
 import com.u.teach.R;
-import com.u.teach.controller.BaseController;
+import com.u.teach.controller.FlowController;
 import com.u.teach.controller.register.RegisterController;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
@@ -25,7 +24,7 @@ import rx.schedulers.Schedulers;
  * Created by saguilera on 1/20/17.
  */
 
-public class SplashController extends BaseController {
+public class SplashController extends FlowController {
 
     /**
      * Default minimum time for the activity to be shown

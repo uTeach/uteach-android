@@ -1,7 +1,6 @@
 package com.u.teach.controller.dialog;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +23,6 @@ public class DialogController extends BaseController {
     private View content;
 
     private DialogContract.Presenter presenter;
-
-    @Nullable
-    @Override
-    protected String title() {
-        return null;
-    }
-
-    @Override
-    protected boolean hasActionBar() {
-        return false;
-    }
 
     public @NonNull DialogController severity(@NonNull DialogPresenter.Severity severity,
             @NonNull String title) {
@@ -85,4 +73,5 @@ public class DialogController extends BaseController {
         super.onDetach(view);
         presenter.onDetach();
     }
+
 }
