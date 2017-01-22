@@ -14,13 +14,17 @@ ext {
     robolectricVersion = '3.2.2'
     junitVersion = '4.12'
 
+    leakCanaryVersion = '1.5'
+
     support = [
         design : "com.android.support:design:$supportVersion",
         cardView : "com.android.support:cardview-v7:$supportVersion"
     ]
 
     misc = [
-        gif : "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
+        gif : "pl.droidsonroids.gif:android-gif-drawable:$gifVersion",
+        leakCanary : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+        leakCanaryStub : "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     ]
 
     rx = [

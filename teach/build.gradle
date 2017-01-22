@@ -41,6 +41,11 @@ dependencies {
     compile http.parser
     compile http.rx
 
+    debugCompile misc.leakCanary
+
+    releaseCompile misc.leakCanaryStub
+
     testCompile test.robolectric
     testCompile test.junit
+    testCompile misc.leakCanaryStub
 }
