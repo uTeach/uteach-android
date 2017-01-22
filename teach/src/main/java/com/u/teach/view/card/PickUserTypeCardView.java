@@ -9,6 +9,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.u.teach.R;
 import com.u.teach.contract.card.PickUserTypeCardContract;
 import com.u.teach.utils.MetricsUtils;
+import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -69,10 +70,8 @@ public class PickUserTypeCardView extends CardView implements PickUserTypeCardCo
     }
 
     @Override
-    public Subscription subscribeOnCardPickedEvent(final Action1<Void> onCardPicked) {
-        return RxView.clicks(this)
-            .take(1)
-            .subscribe(onCardPicked);
+    public Observable<Void> observeOnCardPickedEvent() {
+        return RxView.clicks(this);
     }
 
 }

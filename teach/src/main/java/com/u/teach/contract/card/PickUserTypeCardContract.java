@@ -4,8 +4,6 @@ import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
 import com.u.teach.model.AccessToken.UserType;
 import rx.Observable;
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by saguilera on 1/21/17.
@@ -14,7 +12,7 @@ public interface PickUserTypeCardContract {
 
     interface View extends ContractView {
 
-        Subscription subscribeOnCardPickedEvent(final Action1<Void> onCardPicked);
+        Observable<Void> observeOnCardPickedEvent();
 
     }
 

@@ -32,13 +32,14 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     public void onAttach(@NonNull PickUserTypeCardContract.View view) {
         super.onAttach(view);
 
-        Subscription clickSubscription = view.subscribeOnCardPickedEvent(new Action1<Void>() {
-            @Override
-            public void call(final Void aVoid) {
-                onCardPicked();
-            }
-        });
-
+        Subscription clickSubscription = view.observeOnCardPickedEvent()
+            .take(1)
+            .subscribe(new Action1<Void>() {
+                @Override
+                public void call(final Void aVoid) {
+                    onCardPicked();
+                }
+            });
         addSubscription(clickSubscription);
     }
 

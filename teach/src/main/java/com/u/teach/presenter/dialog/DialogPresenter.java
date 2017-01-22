@@ -10,7 +10,9 @@ import com.u.teach.contract.dialog.DialogContract;
 import com.u.teach.presenter.Presenter;
 import rx.Observable;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 /**
@@ -60,12 +62,15 @@ public class DialogPresenter extends Presenter<DialogContract.View> implements D
         view.setCancellable(cancellable);
         view.setSeverityTitle(title);
 
-        Subscription subscription = view.subscribeOnCancelevent(new Action1<Void>() {
-            @Override
-            public void call(final Void aVoid) {
-                onDismiss();
-            }
-        });
+        Subscription subscription = view.observeOnCancelEvent()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.newThread())
+            .subscribe(new Action1<Void>() {
+                @Override
+                public void call(final Void aVoid) {
+                    onDismiss();
+                }
+            });
         addSubscription(subscription);
 
         if (content != null) {

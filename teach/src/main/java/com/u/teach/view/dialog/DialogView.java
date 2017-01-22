@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.u.teach.R;
 import com.u.teach.contract.dialog.DialogContract;
 import com.u.teach.utils.MetricsUtils;
+import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -77,15 +78,12 @@ public class DialogView extends FrameLayout implements DialogContract.View {
     }
 
     @Override
-    public Subscription subscribeOnCancelevent(@NonNull Action1<Void> func) {
+    public Observable<Void> observeOnCancelEvent() {
         if (listener == null) {
             listener = PublishSubject.create();
         }
 
-        return listener
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(func);
+        return listener;
     }
 
     @Override

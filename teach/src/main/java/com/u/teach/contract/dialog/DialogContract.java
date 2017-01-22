@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
 import rx.Observable;
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by saguilera on 1/21/17.
@@ -16,7 +14,7 @@ public interface DialogContract {
 
     interface View extends ContractView {
 
-        Subscription subscribeOnCancelevent(@NonNull Action1<Void> func);
+        Observable<Void> observeOnCancelEvent();
         void setCancellable(boolean cancellable);
         boolean isCancellable();
         void setContentView(@NonNull android.view.View view);
