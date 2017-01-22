@@ -3,6 +3,7 @@ package com.u.teach.view.dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,19 +11,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.jakewharton.rxbinding.view.RxView;
 import com.u.teach.R;
+import com.u.teach.contract.dialog.LoginContract;
 import com.u.teach.utils.TextUtils;
+import rx.Observable;
+import rx.subjects.PublishSubject;
 
 /**
  * Created by saguilera on 1/22/17.
  */
 
-public class LoginDialogView extends LinearLayout {
+public class LoginDialogView extends LinearLayout implements LoginContract.View {
 
     private @NonNull TextView readTCView;
     private @NonNull ImageView facebookButton;
     private @NonNull ImageView googleButton;
+
+    @Nullable PublishSubject<Void> termsAndConditionsListener;
 
     public LoginDialogView(final Context context) {
         super(context);
@@ -42,7 +48,9 @@ public class LoginDialogView extends LinearLayout {
             new TextUtils.BaseClickableSpan(getContext()) {
                 @Override
                 public void onClick(final View widget) {
-                    Toast.makeText(getContext(), "TODO, show terms and conditions", Toast.LENGTH_SHORT).show();
+                    if (termsAndConditionsListener != null) {
+                        termsAndConditionsListener.onNext(null);
+                    }
                 }
             }), TextView.BufferType.SPANNABLE);
     }
@@ -55,6 +63,25 @@ public class LoginDialogView extends LinearLayout {
     public LoginDialogView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         throw new IllegalStateException("This view doesnt support xml injection. Use is programatical only");
+    }
+
+    @Override
+    public Observable<Void> observeOnTermsAndConditionsClick() {
+        if (termsAndConditionsListener == null) {
+            termsAndConditionsListener = PublishSubject.create();
+        }
+
+        return termsAndConditionsListener;
+    }
+
+    @Override
+    public Observable<Void> observeOnFacebookLoginClick() {
+        return RxView.clicks(facebookButton);
+    }
+
+    @Override
+    public Observable<Void> observeOnGoogleLoginClick() {
+        return RxView.clicks(googleButton);
     }
 
 }

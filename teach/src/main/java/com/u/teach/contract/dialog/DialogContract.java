@@ -25,7 +25,7 @@ public interface DialogContract {
 
     interface Presenter extends ContractPresenter<View> {
 
-        Observable<Void> getOnDismissEvent();
+        Observable<Void> observeOnDismissEvent();
         void onDismiss();
         void setCancellable(boolean cancellable);
 

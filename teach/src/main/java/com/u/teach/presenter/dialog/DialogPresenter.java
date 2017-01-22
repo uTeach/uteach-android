@@ -44,7 +44,7 @@ public class DialogPresenter extends Presenter<DialogContract.View> implements D
     }
 
     @Override
-    public Observable<Void> getOnDismissEvent() {
+    public Observable<Void> observeOnDismissEvent() {
         return dismissSubject;
     }
 

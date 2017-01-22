@@ -55,7 +55,7 @@ public class DialogController extends BaseController {
         super.onAttach(view);
         presenter.onAttach((DialogContract.View) view);
 
-        presenter.getOnDismissEvent()
+        presenter.observeOnDismissEvent()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .compose(this.<Void>bindToLifecycle())
