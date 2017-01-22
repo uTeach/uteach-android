@@ -1,4 +1,4 @@
-package com.u.teach.contract.dialog;
+package com.u.teach.contract.abstracts;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import rx.Observable;
  * Created by saguilera on 1/21/17.
  */
 
-public interface DialogContract {
+public interface BaseDialogContract {
 
     interface View extends ContractView {
 

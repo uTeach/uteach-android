@@ -1,9 +1,10 @@
-package com.u.teach.presenter.dialog;
+package com.u.teach.presenter.register;
 
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 import com.bluelinelabs.conductor.Router;
-import com.u.teach.contract.dialog.LoginContract;
+import com.u.teach.contract.register.LoginContract;
+import com.u.teach.model.AccessToken;
 import com.u.teach.presenter.Presenter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -16,7 +17,7 @@ import rx.subjects.ReplaySubject;
  */
 public class LoginDialogPresenter extends Presenter<LoginContract.View> implements LoginContract.Presenter {
 
-    private ReplaySubject<Login> listener = ReplaySubject.create();
+    private ReplaySubject<AccessToken.Provider> listener = ReplaySubject.create();
 
     public LoginDialogPresenter(@NonNull final Router router) {
         super(router);
@@ -61,20 +62,13 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
             }));
     }
 
-    void notifyLogin(@NonNull Login login) {
+    void notifyLogin(@NonNull AccessToken.Provider login) {
         listener.onNext(login);
     }
 
     @Override
-    public Observable<Login> onLoginEvent() {
+    public Observable<AccessToken.Provider> onLoginEvent() {
         return listener.asObservable();
-    }
-
-    public class Login {
-
-        String accessToken;
-        String type;
-
     }
 
 }

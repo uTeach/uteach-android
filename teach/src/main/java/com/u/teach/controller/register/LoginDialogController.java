@@ -1,4 +1,4 @@
-package com.u.teach.controller.dialog;
+package com.u.teach.controller.register;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.u.teach.R;
-import com.u.teach.contract.dialog.LoginContract;
-import com.u.teach.presenter.dialog.BaseDialogPresenter;
-import com.u.teach.presenter.dialog.LoginDialogPresenter;
-import com.u.teach.view.dialog.LoginDialogView;
+import com.u.teach.contract.register.LoginContract;
+import com.u.teach.controller.abstracts.BaseDialogController;
+import com.u.teach.model.AccessToken;
+import com.u.teach.presenter.abstracts.BaseDialogPresenter;
+import com.u.teach.presenter.register.LoginDialogPresenter;
+import com.u.teach.view.register.LoginDialogView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -36,11 +38,11 @@ public class LoginDialogController extends BaseDialogController {
         presenter.onLoginEvent()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.newThread())
-            .compose(this.<LoginDialogPresenter.Login>bindToLifecycle())
+            .compose(this.<AccessToken.Provider>bindToLifecycle())
             .take(1)
-            .subscribe(new Action1<LoginDialogPresenter.Login>() {
+            .subscribe(new Action1<AccessToken.Provider>() {
                 @Override
-                public void call(final LoginDialogPresenter.Login login) {
+                public void call(final AccessToken.Provider login) {
                     //TODO do our login :)
                     Toast.makeText(getApplicationContext(), "Login..", Toast.LENGTH_SHORT).show();
                 }

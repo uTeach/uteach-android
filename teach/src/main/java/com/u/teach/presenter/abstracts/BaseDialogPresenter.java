@@ -1,4 +1,4 @@
-package com.u.teach.presenter.dialog;
+package com.u.teach.presenter.abstracts;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import com.bluelinelabs.conductor.Router;
 import com.u.teach.R;
-import com.u.teach.contract.dialog.DialogContract;
+import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.presenter.Presenter;
 import rx.Observable;
 import rx.Subscription;
@@ -18,7 +18,7 @@ import rx.subjects.PublishSubject;
 /**
  * Created by saguilera on 1/21/17.
  */
-public class BaseDialogPresenter extends Presenter<DialogContract.View> implements DialogContract.Presenter {
+public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> implements BaseDialogContract.Presenter {
 
     private @NonNull Severity severity;
     private @NonNull String title;
@@ -58,7 +58,7 @@ public class BaseDialogPresenter extends Presenter<DialogContract.View> implemen
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void onAttach(@NonNull final DialogContract.View view) {
+    public void onAttach(@NonNull final BaseDialogContract.View view) {
         view.setCancellable(cancellable);
         view.setSeverityTitle(title);
 

@@ -50,4 +50,23 @@ public final class AccessToken implements Serializable {
         PROFESSOR
     }
 
+    public static class ProviderToken {
+
+        private @NonNull String accessToken;
+        private @NonNull Provider provider;
+
+        public ProviderToken(@NonNull Provider provider, @NonNull String accessToken) {
+            this.provider = provider;
+            this.accessToken =  accessToken;
+        }
+
+    }
+
+    public enum Provider {
+        @SerializedName("google")
+        GOOGLE,
+        @SerializedName("facebook")
+        FACEBOOK
+    }
+
 }

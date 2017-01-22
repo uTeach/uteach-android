@@ -1,8 +1,8 @@
-package com.u.teach.presenter.card;
+package com.u.teach.presenter.register;
 
 import android.support.annotation.NonNull;
 import com.bluelinelabs.conductor.Router;
-import com.u.teach.contract.card.PickUserTypeCardContract;
+import com.u.teach.contract.register.AccountTypeContract;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.Presenter;
 import rx.Observable;
@@ -13,13 +13,13 @@ import rx.subjects.PublishSubject;
 /**
  * Created by saguilera on 1/21/17.
  */
-public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContract.View>
-        implements PickUserTypeCardContract.Presenter {
+public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
+        implements AccountTypeContract.Presenter {
 
     private final @NonNull UserType type;
     private PublishSubject<UserType> subject;
 
-    public PickUserTypeCardPresenter(@NonNull Router router,
+    public AccountTypePresenter(@NonNull Router router,
         @NonNull UserType type) {
         super(router);
 
@@ -29,7 +29,7 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     }
 
     @Override
-    public void onAttach(@NonNull PickUserTypeCardContract.View view) {
+    public void onAttach(@NonNull AccountTypeContract.View view) {
         super.onAttach(view);
 
         Subscription clickSubscription = view.observeOnCardPickedEvent()

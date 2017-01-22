@@ -1,4 +1,4 @@
-package com.u.teach.view.dialog;
+package com.u.teach.view.abstracts;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.u.teach.R;
-import com.u.teach.contract.dialog.DialogContract;
+import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.utils.MetricsUtils;
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -23,7 +23,7 @@ import rx.subjects.PublishSubject;
  * Created by saguilera on 1/21/17.
  */
 
-public class DialogView extends FrameLayout implements DialogContract.View {
+public class BaseDialogView extends FrameLayout implements BaseDialogContract.View {
 
     private @NonNull View innerContainer;
 
@@ -35,7 +35,7 @@ public class DialogView extends FrameLayout implements DialogContract.View {
 
     private @Nullable PublishSubject<Void> listener;
 
-    public DialogView(final Context context) {
+    public BaseDialogView(final Context context) {
         super(context);
 
         inflate(context, R.layout.view_base_dialog, this);
@@ -53,17 +53,17 @@ public class DialogView extends FrameLayout implements DialogContract.View {
         setPadding(padding, padding, padding, padding);
     }
 
-    public DialogView(final Context context, final AttributeSet attrs) {
+    public BaseDialogView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         throw new IllegalStateException("This view doesnt support xml injection. Use is programatical only");
     }
 
-    public DialogView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
+    public BaseDialogView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         throw new IllegalStateException("This view doesnt support xml injection. Use is programatical only");
     }
 
-    public DialogView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
+    public BaseDialogView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         throw new IllegalStateException("This view doesnt support xml injection. Use is programatical only");
     }

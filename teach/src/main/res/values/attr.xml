@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="PickUserTypeCardView">
+    <declare-styleable name="AccountTypeView">
         <attr name="user_type" format="enum">
             <enum name="student" value="1" />
             <enum name="professor" value="2" />

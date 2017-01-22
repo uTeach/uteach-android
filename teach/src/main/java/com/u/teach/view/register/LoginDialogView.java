@@ -1,4 +1,4 @@
-package com.u.teach.view.dialog;
+package com.u.teach.view.register;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.u.teach.R;
-import com.u.teach.contract.dialog.LoginContract;
+import com.u.teach.contract.register.LoginContract;
 import com.u.teach.utils.TextUtils;
 import rx.Observable;
 import rx.subjects.PublishSubject;

@@ -1,4 +1,4 @@
-package com.u.teach.contract.card;
+package com.u.teach.contract.register;
 
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
@@ -8,7 +8,7 @@ import rx.Observable;
 /**
  * Created by saguilera on 1/21/17.
  */
-public interface PickUserTypeCardContract {
+public interface AccountTypeContract {
 
     interface View extends ContractView {
 

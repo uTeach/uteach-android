@@ -1,8 +1,8 @@
-package com.u.teach.contract.dialog;
+package com.u.teach.contract.register;
 
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
-import com.u.teach.presenter.dialog.LoginDialogPresenter;
+import com.u.teach.model.AccessToken;
 import rx.Observable;
 
 /**
@@ -21,7 +21,7 @@ public interface LoginContract {
 
     interface Presenter extends ContractPresenter<View> {
 
-        Observable<LoginDialogPresenter.Login> onLoginEvent();
+        Observable<AccessToken.Provider> onLoginEvent();
 
     }
 

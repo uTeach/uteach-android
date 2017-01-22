@@ -1,13 +1,13 @@
-package com.u.teach.controller.dialog;
+package com.u.teach.controller.abstracts;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.u.teach.contract.dialog.DialogContract;
+import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.controller.BaseController;
-import com.u.teach.presenter.dialog.BaseDialogPresenter;
-import com.u.teach.view.dialog.DialogView;
+import com.u.teach.presenter.abstracts.BaseDialogPresenter;
+import com.u.teach.view.abstracts.BaseDialogView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -22,7 +22,7 @@ public abstract class BaseDialogController extends BaseController {
     private View content;
     private boolean cancellable = true;
 
-    private DialogContract.Presenter presenter;
+    private BaseDialogContract.Presenter presenter;
 
     public @NonNull BaseDialogController severity(@NonNull BaseDialogPresenter.Severity severity,
             @NonNull String title) {
@@ -49,7 +49,7 @@ public abstract class BaseDialogController extends BaseController {
     @NonNull
     @Override
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
-        View view = new DialogView(getActivity());
+        View view = new BaseDialogView(getActivity());
 
         presenter = new BaseDialogPresenter.Builder(getRouter())
             .severity(severity)
@@ -64,7 +64,7 @@ public abstract class BaseDialogController extends BaseController {
     @Override
     protected void onAttach(@NonNull final View view) {
         super.onAttach(view);
-        presenter.onAttach((DialogContract.View) view);
+        presenter.onAttach((BaseDialogContract.View) view);
 
         presenter.observeOnDismissEvent()
             .subscribeOn(Schedulers.newThread())

@@ -7,14 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.u.teach.R;
-import com.u.teach.contract.card.PickUserTypeCardContract;
+import com.u.teach.contract.register.AccountTypeContract;
 import com.u.teach.controller.FlowController;
-import com.u.teach.controller.dialog.BaseDialogController;
-import com.u.teach.controller.dialog.LoginDialogController;
 import com.u.teach.model.AccessToken.UserType;
-import com.u.teach.presenter.card.PickUserTypeCardPresenter;
-import com.u.teach.presenter.dialog.BaseDialogPresenter;
-import com.u.teach.view.dialog.LoginDialogView;
+import com.u.teach.presenter.register.AccountTypePresenter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -26,16 +22,16 @@ import rx.schedulers.Schedulers;
 
 public class RegisterController extends FlowController {
 
-    private PickUserTypeCardContract.Presenter professorCardPresenter;
-    private PickUserTypeCardContract.Presenter studentCardPresenter;
+    private AccountTypeContract.Presenter professorCardPresenter;
+    private AccountTypeContract.Presenter studentCardPresenter;
 
     @NonNull
     @Override
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
         View view = inflater.inflate(R.layout.controller_register, container, false);
 
-        studentCardPresenter = new PickUserTypeCardPresenter(getRouter(), UserType.STUDENT);
-        professorCardPresenter = new PickUserTypeCardPresenter(getRouter(), UserType.PROFESSOR);
+        studentCardPresenter = new AccountTypePresenter(getRouter(), UserType.STUDENT);
+        professorCardPresenter = new AccountTypePresenter(getRouter(), UserType.PROFESSOR);
 
         Observable.merge(
             studentCardPresenter.getCardPickEvent(),
@@ -62,9 +58,9 @@ public class RegisterController extends FlowController {
         super.onAttach(view);
 
         studentCardPresenter.onAttach(
-            (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_student));
+            (AccountTypeContract.View) view.findViewById(R.id.controller_register_view_card_student));
         professorCardPresenter.onAttach(
-            (PickUserTypeCardContract.View) view.findViewById(R.id.controller_register_view_card_professor));
+            (AccountTypeContract.View) view.findViewById(R.id.controller_register_view_card_professor));
     }
 
     @Override

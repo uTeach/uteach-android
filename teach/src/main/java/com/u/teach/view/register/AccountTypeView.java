@@ -1,4 +1,4 @@
-package com.u.teach.view.card;
+package com.u.teach.view.register;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,17 +7,15 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.u.teach.R;
-import com.u.teach.contract.card.PickUserTypeCardContract;
+import com.u.teach.contract.register.AccountTypeContract;
 import com.u.teach.utils.MetricsUtils;
 import rx.Observable;
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by saguilera on 1/20/17.
  */
 
-public class PickUserTypeCardView extends CardView implements PickUserTypeCardContract.View {
+public class AccountTypeView extends CardView implements AccountTypeContract.View {
 
     private static final int RADIUS_DP = 2;
     private static final int ELEVATION_DP = 8;
@@ -27,15 +25,15 @@ public class PickUserTypeCardView extends CardView implements PickUserTypeCardCo
     private static final int TYPE_STUDENT = 1;
     private static final int TYPE_PROFESSOR = 2;
 
-    public PickUserTypeCardView(final Context context) {
+    public AccountTypeView(final Context context) {
         this(context, null);
     }
 
-    public PickUserTypeCardView(final Context context, final AttributeSet attrs) {
+    public AccountTypeView(final Context context, final AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public PickUserTypeCardView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
+    public AccountTypeView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         inflate(context, R.layout.view_card_pick_user_type, this);
@@ -51,10 +49,10 @@ public class PickUserTypeCardView extends CardView implements PickUserTypeCardCo
 
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(
             attrs,
-            R.styleable.PickUserTypeCardView,
+            R.styleable.AccountTypeView,
             0, 0);
 
-        int userType = typedArray.getInt(R.styleable.PickUserTypeCardView_user_type, TYPE_NAN);
+        int userType = typedArray.getInt(R.styleable.AccountTypeView_user_type, TYPE_NAN);
 
         switch (userType) {
             case TYPE_PROFESSOR:
