@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:layout_gravity="center"
+
         app:cardElevation="@dimen/dialog_elevation"
         app:cardCornerRadius="@dimen/dialog_radius"
         app:cardBackgroundColor="@color/colorAccent"
@@ -44,6 +46,8 @@
 
             <FrameLayout
                 android:id="@+id/view_dialog_content"
+
+                android:layout_marginTop="@dimen/dialog_padding"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

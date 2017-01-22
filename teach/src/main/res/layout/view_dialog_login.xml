@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_logging_button_height"
 
-        android:layout_marginBottom="@dimen/dialog_logging_margin"
+        android:layout_marginBottom="@dimen/dialog_padding"
 
         android:src="@color/blue" />
     

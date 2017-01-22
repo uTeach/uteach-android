@@ -17,10 +17,6 @@ import com.u.teach.R;
 import com.u.teach.contract.dialog.DialogContract;
 import com.u.teach.utils.MetricsUtils;
 import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 /**
