@@ -38,7 +38,7 @@ public class DialogView extends FrameLayout implements DialogContract.View {
     public DialogView(final Context context) {
         super(context);
 
-        inflate(context, R.layout.view_dialog, this);
+        inflate(context, R.layout.view_base_dialog, this);
 
         innerContainer = findViewById(R.id.view_dialog_inner_container);
         severityImage = (ImageView) findViewById(R.id.view_dialog_severity_image);

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.u.teach.contract.dialog.DialogContract;
 import com.u.teach.controller.BaseController;
-import com.u.teach.presenter.dialog.DialogPresenter;
+import com.u.teach.presenter.dialog.BaseDialogPresenter;
 import com.u.teach.view.dialog.DialogView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -15,23 +15,22 @@ import rx.schedulers.Schedulers;
 /**
  * Created by saguilera on 1/21/17.
  */
-//TODO is abstract.
-public class DialogController extends BaseController {
+public abstract class BaseDialogController extends BaseController {
 
-    private DialogPresenter.Severity severity;
+    private BaseDialogPresenter.Severity severity;
     private String title;
     private View content;
 
     private DialogContract.Presenter presenter;
 
-    public @NonNull DialogController severity(@NonNull DialogPresenter.Severity severity,
+    public @NonNull BaseDialogController severity(@NonNull BaseDialogPresenter.Severity severity,
             @NonNull String title) {
         this.severity = severity;
         this.title = title;
         return this;
     }
 
-    public @NonNull DialogController content(@NonNull View content) {
+    public @NonNull BaseDialogController content(@NonNull View content) {
         this.content = content;
         return this;
     }
@@ -41,7 +40,7 @@ public class DialogController extends BaseController {
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
         View view = new DialogView(getActivity());
 
-        presenter = new DialogPresenter.Builder(getApplicationContext())
+        presenter = new BaseDialogPresenter.Builder(getRouter())
             .severity(severity)
             .title(title)
             .content(content)

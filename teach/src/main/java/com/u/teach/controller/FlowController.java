@@ -31,8 +31,7 @@ public abstract class FlowController extends BaseController {
         return true;
     }
 
-    protected @Nullable
-    ActionBar getActionBar() {
+    protected @Nullable ActionBar getActionBar() {
         return getActivity() == null ? null : ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 

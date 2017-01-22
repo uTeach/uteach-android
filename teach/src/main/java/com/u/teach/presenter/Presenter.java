@@ -3,6 +3,7 @@ package com.u.teach.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.bluelinelabs.conductor.Router;
 import com.u.teach.contract.ContractView;
 import com.u.teach.view.ViewSubscriptionsManager;
 import rx.Subscription;
@@ -12,13 +13,13 @@ import rx.Subscription;
  */
 public abstract class Presenter<T extends ContractView> {
 
-    private @NonNull Context context;
+    private @NonNull Router router;
 
     private @Nullable T view;
     private @NonNull ViewSubscriptionsManager subscriptionsManager;
 
-    public Presenter(@NonNull Context context) {
-        this.context = context;
+    public Presenter(@NonNull Router router) {
+        this.router = router;
         subscriptionsManager = new ViewSubscriptionsManager();
     }
 
@@ -34,8 +35,12 @@ public abstract class Presenter<T extends ContractView> {
         subscriptionsManager.clear();
     }
 
-    protected @NonNull Context getContext() {
-        return context;
+    protected @Nullable Context getContext() {
+        return router.getActivity();
+    }
+
+    protected @NonNull Router getRouter() {
+        return router;
     }
 
     public void onAttach(@NonNull T view) {

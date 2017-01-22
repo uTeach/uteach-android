@@ -1,10 +1,10 @@
 package com.u.teach.presenter.dialog;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import com.bluelinelabs.conductor.Router;
 import com.u.teach.R;
 import com.u.teach.contract.dialog.DialogContract;
 import com.u.teach.presenter.Presenter;
@@ -18,7 +18,7 @@ import rx.subjects.PublishSubject;
 /**
  * Created by saguilera on 1/21/17.
  */
-public class DialogPresenter extends Presenter<DialogContract.View> implements DialogContract.Presenter {
+public class BaseDialogPresenter extends Presenter<DialogContract.View> implements DialogContract.Presenter {
 
     private @NonNull Severity severity;
     private @NonNull String title;
@@ -29,8 +29,8 @@ public class DialogPresenter extends Presenter<DialogContract.View> implements D
 
     private PublishSubject<Void> dismissSubject;
 
-    DialogPresenter(Builder builder) {
-        super(builder.context);
+    BaseDialogPresenter(Builder builder) {
+        super(builder.router);
         this.severity = builder.severity;
         this.title = builder.title;
         this.content = builder.content;
@@ -94,13 +94,13 @@ public class DialogPresenter extends Presenter<DialogContract.View> implements D
 
     public static class Builder {
 
-        @NonNull Context context;
+        @NonNull Router router;
         @Nullable Severity severity;
         @Nullable String title;
         @Nullable View content;
 
-        public Builder(@NonNull Context context) {
-            this.context = context;
+        public Builder(@NonNull Router router) {
+            this.router = router;
         }
 
         public @NonNull Builder severity(@NonNull Severity severity) {
@@ -118,12 +118,13 @@ public class DialogPresenter extends Presenter<DialogContract.View> implements D
             return this;
         }
 
-        public @NonNull DialogPresenter build() {
+        public @NonNull
+        BaseDialogPresenter build() {
             if (severity == null || title == null) {
                 throw new IllegalStateException("Missing params");
             }
 
-            return new DialogPresenter(this);
+            return new BaseDialogPresenter(this);
         }
 
     }

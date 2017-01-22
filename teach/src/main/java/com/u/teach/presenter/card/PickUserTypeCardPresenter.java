@@ -1,7 +1,7 @@
 package com.u.teach.presenter.card;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
+import com.bluelinelabs.conductor.Router;
 import com.u.teach.contract.card.PickUserTypeCardContract;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.Presenter;
@@ -19,9 +19,9 @@ public class PickUserTypeCardPresenter extends Presenter<PickUserTypeCardContrac
     private final @NonNull UserType type;
     private PublishSubject<UserType> subject;
 
-    public PickUserTypeCardPresenter(@NonNull Context context,
+    public PickUserTypeCardPresenter(@NonNull Router router,
         @NonNull UserType type) {
-        super(context);
+        super(router);
 
         this.type = type;
 

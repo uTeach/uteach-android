@@ -2,6 +2,7 @@ package com.u.teach.contract.dialog;
 
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
+import com.u.teach.presenter.dialog.LoginDialogPresenter;
 import rx.Observable;
 
 /**
@@ -20,7 +21,7 @@ public interface LoginContract {
 
     interface Presenter extends ContractPresenter<View> {
 
-        Observable<Void> onLoginEvent();
+        Observable<LoginDialogPresenter.Login> onLoginEvent();
 
     }
 

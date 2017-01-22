@@ -6,14 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.bluelinelabs.conductor.RouterTransaction;
 import com.u.teach.R;
 import com.u.teach.contract.card.PickUserTypeCardContract;
 import com.u.teach.controller.FlowController;
-import com.u.teach.controller.dialog.DialogController;
+import com.u.teach.controller.dialog.BaseDialogController;
+import com.u.teach.controller.dialog.LoginDialogController;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.card.PickUserTypeCardPresenter;
-import com.u.teach.presenter.dialog.DialogPresenter;
+import com.u.teach.presenter.dialog.BaseDialogPresenter;
 import com.u.teach.view.dialog.LoginDialogView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -34,8 +34,8 @@ public class RegisterController extends FlowController {
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
         View view = inflater.inflate(R.layout.controller_register, container, false);
 
-        studentCardPresenter = new PickUserTypeCardPresenter(getApplicationContext(), UserType.STUDENT);
-        professorCardPresenter = new PickUserTypeCardPresenter(getApplicationContext(), UserType.PROFESSOR);
+        studentCardPresenter = new PickUserTypeCardPresenter(getRouter(), UserType.STUDENT);
+        professorCardPresenter = new PickUserTypeCardPresenter(getRouter(), UserType.PROFESSOR);
 
         Observable.merge(
             studentCardPresenter.getCardPickEvent(),
@@ -50,9 +50,7 @@ public class RegisterController extends FlowController {
                         //TODO
                         // We have the selected usertype, do something.
                         Log.w("RegisterController", userType.name());
-                        showDialog(new DialogController()
-                            .severity(DialogPresenter.Severity.ERROR, userType.name())
-                            .content(new LoginDialogView(getApplicationContext())));
+                        showDialog(new LoginDialogController());
                     }
                 });
 
