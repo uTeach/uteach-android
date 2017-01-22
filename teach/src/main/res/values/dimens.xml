@@ -7,10 +7,8 @@
     <dimen name="dialog_elevation">8dp</dimen>
     <dimen name="dialog_radius">4dp</dimen>
 
-    <!-- Login dialog -->
-    <dimen name="dialog_logging_button_height">48dp</dimen>
-    <dimen name="dialog_logging_margin">16dp</dimen>
-    <dimen name="dialog_logging_text_size">13sp</dimen>
-    <dimen name="dialog_logging_text_padding">4dp</dimen>
+    <!-- Toolbar -->
+    <dimen name="action_bar_height">42dp</dimen>
+    <dimen name="action_bar_content_inset_start">12dp</dimen>
 
 </resources>
