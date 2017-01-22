@@ -20,6 +20,7 @@ public abstract class BaseDialogController extends BaseController {
     private BaseDialogPresenter.Severity severity;
     private String title;
     private View content;
+    private boolean cancellable = true;
 
     private DialogContract.Presenter presenter;
 
@@ -35,6 +36,16 @@ public abstract class BaseDialogController extends BaseController {
         return this;
     }
 
+    public @NonNull BaseDialogController cancellable(boolean cancelable) {
+        this.cancellable = cancelable;
+        return this;
+    }
+
+    @Override
+    public boolean handleBack() {
+        return !cancellable || super.handleBack();
+    }
+
     @NonNull
     @Override
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
@@ -45,6 +56,7 @@ public abstract class BaseDialogController extends BaseController {
             .title(title)
             .content(content)
             .build();
+        presenter.setCancellable(cancellable);
 
         return view;
     }
