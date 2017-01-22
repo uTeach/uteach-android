@@ -109,6 +109,11 @@ public class DialogView extends FrameLayout implements DialogContract.View {
 
     @Override
     public boolean onInterceptTouchEvent(final MotionEvent ev) {
+        boolean interceptEvent = ev.getAction() == MotionEvent.ACTION_DOWN;
+        interceptEvent &= isCancellable();
+
+        if (!interceptEvent) return false;
+
         Rect outRect = new Rect();
         int[] location = new int[2];
 
@@ -116,9 +121,7 @@ public class DialogView extends FrameLayout implements DialogContract.View {
         innerContainer.getLocationOnScreen(location);
         outRect.offset(location[0], location[1]);
 
-        boolean interceptEvent = !outRect.contains((int) ev.getRawX(), (int) ev.getRawY());
-        interceptEvent &= ev.getAction() == MotionEvent.ACTION_DOWN;
-        interceptEvent &= isCancellable();
+        interceptEvent = !outRect.contains((int) ev.getRawX(), (int) ev.getRawY());
 
         if (interceptEvent && listener != null) {
             listener.onNext(null);
