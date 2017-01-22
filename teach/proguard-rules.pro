@@ -26,6 +26,17 @@
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
+-dontwarn retrofit2.adapter.rxjava.CompletableHelper$**
+-dontwarn okio.**
+-dontnote libcore.icu.ICU
+-dontnote sun.misc.Unsafe
+-dontnote org.apache.harmony.xnet.provider.jsse.SSLParametersImpl
+-dontnote sun.security.ssl.SSLContextImpl
+-dontnote android.app.ActivityThread
+-dontnote android.net.http.*
+-dontnote org.apache.commons.codec.**
+-dontnote org.apache.http.**
+
 # For using GSON @Expose annotation
 -keepattributes *Annotation*
 
