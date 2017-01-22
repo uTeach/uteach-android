@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">uTeach</string>
+    <string name="register_terms_and_conditions">Al registrarte aceptas todos los términos y condiciones de uTeach. [Ver terminos y condiciones]</string>
 </resources>

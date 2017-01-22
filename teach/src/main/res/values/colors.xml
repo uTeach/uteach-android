@@ -7,6 +7,8 @@
 
     <!-- Palette -->
     <color name="black">#000000</color>
+    <color name="blue">#0000ff</color>
+    <color name="red">#ff0000</color>
 
     <!-- Dialogs -->
     <color name="dialog_shadow">#72000000</color>

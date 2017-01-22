@@ -14,6 +14,7 @@ import com.u.teach.controller.dialog.DialogController;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.card.PickUserTypeCardPresenter;
 import com.u.teach.presenter.dialog.DialogPresenter;
+import com.u.teach.view.dialog.LoginDialogView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -50,7 +51,8 @@ public class RegisterController extends FlowController {
                         // We have the selected usertype, do something.
                         Log.w("RegisterController", userType.name());
                         showDialog(new DialogController()
-                            .severity(DialogPresenter.Severity.ERROR, userType.name()));
+                            .severity(DialogPresenter.Severity.ERROR, userType.name())
+                            .content(new LoginDialogView(getApplicationContext())));
                     }
                 });
 
