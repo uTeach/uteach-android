@@ -26,16 +26,25 @@
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
+# Local issues to remove warnings/notes that external libraries say its no problem / should take them into account.
 -dontwarn retrofit2.adapter.rxjava.CompletableHelper$**
 -dontwarn okio.**
+-dontnote pl.droidsonroids.**
 -dontnote libcore.icu.ICU
 -dontnote sun.misc.Unsafe
 -dontnote org.apache.harmony.xnet.provider.jsse.SSLParametersImpl
 -dontnote sun.security.ssl.SSLContextImpl
+-dontnote okhttp3.internal.AndroidPlatform
 -dontnote android.app.ActivityThread
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
+-dontnote rx.internal.util.PlatformDependent
+-dontnote com.google.gson.internal.UnsafeAllocator
+
+# Be careful with these, it produces way too much output so im silencing it but it should be payed atention to
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
 
 # For using GSON @Expose annotation
 -keepattributes *Annotation*
