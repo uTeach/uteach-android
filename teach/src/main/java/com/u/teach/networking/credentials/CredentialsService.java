@@ -2,6 +2,7 @@ package com.u.teach.networking.credentials;
 
 import android.support.annotation.NonNull;
 import com.u.teach.model.AccessToken;
+import com.u.teach.model.AccessToken.Provider;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -18,9 +19,10 @@ public interface CredentialsService {
 
     String GRANT_TYPE_CREATE = "assertion";
     String GRANT_TYPE_REFRESH = "refresh_token";
+    String GRANT_TYPE_LOGIN = "assertion";
 
     /**
-     * Post to with an AccessToken.
+     * Post to create an AccessToken.
      *
      * #NO AUTH
      *
@@ -46,9 +48,12 @@ public interface CredentialsService {
 
         private @NonNull String grantType = GRANT_TYPE_CREATE;
         private @NonNull String assertion;
+        private @NonNull Provider provider;
 
-        public CreateCredentialForm(@NonNull String accessToken) {
+        public CreateCredentialForm(@NonNull String accessToken,
+            @NonNull Provider provider) {
             this.assertion = accessToken;
+            this.provider = provider;
         }
 
     }
