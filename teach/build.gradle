@@ -13,20 +13,24 @@ android {
 
     signingConfigs {
         release {
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-            storeFile file(properties.getProperty('signingStoreFile'))
-            storePassword properties.getProperty('signingStorePassword')
-            keyAlias properties.getProperty('signingKeyAlias')
-            keyPassword properties.getProperty('signingKeyPassword')
+            if (isSignable()) {
+                Properties properties = getLocalProperties()
+                storeFile file(properties.getProperty('signingStoreFile'))
+                storePassword properties.getProperty('signingStorePassword')
+                keyAlias properties.getProperty('signingKeyAlias')
+                keyPassword properties.getProperty('signingKeyPassword')
+            }
         }
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            signingConfig signingConfigs.release
+            minifyEnabled isSignable()
+
+            if (isSignable()) {
+                signingConfig signingConfigs.release
+            }
+            
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

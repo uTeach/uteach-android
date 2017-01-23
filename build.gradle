@@ -22,3 +22,4 @@ allprojects {
 }
 
 apply from: 'dependencies.gradle'
+apply from: 'utils.gradle'
