@@ -2,7 +2,6 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
-import com.u.teach.model.entity.Picture;
 import java.io.Serializable;
 
 /**

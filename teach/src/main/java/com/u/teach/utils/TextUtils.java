@@ -1,7 +1,6 @@
 package com.u.teach.utils;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
@@ -12,8 +11,10 @@ import com.u.teach.R;
 /**
  * Created by saguilera on 1/22/17.
  */
-
 public class TextUtils {
+
+    private TextUtils() {
+    }
 
     public static SpannableStringBuilder createClickableSpan(String text, BaseClickableSpan... spans) {
         SpannableStringBuilder spanBuilder = new SpannableStringBuilder(text);

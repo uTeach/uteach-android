@@ -1,6 +1,5 @@
 package com.u.teach.model.entity;
 
-import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import com.u.teach.model.Preconditions;
 import java.io.Serializable;
