@@ -7,10 +7,10 @@ machine:
 
 dependencies:
     cache_directories:
-        - ~/.gradle
         - ~/.android
     override:
         - bash circle/install_depenencies.sh
+        - ./gradlew teach:dependencies --console=plain
 
 test:
     override:

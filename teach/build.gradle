@@ -5,15 +5,32 @@ android {
     compileSdkVersion 25
     defaultConfig {
         applicationId "com.u.teach"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
 
+    signingConfigs {
+        release {
+            if (isSignable()) {
+                Properties properties = getLocalProperties()
+                storeFile file(properties.getProperty('signingStoreFile'))
+                storePassword properties.getProperty('signingStorePassword')
+                keyAlias properties.getProperty('signingKeyAlias')
+                keyPassword properties.getProperty('signingKeyPassword')
+            }
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled isSignable()
+
+            if (isSignable()) {
+                signingConfig signingConfigs.release
+            }
+            
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,14 +42,27 @@ android {
 }
 
 dependencies {
-    compile support.appcompat
+    compile support.design
+    compile support.cardView
 
     compile misc.gif
 
     compile rx.java
     compile rx.android
+    compile rx.bindings
+    compile rx.lifecycle
+
+    compile structure.conductor
 
     compile http.core
     compile http.parser
     compile http.rx
+
+    debugCompile misc.leakCanary
+
+    releaseCompile misc.leakCanaryStub
+
+    testCompile test.robolectric
+    testCompile test.junit
+    testCompile misc.leakCanaryStub
 }

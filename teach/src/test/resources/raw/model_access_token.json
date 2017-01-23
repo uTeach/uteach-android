@@ -1,0 +1,8 @@
+{
+  "access_token": "f148ed1ece66589c3f637745cdae345c94a66c0be31b19abeb098edc155b298a",
+  "token_type": "bearer",
+  "expires_in": 86400,
+  "refresh_token": "7bb93e22de7ebb410dac83572e07a71e490a4deea8acedd3bab5154f2533ea5d",
+  "created_at": 1484172787,
+  "user_type": "Teacher"
+}

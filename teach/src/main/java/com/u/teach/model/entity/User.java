@@ -3,6 +3,7 @@ package com.u.teach.model.entity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.u.teach.model.Gender;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,8 @@ import java.util.Date;
  *
  * Created by saguilera on 1/8/17.
  */
-public abstract class User extends Entity {
+@SuppressWarnings("unused")
+public abstract class User extends Entity implements Serializable {
 
     private @NonNull String name;
     private @NonNull String email;
@@ -75,27 +77,27 @@ public abstract class User extends Entity {
             picture(user.picture());
         }
 
-        public final @NonNull Builder birthday(@NonNull final Date birthday) {
+        public final @NonNull Builder<T> birthday(@NonNull final Date birthday) {
             this.birthday = birthday;
             return this;
         }
 
-        public final @NonNull Builder email(@NonNull final String email) {
+        public final @NonNull Builder<T> email(@NonNull final String email) {
             this.email = email;
             return this;
         }
 
-        public final @NonNull Builder gender(@NonNull final Gender gender) {
+        public final @NonNull Builder<T> gender(@NonNull final Gender gender) {
             this.gender = gender;
             return this;
         }
 
-        public final @NonNull Builder name(@NonNull final String name) {
+        public final @NonNull Builder<T> name(@NonNull final String name) {
             this.name = name;
             return this;
         }
 
-        public final @NonNull Builder picture(@NonNull final Picture picture) {
+        public final @NonNull Builder<T> picture(@NonNull final Picture picture) {
             this.picture = picture;
             return this;
         }

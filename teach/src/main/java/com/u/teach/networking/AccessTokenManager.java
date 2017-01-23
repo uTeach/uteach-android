@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.u.teach.model.AccessToken;
 
 /**
  * Access token manager for credentials.
@@ -30,7 +33,7 @@ public class AccessTokenManager {
      * Current token to avoid having to read from shared preferences
      * each time
      */
-    private @Nullable String token;
+    private @Nullable AccessToken token;
 
     /**
      * Getter of an instance
@@ -47,13 +50,17 @@ public class AccessTokenManager {
      * @param context of the scope that wants to read
      * @return access token, if persisted. Else null
      */
-    public @Nullable String read(@NonNull Context context) {
-        if (token != null) {
+    public @Nullable AccessToken read(@NonNull Context context) {
+        if (token != null)
             return token;
-        }
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_DIR, Context.MODE_PRIVATE);
-        return token = sharedPreferences.getString(SHARED_PREFERENCIES_KEY, null);
+        String json = sharedPreferences.getString(SHARED_PREFERENCIES_KEY, null);
+
+        if (json == null)
+            return null;
+
+        return token = new Gson().fromJson(json, AccessToken.class);
     }
 
     /**
@@ -63,10 +70,21 @@ public class AccessTokenManager {
      * @param context of the scope that wants to write
      * @param token to persist
      */
-    public void write(@NonNull Context context, @NonNull String token) {
+    public void write(@NonNull Context context, @NonNull AccessToken token) {
         this.token = token;
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_DIR, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString(SHARED_PREFERENCIES_KEY, token).apply();
+        sharedPreferences.edit().putString(SHARED_PREFERENCIES_KEY, new Gson().toJson(token)).apply();
+    }
+
+    /**
+     * Clear the access token.
+     *
+     * @param context of the scope that wants to write
+     */
+    public void clear(@NonNull Context context) {
+        this.token = null;
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_DIR, Context.MODE_PRIVATE);
+        sharedPreferences.edit().remove(SHARED_PREFERENCIES_KEY).apply();
     }
 
 }

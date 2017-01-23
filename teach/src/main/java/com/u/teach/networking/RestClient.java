@@ -2,20 +2,28 @@ package com.u.teach.networking;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
+import com.u.teach.model.AccessToken;
+import com.u.teach.networking.credentials.CredentialsService;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
+import okhttp3.Authenticator;
 import okhttp3.Cache;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.Route;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 /**
- * Utility class to create http services with the correct params.
+ * Utility class to with http services with the correct params.
  *
  * This class handles authentication (if needed) and adds nth features
  * to the http client.
@@ -59,39 +67,16 @@ public class RestClient {
      * Create a new client instance with default values.
      *
      * @param context of the scope creating a client
-     * @param needsAuth true if will perform auth (Must have a valid readable token the {@link AccessTokenManager}). Else false
      * @return a client instance
      */
-    public static @NonNull Retrofit create(final @NonNull Context context, boolean needsAuth) {
-        return new RestClient().createRetrofitInstance(context, needsAuth);
-    }
-
-    /**
-     * Creates a fully customized retrofit client with the needs of the application
-     */
-    private @NonNull Retrofit createRetrofitInstance(final @NonNull Context context, boolean needsAuth) {
-        return new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
-                .setDateFormat(DATE_FORMAT)
-                .disableInnerClassSerialization()
-                .create()))
-            .client(new OkHttpClient.Builder()
-                .cache(new Cache(new File(context.getCacheDir(), CACHE_DIR), CACHE_MAX_SIZE))
-                .addInterceptor(createCacheMaxAgeInterceptor())
-                .addInterceptor(createAuthenticatorInterceptor(context, needsAuth))
-                .cookieJar(CookieJar.NO_COOKIES)
-                .connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
-                .writeTimeout(TIMEOUT_WRITE, TimeUnit.SECONDS)
-                .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-                .build())
-            .build();
+    public static @NonNull RestClient.Builder with(final @NonNull Context context) {
+        return new RestClient.Builder(context);
     }
 
     /**
      * Creates an interceptor for setting the max age allowed for caching responses
      */
-    private @NonNull Interceptor createCacheMaxAgeInterceptor() {
+    static @NonNull Interceptor createCacheMaxAgeInterceptor() {
         return new Interceptor() {
             @Override
             public Response intercept(final Chain chain) throws IOException {
@@ -106,23 +91,102 @@ public class RestClient {
     /**
      * Creates an interceptor for setting the auth params to each (authored) request
      */
-    private @NonNull Interceptor createAuthenticatorInterceptor(final @NonNull Context context, final boolean needsAuth) {
-        return new Interceptor() {
+    static @NonNull Authenticator createAuthenticator(final @NonNull Context context, final boolean needsAuth) {
+        return new Authenticator() {
             @Override
-            public Response intercept(final Chain chain) throws IOException {
-                if (!needsAuth) return chain.proceed(chain.request());
+            public Request authenticate(final Route route, final Response response) throws IOException {
+                if (!needsAuth) return null;
 
-                String token = AccessTokenManager.getInstance().read(context);
-                if (token == null) throw new IllegalStateException("No access token available for authored request");
+                AccessToken accessToken = AccessTokenManager.getInstance().read(context);
+                if (accessToken == null)
+                    throw new IllegalStateException("Trying to auth with no available access token");
 
-                Response originalResponse = chain.proceed(chain.request());
-                return originalResponse.newBuilder()
-                    .addHeader("grant_type", "assertion")
-                    .addHeader("assertion", token)
-                    .addHeader("type", "google or facebook") // TODO
-                    .build();
+                if (accessToken.hasExpired()) {
+                    accessToken = RestClient.with(context)
+                        .noAuth()
+                        .create(CredentialsService.class)
+                        .refresh(new CredentialsService.RefreshCredentialForm(accessToken.refreshToken()))
+                        .observeOn(Schedulers.immediate())
+                        .subscribeOn(Schedulers.immediate())
+                        .toBlocking()
+                        .first();
+                }
+
+                if (accessToken != null) {
+                    AccessTokenManager.getInstance().write(context, accessToken);
+                    return response.request().newBuilder()
+                        .addHeader("Authorization", accessToken.tokenType() + " " + accessToken.accessToken())
+                        .build();
+                }
+
+                return null;
             }
         };
+    }
+
+    /**
+     * Restclient Builder class for creating Retrofit instances.
+     */
+    public static class Builder {
+
+        /**
+         * Context as weak reference to avoid leakage
+         */
+        private WeakReference<Context> context;
+
+        /**
+         * Available dinamic properties of the client
+         */
+        private boolean auth;
+
+        /**
+         * Construct a default rest client builder.
+         * @param context of the scope
+         */
+        Builder(@NonNull Context context) {
+            this.context = new WeakReference<>(context);
+            this.auth = true;
+        }
+
+        /**
+         * Client wont authenticate the request
+         * @return Builder instance
+         */
+        public @NonNull Builder noAuth() {
+            this.auth = false;
+            return this;
+        }
+
+        /**
+         * Create a default retrofit instance with all the features and improvements every request
+         * should have.
+         *
+         * By default it will try to authenticate the request (unless specified).
+         *
+         * @param service class to create the instance for
+         * @return Service instance for doing http request against.
+         */
+        public @NonNull <T> T create(@NonNull final Class<T> service) {
+            // TODO Check performance improvement on having only one Retrofit instance always
+            return new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                    .setDateFormat(DATE_FORMAT)
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    .create()))
+                .client(new OkHttpClient.Builder()
+                    .cache(new Cache(new File(context.get().getCacheDir(), CACHE_DIR), CACHE_MAX_SIZE))
+                    .addInterceptor(RestClient.createCacheMaxAgeInterceptor())
+                    .authenticator(RestClient.createAuthenticator(context.get(), auth))
+                    .cookieJar(CookieJar.NO_COOKIES)
+                    .connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
+                    .writeTimeout(TIMEOUT_WRITE, TimeUnit.SECONDS)
+                    .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+                    .build())
+                .build()
+                .create(service);
+        }
+
     }
 
 }

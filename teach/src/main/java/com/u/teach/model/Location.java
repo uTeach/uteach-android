@@ -2,32 +2,32 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  * Location model
  *
  * Created by saguilera on 1/9/17.
  */
-public class Location {
+@SuppressWarnings("unused")
+public final class Location implements Serializable {
 
-    @SerializedName("lat")
-    private long latitude;
-    @SerializedName("lng")
-    private long longitude;
+    private double latitude;
+    private double longitude;
 
-    Location() {
+    private Location() {
     }
 
-    Location(@NonNull Builder builder) {
+    private Location(@NonNull Builder builder) {
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
     }
 
-    public long latitude() {
+    public double latitude() {
         return latitude;
     }
 
-    public long longitude() {
+    public double longitude() {
         return longitude;
     }
 
@@ -37,8 +37,8 @@ public class Location {
 
     public static class Builder implements Preconditions<Location> {
 
-        long latitude = NO_VALUE;
-        long longitude = NO_VALUE;
+        double latitude = NO_VALUE;
+        double longitude = NO_VALUE;
 
         public Builder() {
         }
@@ -48,12 +48,12 @@ public class Location {
             longitude(location.longitude());
         }
 
-        public @NonNull Builder latitude(final long latitude) {
+        public @NonNull Builder latitude(final double latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public @NonNull Builder longitude(final long longitude) {
+        public @NonNull Builder longitude(final double longitude) {
             this.longitude = longitude;
             return this;
         }

@@ -2,9 +2,11 @@ package com.u.teach.model.entity;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.google.gson.annotations.SerializedName;
 import com.u.teach.model.Expertise;
 import com.u.teach.model.Location;
 import com.u.teach.model.Rating;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,30 +14,35 @@ import java.util.List;
  *
  * Created by saguilera on 1/9/17.
  */
-public class Professor extends User {
+@SuppressWarnings("unused")
+public class Professor extends User implements Serializable {
 
     private @NonNull Location location;
     private @NonNull Rating rating;
     private @NonNull Expertise expertise;
+    @SerializedName("class_cost")
+    private double fee;
     private @NonNull List<Student> pendingRequests;
+    @SerializedName("subjects")
+    private @NonNull List<Tag> tags;
 
-    Professor() {
+    protected Professor() {
         super();
     }
 
-    Professor(@NonNull Builder builder) {
+    protected Professor(@NonNull Builder builder) {
         super(builder);
         this.location = builder.location;
         this.rating = builder.rating;
         this.expertise = builder.expertise;
         this.pendingRequests = builder.pendings;
+        this.fee = builder.fee;
+        this.tags = builder.tags;
     }
 
-    /**
-     * Faltaria:
-     * - TAGS
-     * ??
-     */
+    public double fee() {
+        return fee;
+    }
 
     public @NonNull Expertise expertise() {
         return expertise;
@@ -53,6 +60,10 @@ public class Professor extends User {
         return rating;
     }
 
+    public @NonNull List<Tag> tags() {
+        return tags;
+    }
+
     public @NonNull Builder newBuilder() {
         return new Builder(this);
     }
@@ -63,6 +74,8 @@ public class Professor extends User {
         @Nullable Rating rating;
         @Nullable Expertise expertise;
         @Nullable List<Student> pendings;
+        @Nullable List<Tag> tags;
+        double fee = NO_VALUE;
 
         public Builder() {
             super();
@@ -74,6 +87,8 @@ public class Professor extends User {
             expertise(professor.expertise());
             pendings(professor.pendingRequests());
             rating(professor.rating());
+            fee(professor.fee());
+            tags(professor.tags());
         }
 
         public final @NonNull Builder location(@NonNull Location location) {
@@ -96,6 +111,16 @@ public class Professor extends User {
             return this;
         }
 
+        public final @NonNull Builder fee(double fee) {
+            this.fee = fee;
+            return this;
+        }
+
+        public final @NonNull Builder tags(@NonNull List<Tag> tags) {
+            this.tags = tags;
+            return this;
+        }
+
         @Override
         public @NonNull Professor build() {
             if (buildable())
@@ -110,6 +135,8 @@ public class Professor extends User {
             buildable &= rating != null;
             buildable &= expertise != null;
             buildable &= pendings != null;
+            buildable &= tags != null;
+            buildable &= fee != NO_VALUE;
             return buildable;
         }
 

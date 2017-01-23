@@ -16,6 +16,7 @@
         android:layout_gravity="center"
 
         android:src="@drawable/gif_loading_loop"
+        android:background="@color/colorPrimary"
 
         android:layout_margin="@dimen/splash_gif_padding" />
 

@@ -1,0 +1,14 @@
+gradle.allprojects {
+
+    ext.getLocalProperties = {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties;
+    }
+
+    ext.isSignable = {
+        return (file(project.rootDir.absolutePath + "/local.properties").exists() &&
+                getLocalProperties().getProperty('signingStoreFile', '') != '')
+    }
+
+}

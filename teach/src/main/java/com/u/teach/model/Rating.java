@@ -2,6 +2,8 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
+import com.u.teach.model.entity.Picture;
+import java.io.Serializable;
 
 /**
  * Rating model
@@ -12,22 +14,8 @@ import com.google.gson.annotations.SerializedName;
  *
  * Created by saguilera on 1/9/17.
  */
-public enum Rating {
-
-    @SerializedName(Rating.RATING_A_PLUS)
-    A_PLUS(Rating.RATING_A_PLUS),
-    @SerializedName(Rating.RATING_A)
-    A(Rating.RATING_A),
-    @SerializedName(Rating.RATING_B)
-    B(Rating.RATING_B),
-    @SerializedName(Rating.RATING_C)
-    C(Rating.RATING_C),
-    @SerializedName(Rating.RATING_D)
-    D(Rating.RATING_D),
-    @SerializedName(Rating.RATING_E)
-    E(Rating.RATING_E),
-    @SerializedName(Rating.RATING_F)
-    F(Rating.RATING_F);
+@SuppressWarnings("unused")
+public final class Rating implements Serializable {
 
     private static final String RATING_A_PLUS = "A+";
     private static final String RATING_A = "A";
@@ -37,14 +25,27 @@ public enum Rating {
     private static final String RATING_E = "E";
     private static final String RATING_F = "F";
 
-    private @NonNull String rating;
+    private @NonNull Type value;
 
-    Rating(@NonNull String rating) {
-        this.rating = rating;
+    public @NonNull Type value() {
+        return value;
     }
 
-    private @NonNull String rating() {
-        return rating;
+    public enum Type {
+        @SerializedName(Rating.RATING_A_PLUS)
+        A_PLUS,
+        @SerializedName(Rating.RATING_A)
+        A,
+        @SerializedName(Rating.RATING_B)
+        B,
+        @SerializedName(Rating.RATING_C)
+        C,
+        @SerializedName(Rating.RATING_D)
+        D,
+        @SerializedName(Rating.RATING_E)
+        E,
+        @SerializedName(Rating.RATING_F)
+        F
     }
 
 }
