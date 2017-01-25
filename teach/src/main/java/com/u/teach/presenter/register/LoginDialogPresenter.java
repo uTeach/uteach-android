@@ -67,7 +67,7 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
     }
 
     @Override
-    public Observable<AccessToken.Provider> onLoginEvent() {
+    public Observable<AccessToken.Provider> observeOnLoginEvent() {
         return listener.asObservable();
     }
 

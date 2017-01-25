@@ -44,7 +44,7 @@ public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
     }
 
     @Override
-    public Observable<UserType> getCardPickEvent() {
+    public Observable<UserType> observeOnCardPickedEvent() {
         return subject;
     }
 

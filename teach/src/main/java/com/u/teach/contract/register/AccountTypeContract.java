@@ -19,7 +19,7 @@ public interface AccountTypeContract {
     interface Presenter extends ContractPresenter<View> {
 
         void onCardPicked();
-        Observable<UserType> getCardPickEvent();
+        Observable<UserType> observeOnCardPickedEvent();
 
     }
 

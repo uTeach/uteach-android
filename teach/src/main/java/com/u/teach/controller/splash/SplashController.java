@@ -13,7 +13,7 @@ import com.u.teach.controller.register.RegisterController;
 import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.RestClient;
-import com.u.teach.networking.user.UserService;
+import com.u.teach.networking.services.user.UserService;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

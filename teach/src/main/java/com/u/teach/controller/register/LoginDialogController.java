@@ -35,7 +35,7 @@ public class LoginDialogController extends BaseDialogController {
 
         content((View) view);
 
-        presenter.onLoginEvent()
+        presenter.observeOnLoginEvent()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.newThread())
             .compose(this.<AccessToken.Provider>bindToLifecycle())

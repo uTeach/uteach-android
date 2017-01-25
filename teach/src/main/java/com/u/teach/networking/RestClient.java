@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 import com.u.teach.model.AccessToken;
-import com.u.teach.networking.credentials.CredentialsService;
+import com.u.teach.networking.services.credentials.CredentialsService;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;

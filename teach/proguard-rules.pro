@@ -15,6 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
 -dontnote retrofit2.Platform
 # Platform used when running on RoboVM on iOS. Will not be used at runtime.
@@ -44,17 +47,15 @@
 
 # Be careful with these, it produces way too much output so im silencing it but it should be payed atention to
 -keepattributes EnclosingMethod
--keepattributes InnerClasses
 
-# For using GSON @Expose annotation
 -keepattributes *Annotation*
 
 # Gson specific classes
 -keep class sun.misc.Unsafe { *; }
-#-keep class com.google.gson.stream.** { *; }
 
 # Application classes that will be serialized/deserialized over Gson
--keep class com.google.gson.examples.android.model.** { *; }
+-keep class com.u.teach.networking.services.** { *; }
+-keep class com.u.teach.model.** { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)

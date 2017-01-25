@@ -34,8 +34,8 @@ public class RegisterController extends FlowController {
         professorCardPresenter = new AccountTypePresenter(getRouter(), UserType.PROFESSOR);
 
         Observable.merge(
-            studentCardPresenter.getCardPickEvent(),
-            professorCardPresenter.getCardPickEvent())
+            studentCardPresenter.observeOnCardPickedEvent(),
+            professorCardPresenter.observeOnCardPickedEvent())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<UserType>bindToLifecycle())

@@ -2,7 +2,6 @@ package com.u.teach.model;
 
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
-import com.u.teach.model.entity.Picture;
 import java.io.Serializable;
 
 /**
@@ -31,7 +30,7 @@ public final class Rating implements Serializable {
         return value;
     }
 
-    public enum Type {
+    public enum Type implements Serializable {
         @SerializedName(Rating.RATING_A_PLUS)
         A_PLUS,
         @SerializedName(Rating.RATING_A)
