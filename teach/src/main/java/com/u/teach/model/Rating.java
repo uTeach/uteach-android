@@ -30,7 +30,7 @@ public final class Rating implements Serializable {
         return value;
     }
 
-    public enum Type {
+    public enum Type implements Serializable {
         @SerializedName(Rating.RATING_A_PLUS)
         A_PLUS,
         @SerializedName(Rating.RATING_A)

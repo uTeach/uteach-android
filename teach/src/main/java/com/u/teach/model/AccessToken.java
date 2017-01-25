@@ -43,14 +43,14 @@ public final class AccessToken implements Serializable {
         return userType;
     }
 
-    public enum UserType {
+    public enum UserType implements Serializable {
         @SerializedName("Student")
         STUDENT,
         @SerializedName("Teacher")
         PROFESSOR
     }
 
-    public static class ProviderToken {
+    public static class ProviderToken implements Serializable {
 
         private @NonNull String accessToken;
         private @NonNull Provider provider;
@@ -62,7 +62,7 @@ public final class AccessToken implements Serializable {
 
     }
 
-    public enum Provider {
+    public enum Provider implements Serializable {
         @SerializedName("google")
         GOOGLE,
         @SerializedName("facebook")

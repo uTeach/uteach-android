@@ -3,6 +3,7 @@ package com.u.teach.networking.credentials;
 import android.support.annotation.NonNull;
 import com.u.teach.model.AccessToken;
 import com.u.teach.model.AccessToken.Provider;
+import java.io.Serializable;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -44,7 +45,7 @@ public interface CredentialsService {
     /**
      * Class for the with request body
      */
-    class CreateCredentialForm {
+    class CreateCredentialForm implements Serializable {
 
         private @NonNull String grantType = GRANT_TYPE_CREATE;
         private @NonNull String assertion;
@@ -61,7 +62,7 @@ public interface CredentialsService {
     /**
      * Class for the refresh request body
      */
-    class RefreshCredentialForm {
+    class RefreshCredentialForm implements Serializable {
 
         private @NonNull String grantType = GRANT_TYPE_REFRESH;
         private @NonNull String refreshToken;

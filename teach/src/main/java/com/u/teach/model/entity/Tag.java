@@ -88,7 +88,7 @@ public class Tag extends Entity implements Serializable {
         }
     }
 
-    public enum Level {
+    public enum Level implements Serializable {
         @SerializedName(LEVEL_OTHER)
         OTHER,
         @SerializedName(LEVEL_ELEMENTARY)

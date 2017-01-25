@@ -30,7 +30,7 @@ public final class Expertise implements Serializable {
         return value;
     }
 
-    public enum Type {
+    public enum Type implements Serializable {
         @SerializedName(EXPERTISE_YELLOW)
         YELLOW,
         @SerializedName(EXPERTISE_ORANGE)
