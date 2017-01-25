@@ -44,17 +44,14 @@
 
 # Be careful with these, it produces way too much output so im silencing it but it should be payed atention to
 -keepattributes EnclosingMethod
--keepattributes InnerClasses
 
-# For using GSON @Expose annotation
 -keepattributes *Annotation*
 
 # Gson specific classes
 -keep class sun.misc.Unsafe { *; }
-#-keep class com.google.gson.stream.** { *; }
 
 # Application classes that will be serialized/deserialized over Gson
--keep class com.u.teach.networking.** { *; }
+-keep class com.u.teach.networking.services.** { *; }
 -keep class com.u.teach.model.** { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,

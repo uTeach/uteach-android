@@ -1,4 +1,4 @@
-package com.u.teach.networking.user;
+package com.u.teach.networking.services.user;
 
 import com.u.teach.model.entity.User;
 import retrofit2.http.GET;

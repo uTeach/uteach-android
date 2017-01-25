@@ -1,4 +1,4 @@
-package com.u.teach.networking.credentials;
+package com.u.teach.networking.services.credentials;
 
 import android.support.annotation.NonNull;
 import com.u.teach.model.AccessToken;
