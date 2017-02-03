@@ -57,6 +57,17 @@
 -keep class com.u.teach.networking.services.** { *; }
 -keep class com.u.teach.model.** { *; }
 
+-keep class retrofit2.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-keep class okio.** { *; }
+-keep class rx.** { *; }
+-keep class com.google.gson.Gson
+-keep class com.google.gson.TypeAdapter
+
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
 -keep class * implements com.google.gson.TypeAdapterFactory
@@ -66,8 +77,8 @@
 -dontwarn sun.misc.**
 
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-   long producerIndex;
-   long consumerIndex;
+    long producerIndex;
+    long consumerIndex;
 }
 
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
