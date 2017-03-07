@@ -21,8 +21,6 @@ public interface LoginContract {
 
     interface Presenter extends ContractPresenter<View> {
 
-        Observable<AccessToken.Provider> observeOnLoginEvent();
-
     }
 
 }

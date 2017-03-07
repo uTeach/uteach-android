@@ -1,8 +1,10 @@
 package com.u.teach.presenter.register;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.Toast;
 import com.bluelinelabs.conductor.Router;
+import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.u.teach.contract.register.LoginContract;
 import com.u.teach.model.AccessToken;
 import com.u.teach.presenter.Presenter;
@@ -17,8 +19,6 @@ import rx.subjects.ReplaySubject;
  */
 public class LoginDialogPresenter extends Presenter<LoginContract.View> implements LoginContract.Presenter {
 
-    private ReplaySubject<AccessToken.Provider> listener = ReplaySubject.create();
-
     public LoginDialogPresenter(@NonNull final Router router) {
         super(router);
     }
@@ -27,31 +27,34 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
     public void onAttach(@NonNull final LoginContract.View view) {
         super.onAttach(view);
 
-        addSubscription(view.observeOnFacebookLoginClick()
+        view.observeOnFacebookLoginClick()
             .observeOn(Schedulers.newThread())
             .subscribeOn(AndroidSchedulers.mainThread())
+            .compose(RxLifecycleAndroid.<Void>bindView((View) view))
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
                     //TODO get access token from fb.. and that stuff.
                     notifyLogin(null);
                 }
-            }));
+            });
 
-        addSubscription(view.observeOnGoogleLoginClick()
+        view.observeOnGoogleLoginClick()
             .observeOn(Schedulers.newThread())
             .subscribeOn(AndroidSchedulers.mainThread())
+            .compose(RxLifecycleAndroid.<Void>bindView((View) view))
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
                     //TODO get access token from google.. and that stuff.
                     notifyLogin(null);
                 }
-            }));
+            });
 
-        addSubscription(view.observeOnTermsAndConditionsClick()
+        view.observeOnTermsAndConditionsClick()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.newThread())
+            .compose(RxLifecycleAndroid.<Void>bindView((View) view))
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
@@ -59,16 +62,11 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
                     // Use slide down to dismiss ?
                     Toast.makeText(getContext(), "terms and conditions", Toast.LENGTH_SHORT).show();
                 }
-            }));
+            });
     }
 
     void notifyLogin(@NonNull AccessToken.Provider login) {
-        listener.onNext(login);
-    }
-
-    @Override
-    public Observable<AccessToken.Provider> observeOnLoginEvent() {
-        return listener.asObservable();
+        //TODO Do the login...
     }
 
 }

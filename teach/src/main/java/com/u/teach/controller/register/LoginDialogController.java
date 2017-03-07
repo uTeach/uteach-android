@@ -4,11 +4,12 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.u.teach.R;
 import com.u.teach.contract.register.LoginContract;
 import com.u.teach.controller.abstracts.BaseDialogController;
 import com.u.teach.model.AccessToken;
+import com.u.teach.networking.ReactiveModel;
+import com.u.teach.networking.interactor.credentials.CredentialsInteractor;
 import com.u.teach.presenter.abstracts.BaseDialogPresenter;
 import com.u.teach.presenter.register.LoginDialogPresenter;
 import com.u.teach.view.register.LoginDialogView;
@@ -35,16 +36,14 @@ public class LoginDialogController extends BaseDialogController {
 
         content((View) view);
 
-        presenter.observeOnLoginEvent()
+        CredentialsInteractor.instance().observeToken()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.newThread())
-            .compose(this.<AccessToken.Provider>bindToLifecycle())
-            .take(1)
-            .subscribe(new Action1<AccessToken.Provider>() {
+            .subscribeOn(Schedulers.io())
+            .compose(this.<ReactiveModel<AccessToken>>bindToLifecycle())
+            .subscribe(new Action1<ReactiveModel<AccessToken>>() {
                 @Override
-                public void call(final AccessToken.Provider login) {
-                    //TODO do our login :)
-                    Toast.makeText(getApplicationContext(), "Login..", Toast.LENGTH_SHORT).show();
+                public void call(final ReactiveModel<AccessToken> accessTokenReactiveModel) {
+                    // TODO Do stuff.
                 }
             });
 
@@ -54,14 +53,12 @@ public class LoginDialogController extends BaseDialogController {
     @Override
     protected void onAttach(@NonNull final View view) {
         super.onAttach(view);
-
         presenter.onAttach(this.view);
     }
 
     @Override
     protected void onDetach(@NonNull final View view) {
         super.onDetach(view);
-
         presenter.onDetach();
     }
 

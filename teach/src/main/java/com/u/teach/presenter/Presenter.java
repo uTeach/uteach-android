@@ -16,23 +16,13 @@ public abstract class Presenter<T extends ContractView> {
     private @NonNull Router router;
 
     private @Nullable T view;
-    private @NonNull ViewSubscriptionsManager subscriptionsManager;
 
     public Presenter(@NonNull Router router) {
         this.router = router;
-        subscriptionsManager = new ViewSubscriptionsManager();
     }
 
     protected @Nullable T getView() {
         return view;
-    }
-
-    protected void addSubscription(@NonNull Subscription subscription) {
-        subscriptionsManager.add(subscription);
-    }
-
-    protected void clearSubscriptions() {
-        subscriptionsManager.clear();
     }
 
     protected @Nullable Context getContext() {
@@ -49,7 +39,6 @@ public abstract class Presenter<T extends ContractView> {
 
     public void onDetach() {
         this.view = null;
-        clearSubscriptions();
     }
 
 }

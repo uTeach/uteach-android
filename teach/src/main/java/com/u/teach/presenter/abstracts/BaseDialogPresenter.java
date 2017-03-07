@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import com.bluelinelabs.conductor.Router;
+import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.u.teach.R;
 import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.presenter.Presenter;
@@ -52,8 +53,6 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
     public void onDismiss() {
         dismissSubject.onNext(null);
         dismissSubject.onCompleted();
-
-        clearSubscriptions();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -65,13 +64,13 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
         Subscription subscription = view.observeOnCancelEvent()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.newThread())
+            .compose(RxLifecycleAndroid.<Void>bindView((View) view))
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
                     onDismiss();
                 }
             });
-        addSubscription(subscription);
 
         if (content != null) {
             view.setContentView(content);
