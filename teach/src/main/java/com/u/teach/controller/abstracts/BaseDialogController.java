@@ -1,9 +1,13 @@
 package com.u.teach.controller.abstracts;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.squareup.coordinators.Coordinator;
+import com.squareup.coordinators.CoordinatorProvider;
+import com.squareup.coordinators.Coordinators;
 import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.controller.BaseController;
 import com.u.teach.presenter.abstracts.BaseDialogPresenter;
@@ -17,15 +21,34 @@ import rx.schedulers.Schedulers;
  */
 public abstract class BaseDialogController extends BaseController {
 
-    private BaseDialogPresenter.Severity severity;
-    private String title;
-    private View content;
-    private boolean cancellable = true;
+    BaseDialogPresenter.Severity severity;
+    String title;
+    View content;
+    boolean cancellable = true;
 
-    private BaseDialogContract.Presenter presenter;
+    @NonNull
+    @Override
+    protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
+        View view = new BaseDialogView(getActivity());
+
+        Coordinators.bind(view, new CoordinatorProvider() {
+            @Nullable
+            @Override
+            public Coordinator provideCoordinator(final View view) {
+                return new BaseDialogPresenter.Builder(getRouter())
+                    .severity(severity)
+                    .title(title)
+                    .content(content)
+                    .cancellable(cancellable)
+                    .build();
+            }
+        });
+
+        return view;
+    }
 
     public @NonNull BaseDialogController severity(@NonNull BaseDialogPresenter.Severity severity,
-            @NonNull String title) {
+        @NonNull String title) {
         this.severity = severity;
         this.title = title;
         return this;
@@ -44,45 +67,6 @@ public abstract class BaseDialogController extends BaseController {
     @Override
     public boolean handleBack() {
         return !cancellable || super.handleBack();
-    }
-
-    @NonNull
-    @Override
-    protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
-        View view = new BaseDialogView(getActivity());
-
-        presenter = new BaseDialogPresenter.Builder(getRouter())
-            .severity(severity)
-            .title(title)
-            .content(content)
-            .build();
-        presenter.setCancellable(cancellable);
-
-        return view;
-    }
-
-    @Override
-    protected void onAttach(@NonNull final View view) {
-        super.onAttach(view);
-        presenter.onAttach((BaseDialogContract.View) view);
-
-        presenter.observeOnDismissEvent()
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .compose(this.<Void>bindToLifecycle())
-            .take(1)
-            .subscribe(new Action1<Void>() {
-                @Override
-                public void call(final Void aVoid) {
-                    getRouter().popCurrentController();
-                }
-            });
-    }
-
-    @Override
-    protected void onDetach(@NonNull final View view) {
-        super.onDetach(view);
-        presenter.onDetach();
     }
 
 }

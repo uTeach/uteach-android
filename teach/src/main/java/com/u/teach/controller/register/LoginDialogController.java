@@ -1,9 +1,13 @@
 package com.u.teach.controller.register;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.squareup.coordinators.Coordinator;
+import com.squareup.coordinators.CoordinatorProvider;
+import com.squareup.coordinators.Coordinators;
 import com.u.teach.R;
 import com.u.teach.contract.register.LoginContract;
 import com.u.teach.controller.abstracts.BaseDialogController;
@@ -20,21 +24,21 @@ import rx.schedulers.Schedulers;
 /**
  * Created by saguilera on 1/22/17.
  */
-
 public class LoginDialogController extends BaseDialogController {
-
-    private @NonNull LoginContract.View view;
-    private @NonNull LoginContract.Presenter presenter;
 
     @NonNull
     @Override
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
+        View view = new LoginDialogView(getApplicationContext());
+        content(view);
         severity(BaseDialogPresenter.Severity.WARNING, getResources().getString(R.string.login_dialog_title));
-
-        presenter = new LoginDialogPresenter(getRouter());
-        view = new LoginDialogView(getApplicationContext());
-
-        content((View) view);
+        Coordinators.bind(view, new CoordinatorProvider() {
+            @Nullable
+            @Override
+            public Coordinator provideCoordinator(final View view) {
+                return new LoginDialogPresenter(getRouter());
+            }
+        });
 
         CredentialsInteractor.instance().observeToken()
             .observeOn(AndroidSchedulers.mainThread())
@@ -48,18 +52,6 @@ public class LoginDialogController extends BaseDialogController {
             });
 
         return super.onCreateView(inflater, container);
-    }
-
-    @Override
-    protected void onAttach(@NonNull final View view) {
-        super.onAttach(view);
-        presenter.onAttach(this.view);
-    }
-
-    @Override
-    protected void onDetach(@NonNull final View view) {
-        super.onDetach(view);
-        presenter.onDetach();
     }
 
 }

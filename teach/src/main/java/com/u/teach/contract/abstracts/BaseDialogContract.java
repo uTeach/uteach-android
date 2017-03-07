@@ -25,10 +25,6 @@ public interface BaseDialogContract {
 
     interface Presenter extends ContractPresenter<View> {
 
-        Observable<Void> observeOnDismissEvent();
-        void onDismiss();
-        void setCancellable(boolean cancellable);
-
     }
 
 }

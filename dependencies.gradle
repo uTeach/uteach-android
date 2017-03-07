@@ -10,6 +10,7 @@ ext {
     retrofitVersion = '2.1.0'
 
     conductorVersion = '2.0.7'
+    coordinatorVersion = '0.2'
 
     robolectricVersion = '3.2.2'
     junitVersion = '4.12'
@@ -35,7 +36,8 @@ ext {
     ]
 
     structure = [
-        conductor : "com.bluelinelabs:conductor:$conductorVersion"
+        conductor : "com.bluelinelabs:conductor:$conductorVersion",
+        coordinator : "com.squareup.coordinators:coordinators:$coordinatorVersion"
     ]
 
     http = [

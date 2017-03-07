@@ -24,16 +24,12 @@ public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
     public AccountTypePresenter(@NonNull Router router,
         @NonNull UserType type) {
         super(router);
-
         this.type = type;
-
         subject = PublishSubject.create();
     }
 
     @Override
     public void onAttach(@NonNull AccountTypeContract.View view) {
-        super.onAttach(view);
-
         view.observeOnCardPickedEvent()
             .take(1)
             .compose(RxLifecycleAndroid.<Void>bindView((View) view))

@@ -56,6 +56,7 @@ dependencies {
     compile rx.lifecycle
 
     compile structure.conductor
+    compile structure.coordinator
 
     compile http.core
     compile http.parser

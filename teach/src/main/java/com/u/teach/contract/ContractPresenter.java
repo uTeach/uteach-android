@@ -6,6 +6,5 @@ package com.u.teach.contract;
 public interface ContractPresenter<T extends ContractView> {
 
     void onAttach(T view);
-    void onDetach();
 
 }

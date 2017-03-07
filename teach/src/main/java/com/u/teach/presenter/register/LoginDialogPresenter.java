@@ -25,8 +25,6 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
 
     @Override
     public void onAttach(@NonNull final LoginContract.View view) {
-        super.onAttach(view);
-
         view.observeOnFacebookLoginClick()
             .observeOn(Schedulers.newThread())
             .subscribeOn(AndroidSchedulers.mainThread())

@@ -26,33 +26,14 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
 
     private @Nullable View content;
 
-    private boolean cancellable = true;
-
-    private PublishSubject<Void> dismissSubject;
+    private boolean cancellable;
 
     BaseDialogPresenter(Builder builder) {
         super(builder.router);
         this.severity = builder.severity;
         this.title = builder.title;
         this.content = builder.content;
-
-        dismissSubject = PublishSubject.create();
-    }
-
-    @Override
-    public void setCancellable(boolean cancellable) {
-        this.cancellable = cancellable;
-    }
-
-    @Override
-    public Observable<Void> observeOnDismissEvent() {
-        return dismissSubject;
-    }
-
-    @Override
-    public void onDismiss() {
-        dismissSubject.onNext(null);
-        dismissSubject.onCompleted();
+        this.cancellable = builder.cancellable;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -68,7 +49,7 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
-                    onDismiss();
+                    getRouter().popCurrentController();
                 }
             });
 
@@ -97,6 +78,7 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
         @Nullable Severity severity;
         @Nullable String title;
         @Nullable View content;
+        boolean cancellable = true;
 
         public Builder(@NonNull Router router) {
             this.router = router;
@@ -117,8 +99,12 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
             return this;
         }
 
-        public @NonNull
-        BaseDialogPresenter build() {
+        public @NonNull Builder cancellable(boolean cancellable) {
+            this.cancellable = cancellable;
+            return this;
+        }
+
+        public @NonNull BaseDialogPresenter build() {
             if (severity == null || title == null) {
                 throw new IllegalStateException("Missing params");
             }
