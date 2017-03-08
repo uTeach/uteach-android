@@ -8,13 +8,9 @@ import android.view.ViewGroup;
 import com.squareup.coordinators.Coordinator;
 import com.squareup.coordinators.CoordinatorProvider;
 import com.squareup.coordinators.Coordinators;
-import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.controller.BaseController;
 import com.u.teach.presenter.abstracts.BaseDialogPresenter;
 import com.u.teach.view.abstracts.BaseDialogView;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by saguilera on 1/21/17.

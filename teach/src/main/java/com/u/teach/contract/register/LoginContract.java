@@ -2,7 +2,6 @@ package com.u.teach.contract.register;
 
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
-import com.u.teach.model.AccessToken;
 import rx.Observable;
 
 /**

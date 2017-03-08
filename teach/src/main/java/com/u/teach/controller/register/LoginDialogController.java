@@ -9,7 +9,6 @@ import com.squareup.coordinators.Coordinator;
 import com.squareup.coordinators.CoordinatorProvider;
 import com.squareup.coordinators.Coordinators;
 import com.u.teach.R;
-import com.u.teach.contract.register.LoginContract;
 import com.u.teach.controller.abstracts.BaseDialogController;
 import com.u.teach.model.AccessToken;
 import com.u.teach.networking.ReactiveModel;
