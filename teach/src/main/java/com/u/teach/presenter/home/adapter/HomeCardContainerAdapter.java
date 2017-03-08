@@ -2,6 +2,7 @@ package com.u.teach.presenter.home.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,13 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
         typeFactory = new HashMap<>();
     }
 
-    public void setData(@NonNull List<CardRenderer> cards) {
-        array = cards;
-    }
+    public void data(@NonNull CardComparator<?> comparator,
+        @NonNull List<CardRenderer> cards) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(comparator);
 
-    public @NonNull List<CardRenderer> getData() {
-        return array;
+        array = cards;
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @Override
@@ -101,6 +103,23 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
         public abstract CardPresenter<ViewHolder> createPresenter();
 
         /**
+         * For applying new changes.
+         *
+         * @param renderer another renderer
+         * @return if the item is the same. This does not mean the contents are equals.
+         * Eg I have User "John" safe and sound. If I get again "John" but with a broken leg,
+         * this returns 'true'. If I got "Joe", it is 'false'
+         */
+        public abstract boolean isSameItem(@NonNull CardRenderer renderer);
+
+        /**
+         * For applying new changes
+         *
+         * @return true if they are the same item AND they have the same content, false otherwise
+         */
+        public abstract boolean isSameContent(@NonNull CardRenderer renderer);
+
+        /**
          * Presenter should be reusable since a renderer will always present
          * only one view
          * @return presenter
@@ -119,6 +138,41 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
          */
         public int type() {
             return getClass().getName().hashCode();
+        }
+
+    }
+
+    /**
+     * Comparator for doing changes in the adapter
+     */
+    public static abstract class CardComparator<Object extends HomeCardContainerAdapter.CardRenderer> extends DiffUtil.Callback {
+
+        private @NonNull List<Object> oldList;
+        private @NonNull List<Object> newList;
+
+        public CardComparator(@NonNull List<Object> oldList, @NonNull List<Object> newList) {
+            this.oldList = oldList;
+            this.newList = newList;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return oldList.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newList.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(final int oldItemPosition, final int newItemPosition) {
+            return oldList.get(oldItemPosition).isSameItem(newList.get(newItemPosition));
+        }
+
+        @Override
+        public boolean areContentsTheSame(final int oldItemPosition, final int newItemPosition) {
+            return oldList.get(oldItemPosition).isSameContent(newList.get(newItemPosition));
         }
 
     }

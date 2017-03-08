@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
 import com.u.teach.presenter.home.adapter.HomeCardContainerAdapter;
-import com.u.teach.view.home.HomeCardContainerView;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public interface HomeCardContainerContract {
 
     interface View extends ContractView {
 
-        void setData(final @NonNull HomeCardContainerView.Comparator<?> comparator,
+        void setData(final @NonNull HomeCardContainerAdapter.CardComparator<?> comparator,
             final @NonNull List<HomeCardContainerAdapter.CardRenderer> cards);
 
     }
