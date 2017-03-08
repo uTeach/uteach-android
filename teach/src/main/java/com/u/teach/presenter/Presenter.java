@@ -10,24 +10,26 @@ import com.squareup.coordinators.Coordinator;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.u.teach.contract.ContractView;
+import com.u.teach.utils.RouterInteractor;
 
 /**
  * Created by saguilera on 1/21/17.
  */
 public abstract class Presenter<VIEW extends ContractView> extends Coordinator {
 
-    private @NonNull Router router;
-
-    public Presenter(@NonNull Router router) {
-        this.router = router;
+    public Presenter() {
     }
 
     protected @Nullable Context getContext() {
-        return router.getActivity();
+        return RouterInteractor.instance().mainRouter().getActivity();
     }
 
-    protected @NonNull Router getRouter() {
-        return router;
+    protected @NonNull Router getMainRouter() {
+        return RouterInteractor.instance().mainRouter();
+    }
+
+    protected @NonNull Router getAuxiliaryRouter() {
+        return RouterInteractor.instance().auxRouter();
     }
 
     @NonNull

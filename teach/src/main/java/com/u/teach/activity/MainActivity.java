@@ -11,13 +11,12 @@ import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.u.teach.R;
 import com.u.teach.controller.splash.SplashController;
+import com.u.teach.utils.RouterInteractor;
 
 /**
  * Created by saguilera on 1/20/17.
  */
 public class MainActivity extends AppCompatActivity {
-
-    private @NonNull Router router;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -27,18 +26,23 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.activity_main_toolbar));
 
-        router = Conductor.attachRouter(this,
+        RouterInteractor.instance().attachMainRouter(this,
             (ViewGroup) findViewById(R.id.activity_main_container),
             savedInstanceState);
 
-        if (!router.hasRootController()) {
-            router.setRoot(RouterTransaction.with(new SplashController()));
+        RouterInteractor.instance().attachAuxiliaryRouter(this,
+            (ViewGroup) findViewById(R.id.activity_dialog_container),
+            savedInstanceState);
+
+        if (!RouterInteractor.instance().mainRouter().hasRootController()) {
+            RouterInteractor.instance().mainRouter().setRoot(RouterTransaction.with(new SplashController()));
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (!router.handleBack()) {
+        if (!RouterInteractor.instance().auxRouter().handleBack() &&
+            !RouterInteractor.instance().mainRouter().handleBack()) {
             super.onBackPressed();
         }
     }

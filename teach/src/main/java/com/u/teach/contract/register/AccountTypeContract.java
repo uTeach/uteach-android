@@ -16,7 +16,7 @@ public interface AccountTypeContract {
 
     }
 
-    interface Presenter extends ContractPresenter<View> {
+    interface Presenter extends ContractPresenter {
 
         void onCardPicked();
         Observable<UserType> observeOnCardPickedEvent();

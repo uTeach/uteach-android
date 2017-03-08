@@ -1,10 +1,13 @@
 package com.u.teach.presenter.register;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
-import com.bluelinelabs.conductor.Router;
+import com.bluelinelabs.conductor.RouterTransaction;
 import com.u.teach.contract.register.LoginContract;
+import com.u.teach.controller.home.HomeController;
 import com.u.teach.model.AccessToken;
 import com.u.teach.presenter.Presenter;
 import rx.android.schedulers.AndroidSchedulers;
@@ -16,12 +19,8 @@ import rx.schedulers.Schedulers;
  */
 public class LoginDialogPresenter extends Presenter<LoginContract.View> implements LoginContract.Presenter {
 
-    public LoginDialogPresenter(@NonNull final Router router) {
-        super(router);
-    }
-
     @Override
-    public void onAttach(@NonNull final LoginContract.View view) {
+    protected void onAttach(@NonNull final LoginContract.View view) {
         view.observeOnFacebookLoginClick()
             .observeOn(Schedulers.newThread())
             .subscribeOn(AndroidSchedulers.mainThread())
@@ -61,7 +60,14 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
     }
 
     void notifyLogin(@NonNull AccessToken.Provider login) {
-        //TODO Do the login...
+        //TODO Do the login... Meanwhile we go to the home to keep the testings
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                getAuxiliaryRouter().popCurrentController();
+                getMainRouter().pushController(RouterTransaction.with(new HomeController()));
+            }
+        });
     }
 
 }

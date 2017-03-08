@@ -18,7 +18,7 @@ public interface LoginContract {
 
     }
 
-    interface Presenter extends ContractPresenter<View> {
+    interface Presenter extends ContractPresenter {
 
     }
 

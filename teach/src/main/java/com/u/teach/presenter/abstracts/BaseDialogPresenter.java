@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import com.bluelinelabs.conductor.Router;
 import com.u.teach.R;
 import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.presenter.Presenter;
@@ -26,7 +25,7 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
     private boolean cancellable;
 
     BaseDialogPresenter(Builder builder) {
-        super(builder.router);
+        super();
         this.severity = builder.severity;
         this.title = builder.title;
         this.content = builder.content;
@@ -35,18 +34,18 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void onAttach(@NonNull final BaseDialogContract.View view) {
+    protected void onAttach(@NonNull final BaseDialogContract.View view) {
         view.setCancellable(cancellable);
         view.setSeverityTitle(title);
 
-        Subscription subscription = view.observeOnCancelEvent()
+        view.observeOnCancelEvent()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.newThread())
             .compose(this.<Void>bindToLifecycle((View) view))
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
-                    getRouter().popCurrentController();
+                    getAuxiliaryRouter().popCurrentController();
                 }
             });
 
@@ -71,15 +70,12 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
 
     public static class Builder {
 
-        @NonNull Router router;
         @Nullable Severity severity;
         @Nullable String title;
         @Nullable View content;
         boolean cancellable = true;
 
-        public Builder(@NonNull Router router) {
-            this.router = router;
-        }
+        public Builder() {}
 
         public @NonNull Builder severity(@NonNull Severity severity) {
             this.severity = severity;

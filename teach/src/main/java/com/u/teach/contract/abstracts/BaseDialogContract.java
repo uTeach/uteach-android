@@ -23,7 +23,7 @@ public interface BaseDialogContract {
 
     }
 
-    interface Presenter extends ContractPresenter<View> {
+    interface Presenter extends ContractPresenter {
 
     }
 
