@@ -61,6 +61,8 @@ public class LoginDialogPresenter extends Presenter<LoginContract.View> implemen
 
     void notifyLogin(@NonNull AccessToken.Provider login) {
         //TODO Do the login... Meanwhile we go to the home to keep the testings
+        // Most probably this will be handled by the controller, since we only want
+        // 1 of the observables to get called at a time.
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {

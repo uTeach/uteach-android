@@ -13,7 +13,7 @@ import com.squareup.coordinators.CoordinatorProvider;
 import com.squareup.coordinators.Coordinators;
 import com.u.teach.R;
 import com.u.teach.controller.FlowController;
-import com.u.teach.presenter.presenter.HomeCardContainerPresenter;
+import com.u.teach.presenter.home.HomeCardContainerPresenter;
 
 /**
  * Created by saguilera on 3/7/17.

@@ -1,4 +1,4 @@
-package com.u.teach.presenter.presenter;
+package com.u.teach.presenter.home;
 
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.presenter.Presenter;
