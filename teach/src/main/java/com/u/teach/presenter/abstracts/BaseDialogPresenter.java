@@ -5,16 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import com.bluelinelabs.conductor.Router;
-import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.u.teach.R;
 import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.presenter.Presenter;
-import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
 
 /**
  * Created by saguilera on 1/21/17.
@@ -45,7 +42,7 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
         Subscription subscription = view.observeOnCancelEvent()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.newThread())
-            .compose(RxLifecycleAndroid.<Void>bindView((View) view))
+            .compose(this.<Void>bindToLifecycle((View) view))
             .subscribe(new Action1<Void>() {
                 @Override
                 public void call(final Void aVoid) {
