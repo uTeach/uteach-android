@@ -2,6 +2,7 @@ package com.u.teach.view.register;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -14,7 +15,6 @@ import rx.Observable;
 /**
  * Created by saguilera on 1/20/17.
  */
-
 public class AccountTypeView extends CardView implements AccountTypeContract.View {
 
     private static final int RADIUS_DP = 2;
@@ -58,7 +58,7 @@ public class AccountTypeView extends CardView implements AccountTypeContract.Vie
             case TYPE_PROFESSOR:
                 //TODO
             case TYPE_STUDENT:
-                ((ImageView) findViewById(R.id.view_card_pick_user_type_image)).setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+                ((ImageView) findViewById(R.id.view_card_pick_user_type_image)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_launcher, null));
                 break;
             default:
                 throw new IllegalStateException("No user_type provided to " + getClass().getSimpleName());
