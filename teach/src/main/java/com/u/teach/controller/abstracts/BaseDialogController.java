@@ -1,5 +1,6 @@
 package com.u.teach.controller.abstracts;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -24,6 +25,16 @@ public abstract class BaseDialogController extends BaseController {
     View content;
     boolean cancellable = true;
 
+    public BaseDialogController(BaseDialogPresenter.Severity severity,
+            String title,
+            View content,
+            boolean cancellable) {
+        this.severity = severity;
+        this.title = title;
+        this.content = content;
+        this.cancellable = cancellable;
+    }
+
     @NonNull
     @Override
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
@@ -45,26 +56,26 @@ public abstract class BaseDialogController extends BaseController {
         return view;
     }
 
-    public @NonNull BaseDialogController severity(@NonNull BaseDialogPresenter.Severity severity,
-        @NonNull String title) {
-        this.severity = severity;
-        this.title = title;
-        return this;
-    }
-
-    public @NonNull BaseDialogController content(@NonNull View content) {
-        this.content = content;
-        return this;
-    }
-
-    public @NonNull BaseDialogController cancellable(boolean cancelable) {
-        this.cancellable = cancelable;
-        return this;
-    }
-
     @Override
     public boolean handleBack() {
         return !cancellable || super.handleBack();
+    }
+
+
+    public boolean isCancellable() {
+        return cancellable;
+    }
+
+    public View content() {
+        return content;
+    }
+
+    public String title() {
+        return title;
+    }
+
+    public BaseDialogPresenter.Severity severity() {
+        return severity;
     }
 
 }

@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import com.u.teach.contract.home.HomeCardContainerContract;
-import com.u.teach.presenter.home.adapter.HomeCardContainerAdapter;
+import com.u.teach.list.adapter.GenericAdapter;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class HomeCardContainerView extends RecyclerView implements HomeCardContainerContract.View {
 
-    @NonNull HomeCardContainerAdapter adapter;
+    @NonNull GenericAdapter adapter;
 
     public HomeCardContainerView(final Context context) {
         this(context, null);
@@ -31,13 +31,12 @@ public class HomeCardContainerView extends RecyclerView implements HomeCardConta
         manager.setInitialPrefetchItemCount(4);
         setLayoutManager(manager);
 
-        setAdapter(adapter = new HomeCardContainerAdapter());
+        setAdapter(adapter = new GenericAdapter());
     }
 
     @Override
-    public void setData(final @NonNull HomeCardContainerAdapter.CardComparator<?> comparator,
-        final @NonNull List<HomeCardContainerAdapter.CardRenderer> cards) {
-        adapter.data(comparator, cards);
+    public void setData(final @NonNull List<GenericAdapter.ItemRenderer> cards) {
+        adapter.data(cards);
     }
 
 }

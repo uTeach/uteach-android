@@ -1,4 +1,4 @@
-package com.u.teach.presenter.home.adapter;
+package com.u.teach.list.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,19 +19,18 @@ import java.util.Map;
 /**
  * Created by saguilera on 3/8/17.
  */
-public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardContainerAdapter.CardViewHolder> {
+public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemViewHolder> {
 
-    @NonNull List<CardRenderer> array;
-    final @NonNull Map<Integer, CardRenderer> typeFactory;
+    @NonNull List<ItemRenderer> array;
+    final @NonNull Map<Integer, ItemRenderer> typeFactory;
 
-    public HomeCardContainerAdapter() {
+    public GenericAdapter() {
         array = new ArrayList<>();
         typeFactory = new HashMap<>();
     }
 
-    public void data(@NonNull CardComparator<?> comparator,
-        @NonNull List<CardRenderer> cards) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(comparator);
+    public void data(@NonNull List<ItemRenderer> cards) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ItemComparator<>(array, cards));
 
         array = cards;
 
@@ -39,14 +38,14 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
     }
 
     @Override
-    public CardViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        return typeFactory.get(viewType).createViewHolder();
+    public ItemViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        return new ItemViewHolder(typeFactory.get(viewType).createView());
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(final CardViewHolder holder, final int position) {
-        final CardRenderer renderer = array.get(position);
+    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
+        final ItemRenderer renderer = array.get(position);
         Coordinators.bind(holder.view(), new CoordinatorProvider() {
             @Nullable
             @Override
@@ -58,7 +57,7 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
 
     @Override
     public int getItemViewType(final int position) {
-        CardRenderer renderer = array.get(position);
+        ItemRenderer renderer = array.get(position);
         typeFactory.put(renderer.type(), renderer);
         return renderer.type();
     }
@@ -71,36 +70,41 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
     /**
      * View for a card
      */
-    public static abstract class CardViewHolder extends RecyclerView.ViewHolder {
+    static class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        public CardViewHolder(final View itemView) {
+        private final @NonNull View view;
+
+        public ItemViewHolder(@NonNull final View itemView) {
             super(itemView);
+            view = itemView;
         }
 
-        public abstract @NonNull View view();
+        public @NonNull View view() {
+            return view;
+        }
 
     }
 
     /**
      * Presenter for a card
-     * @param <ViewHolder> that is able to present
+     * @param <VIEW> that is able to present
      */
-    public static abstract class CardPresenter<ViewHolder extends ContractView> extends Presenter<ViewHolder> {}
+    public static abstract class ItemPresenter<VIEW extends ContractView> extends Presenter<VIEW> {}
 
     /**
      * Class that is able to link generic presenters with views
      */
-    public static abstract class CardRenderer<ViewHolder extends CardViewHolder & ContractView> {
+    public static abstract class ItemRenderer<VIEW extends View & ContractView> {
 
-        private CardPresenter<ViewHolder> currentPresenter;
+        private ItemPresenter<VIEW> currentPresenter;
 
         /**
          * Each card should know how to create its view holder and its presenter.
          * Of course it will delegate responsibility to each of them on how to draw or
          * react accordingly.
          */
-        public abstract ViewHolder createViewHolder();
-        public abstract CardPresenter<ViewHolder> createPresenter();
+        public abstract VIEW createView();
+        public abstract ItemPresenter<VIEW> createPresenter();
 
         /**
          * For applying new changes.
@@ -110,21 +114,21 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
          * Eg I have User "John" safe and sound. If I get again "John" but with a broken leg,
          * this returns 'true'. If I got "Joe", it is 'false'
          */
-        public abstract boolean isSameItem(@NonNull CardRenderer renderer);
+        public abstract boolean isSameItem(@NonNull ItemRenderer renderer);
 
         /**
          * For applying new changes
          *
          * @return true if they are the same item AND they have the same content, false otherwise
          */
-        public abstract boolean isSameContent(@NonNull CardRenderer renderer);
+        public abstract boolean isSameContent(@NonNull ItemRenderer renderer);
 
         /**
          * Presenter should be reusable since a renderer will always present
          * only one view
          * @return presenter
          */
-        CardPresenter<ViewHolder> presenter() {
+        ItemPresenter<VIEW> presenter() {
             if (currentPresenter != null) {
                 return presenter();
             }
@@ -145,12 +149,12 @@ public class HomeCardContainerAdapter extends RecyclerView.Adapter<HomeCardConta
     /**
      * Comparator for doing changes in the adapter
      */
-    public static abstract class CardComparator<Object extends HomeCardContainerAdapter.CardRenderer> extends DiffUtil.Callback {
+    static class ItemComparator<Object extends ItemRenderer> extends DiffUtil.Callback {
 
         private @NonNull List<Object> oldList;
         private @NonNull List<Object> newList;
 
-        public CardComparator(@NonNull List<Object> oldList, @NonNull List<Object> newList) {
+        public ItemComparator(@NonNull List<Object> oldList, @NonNull List<Object> newList) {
             this.oldList = oldList;
             this.newList = newList;
         }
