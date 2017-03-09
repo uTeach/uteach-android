@@ -6,10 +6,10 @@ import com.u.teach.model.AccessToken;
 import com.u.teach.networking.ReactiveModel;
 import com.u.teach.networking.RestClient;
 import com.u.teach.networking.services.credentials.CredentialsService;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 

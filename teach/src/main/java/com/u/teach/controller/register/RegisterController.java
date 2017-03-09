@@ -1,16 +1,13 @@
 package com.u.teach.controller.register;
 
-import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.bluelinelabs.conductor.Router;
 import com.squareup.coordinators.Coordinator;
 import com.squareup.coordinators.CoordinatorProvider;
-import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.u.teach.R;
 import com.u.teach.controller.FlowController;
 import com.u.teach.model.AccessToken.UserType;

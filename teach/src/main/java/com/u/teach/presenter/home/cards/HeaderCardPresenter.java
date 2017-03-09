@@ -7,7 +7,6 @@ import com.u.teach.list.adapter.GenericAdapter;
 /**
  * Created by saguilera on 3/8/17.
  */
-
 public class HeaderCardPresenter extends GenericAdapter.ItemPresenter<HeaderCardContract.View>
     implements HeaderCardContract.Presenter {
 

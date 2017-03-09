@@ -1,14 +1,8 @@
 package com.u.teach.controller.register;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import com.squareup.coordinators.Coordinator;
 import com.squareup.coordinators.CoordinatorProvider;
 import com.squareup.coordinators.Coordinators;

@@ -2,12 +2,9 @@ package com.u.teach.list.home.renderer;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.view.View;
-import com.u.teach.contract.home.cards.HeaderCardContract;
 import com.u.teach.list.adapter.GenericAdapter;
 import com.u.teach.presenter.home.cards.HeaderCardPresenter;
 import com.u.teach.view.home.cards.HeaderCardView;
-import java.lang.ref.WeakReference;
 
 /**
  * Created by saguilera on 3/8/17.

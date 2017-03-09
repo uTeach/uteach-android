@@ -2,7 +2,6 @@ package com.u.teach.presenter.register;
 
 import android.support.annotation.NonNull;
 import android.view.View;
-import com.bluelinelabs.conductor.Router;
 import com.u.teach.contract.register.AccountTypeContract;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.Presenter;

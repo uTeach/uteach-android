@@ -7,7 +7,6 @@ import android.view.View;
 import com.u.teach.R;
 import com.u.teach.contract.abstracts.BaseDialogContract;
 import com.u.teach.presenter.Presenter;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
