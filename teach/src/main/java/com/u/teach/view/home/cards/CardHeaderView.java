@@ -16,8 +16,10 @@ import com.u.teach.utils.MetricsUtils;
 public class CardHeaderView extends TextView
         implements CardHeaderContract.View {
 
-    private static final int VIEW_HEIGHT_DP = 36;
-    private static final int VIEW_PADDING_DP = 8;
+    private static final int VIEW_HEIGHT_DP = 56;
+    private static final int VIEW_PADDING_DP = 12;
+
+    private static final float TEXT_SIZE = 16f;
 
     public CardHeaderView(final Context context) {
         super(context);
@@ -30,6 +32,8 @@ public class CardHeaderView extends TextView
             (int) MetricsUtils.convertDpToPixel(VIEW_PADDING_DP),
             (int) MetricsUtils.convertDpToPixel(VIEW_PADDING_DP));
         setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.transparent, null));
+        setTextSize(TEXT_SIZE);
+        setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
     }
 
     public CardHeaderView(final Context context, final AttributeSet attrs) {

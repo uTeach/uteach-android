@@ -2,9 +2,11 @@ package com.u.teach.view.home;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import com.u.teach.R;
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.list.adapter.GenericAdapter;
 import java.util.List;
@@ -26,6 +28,8 @@ public class HomeCardContainerView extends RecyclerView implements HomeCardConta
 
     public HomeCardContainerView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
 
         LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         manager.setInitialPrefetchItemCount(4);
