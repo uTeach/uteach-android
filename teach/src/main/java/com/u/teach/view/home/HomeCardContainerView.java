@@ -26,7 +26,11 @@ public class HomeCardContainerView extends RecyclerView implements HomeCardConta
 
     public HomeCardContainerView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+
+        LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        manager.setInitialPrefetchItemCount(4);
+        setLayoutManager(manager);
+
         setAdapter(adapter = new HomeCardContainerAdapter());
     }
 
