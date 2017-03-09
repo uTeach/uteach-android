@@ -33,4 +33,35 @@ public class Picture extends Entity implements Serializable {
         return thumb;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Picture)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        final Picture picture = (Picture) o;
+
+        if (!large.equals(picture.large)) {
+            return false;
+        }
+        if (!medium.equals(picture.medium)) {
+            return false;
+        }
+        return thumb.equals(picture.thumb);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + large.hashCode();
+        result = 31 * result + medium.hashCode();
+        result = 31 * result + thumb.hashCode();
+        return result;
+    }
 }

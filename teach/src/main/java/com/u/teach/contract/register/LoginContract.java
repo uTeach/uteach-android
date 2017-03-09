@@ -1,5 +1,6 @@
 package com.u.teach.contract.register;
 
+import android.support.annotation.NonNull;
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
 import rx.Observable;
@@ -12,9 +13,9 @@ public interface LoginContract {
 
     interface View extends ContractView {
 
-        Observable<Void> observeOnTermsAndConditionsClick();
-        Observable<Void> observeOnFacebookLoginClick();
-        Observable<Void> observeOnGoogleLoginClick();
+        @NonNull Observable<Void> observeOnTermsAndConditionsClick();
+        @NonNull Observable<Void> observeOnFacebookLoginClick();
+        @NonNull Observable<Void> observeOnGoogleLoginClick();
 
     }
 

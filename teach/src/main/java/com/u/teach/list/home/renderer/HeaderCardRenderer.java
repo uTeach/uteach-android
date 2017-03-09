@@ -3,32 +3,34 @@ package com.u.teach.list.home.renderer;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import com.u.teach.contract.home.cards.HeaderCardContract;
 import com.u.teach.list.adapter.GenericAdapter;
-import com.u.teach.presenter.home.cards.CardHeaderPresenter;
-import com.u.teach.view.home.cards.CardHeaderView;
+import com.u.teach.presenter.home.cards.HeaderCardPresenter;
+import com.u.teach.view.home.cards.HeaderCardView;
 import java.lang.ref.WeakReference;
 
 /**
  * Created by saguilera on 3/8/17.
  */
-public class CardHeaderRenderer extends GenericAdapter.ItemRenderer {
+public class HeaderCardRenderer extends GenericAdapter.ItemRenderer<HeaderCardView> {
 
-    private final WeakReference<Context> context;
     private final @NonNull String title;
 
-    public CardHeaderRenderer(final @NonNull Context context, final @NonNull String title) {
-        this.context = new WeakReference<>(context);
+    public HeaderCardRenderer(final @NonNull Context context, final @NonNull String title) {
+        super(context);
         this.title = title;
     }
 
+    @NonNull
     @Override
-    public View createView() {
-        return new CardHeaderView(context.get());
+    public HeaderCardView createView() {
+        return new HeaderCardView(context());
     }
 
+    @NonNull
     @Override
     public GenericAdapter.ItemPresenter createPresenter() {
-        return new CardHeaderPresenter(title);
+        return new HeaderCardPresenter(title);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class CardHeaderRenderer extends GenericAdapter.ItemRenderer {
 
         if (!same) return false;
 
-        CardHeaderRenderer cardRenderer = (CardHeaderRenderer) renderer;
+        HeaderCardRenderer cardRenderer = (HeaderCardRenderer) renderer;
         return (title.contentEquals(cardRenderer.title));
     }
 

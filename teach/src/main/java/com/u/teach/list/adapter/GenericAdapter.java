@@ -1,5 +1,6 @@
 package com.u.teach.list.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
@@ -11,6 +12,7 @@ import com.squareup.coordinators.CoordinatorProvider;
 import com.squareup.coordinators.Coordinators;
 import com.u.teach.contract.ContractView;
 import com.u.teach.presenter.Presenter;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,14 +47,7 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
     @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
-        final ItemRenderer renderer = array.get(position);
-        Coordinators.bind(holder.view(), new CoordinatorProvider() {
-            @Nullable
-            @Override
-            public Coordinator provideCoordinator(final View view) {
-                return renderer.presenter();
-            }
-        });
+        array.get(position).presenter().attach(holder.view());
     }
 
     @Override
@@ -96,15 +91,25 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
      */
     public static abstract class ItemRenderer<VIEW extends View & ContractView> {
 
-        private ItemPresenter<VIEW> currentPresenter;
+        private @NonNull WeakReference<Context> context;
+
+        public ItemRenderer(@NonNull Context context) {
+            this.context = new WeakReference<>(context);
+        }
+
+        protected @NonNull Context context() {
+            return context.get();
+        }
+
+        private @Nullable ItemPresenter<VIEW> currentPresenter;
 
         /**
          * Each card should know how to create its view holder and its presenter.
          * Of course it will delegate responsibility to each of them on how to draw or
          * react accordingly.
          */
-        public abstract VIEW createView();
-        public abstract ItemPresenter<VIEW> createPresenter();
+        public abstract @NonNull VIEW createView();
+        public abstract @NonNull ItemPresenter createPresenter();
 
         /**
          * For applying new changes.
@@ -128,9 +133,10 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
          * only one view
          * @return presenter
          */
-        ItemPresenter<VIEW> presenter() {
+        @SuppressWarnings("unchecked")
+        @NonNull ItemPresenter<VIEW> presenter() {
             if (currentPresenter != null) {
-                return presenter();
+                return currentPresenter;
             }
 
             return currentPresenter = createPresenter();
@@ -149,7 +155,7 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
     /**
      * Comparator for doing changes in the adapter
      */
-    static class ItemComparator<Object extends ItemRenderer> extends DiffUtil.Callback {
+    private static class ItemComparator<Object extends ItemRenderer> extends DiffUtil.Callback {
 
         private @NonNull List<Object> oldList;
         private @NonNull List<Object> newList;

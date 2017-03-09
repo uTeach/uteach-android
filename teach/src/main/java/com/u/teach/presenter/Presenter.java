@@ -40,19 +40,19 @@ public abstract class Presenter<VIEW extends ContractView> extends Coordinator {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void attach(final View view) {
+    public void attach(@NonNull final View view) {
         super.attach(view);
         onAttach((VIEW) view);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void detach(final View view) {
+    public void detach(@NonNull final View view) {
         super.detach(view);
         onDetach((VIEW) view);
     }
 
-    protected abstract void onAttach(final VIEW view);
-    protected void onDetach(final VIEW view) {}
+    protected abstract void onAttach(final @NonNull VIEW view);
+    protected void onDetach(final @NonNull VIEW view) {}
 
 }

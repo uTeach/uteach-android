@@ -1,8 +1,12 @@
 package com.u.teach.presenter.home;
 
+import android.support.annotation.NonNull;
+import com.google.gson.Gson;
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.list.adapter.GenericAdapter;
-import com.u.teach.list.home.renderer.CardHeaderRenderer;
+import com.u.teach.list.home.renderer.HeaderCardRenderer;
+import com.u.teach.list.home.renderer.ProfessorCardRenderer;
+import com.u.teach.model.entity.Professor;
 import com.u.teach.presenter.Presenter;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +18,147 @@ public class HomeCardContainerPresenter extends Presenter<HomeCardContainerContr
         implements HomeCardContainerContract.Presenter {
 
     @Override
-    protected void onAttach(final HomeCardContainerContract.View view) {
+    protected void onAttach(@NonNull final HomeCardContainerContract.View view) {
+        Professor professor = new Gson().fromJson(PROFESSOR_MOCK_STRING, Professor.class);
+
         List<GenericAdapter.ItemRenderer> mocks = new ArrayList<>();
-        mocks.add(new CardHeaderRenderer(getContext(), "Mock 1"));
-        mocks.add(new CardHeaderRenderer(getContext(), "Mock 2"));
-        mocks.add(new CardHeaderRenderer(getContext(), "Mock 3"));
-        mocks.add(new CardHeaderRenderer(getContext(), "Mock 4"));
+        mocks.add(new HeaderCardRenderer(getContext(), "Profesores Mock 1"));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new HeaderCardRenderer(getContext(), "Pofessors Mock 2"));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
+        mocks.add(new ProfessorCardRenderer(getContext(), professor));
         view.setData(mocks);
     }
+
+    private static final String PROFESSOR_MOCK_STRING = "{\n" +
+        "  \"id\": 1,\n" +
+        "  \"name\": \"Santiago\",\n" +
+        "  \"email\": \"mail@mailto.com\",\n" +
+        "  \"gender\": \"male\",\n" +
+        "  \"birthday\": \"2012-04-23T18:25:43.511Z\",\n" +
+        "  \"picture\": {\n" +
+        "    \"large\": \"santiago-picture-large\",\n" +
+        "    \"medium\": null,\n" +
+        "    \"thumb\": null\n" +
+        "  },\n" +
+        "  \"location\": {\n" +
+        "    \"latitude\": -34.56,\n" +
+        "    \"longitude\": 45.89\n" +
+        "  },\n" +
+        "  \"class_cost\": 4000,\n" +
+        "  \"subjects\": [\n" +
+        "    {\n" +
+        "      \"id\": 2,\n" +
+        "      \"name\": \"math\",\n" +
+        "      \"level\": [\n" +
+        "        \"high\",\n" +
+        "        \"college\"\n" +
+        "      ]\n" +
+        "    }\n" +
+        "  ],\n" +
+        "  \"pending_requests\": [\n" +
+        "    {\n" +
+        "      \"id\": 1,\n" +
+        "      \"name\": \"Santiago\",\n" +
+        "      \"email\": \"mail@mailto.com\",\n" +
+        "      \"gender\": \"male\",\n" +
+        "      \"birthday\": \"2012-04-23T18:25:43.511Z\",\n" +
+        "      \"picture\": {\n" +
+        "        \"large\": \"santiago-picture-large\",\n" +
+        "        \"medium\": null,\n" +
+        "        \"thumb\": null\n" +
+        "      }\n" +
+        "    },\n" +
+        "    {\n" +
+        "      \"id\": 2,\n" +
+        "      \"name\": \"Santiago\",\n" +
+        "      \"email\": \"mail@mailto.com\",\n" +
+        "      \"gender\": \"male\",\n" +
+        "      \"birthday\": \"2012-04-23T18:25:43.511Z\",\n" +
+        "      \"picture\": {\n" +
+        "        \"large\": \"santiago-picture-large\",\n" +
+        "        \"medium\": null,\n" +
+        "        \"thumb\": null\n" +
+        "      }\n" +
+        "    }\n" +
+        "  ],\n" +
+        "  \"expertise\": {\n" +
+        "    \"value\": \"black\"\n" +
+        "  },\n" +
+        "  \"rating\": {\n" +
+        "    \"value\": \"A+\"\n" +
+        "  }\n" +
+        "}";
 
 }

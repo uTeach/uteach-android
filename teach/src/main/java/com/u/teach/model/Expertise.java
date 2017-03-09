@@ -30,6 +30,25 @@ public final class Expertise implements Serializable {
         return value;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Expertise)) {
+            return false;
+        }
+
+        final Expertise expertise = (Expertise) o;
+
+        return value == expertise.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
     public enum Type implements Serializable {
         @SerializedName(EXPERTISE_YELLOW)
         YELLOW,

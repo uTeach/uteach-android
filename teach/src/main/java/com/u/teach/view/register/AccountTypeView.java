@@ -2,6 +2,7 @@ package com.u.teach.view.register;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
@@ -67,6 +68,7 @@ public class AccountTypeView extends CardView implements AccountTypeContract.Vie
         typedArray.recycle();
     }
 
+    @NonNull
     @Override
     public Observable<Void> observeOnCardPickedEvent() {
         return RxView.clicks(this);

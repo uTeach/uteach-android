@@ -30,6 +30,25 @@ public final class Rating implements Serializable {
         return value;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Rating)) {
+            return false;
+        }
+
+        final Rating rating = (Rating) o;
+
+        return value == rating.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
     public enum Type implements Serializable {
         @SerializedName(Rating.RATING_A_PLUS)
         A_PLUS,

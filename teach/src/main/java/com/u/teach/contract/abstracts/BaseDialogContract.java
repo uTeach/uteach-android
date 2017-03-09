@@ -14,7 +14,7 @@ public interface BaseDialogContract {
 
     interface View extends ContractView {
 
-        Observable<Void> observeOnCancelEvent();
+        @NonNull Observable<Void> observeOnCancelEvent();
         void setCancellable(boolean cancellable);
         boolean isCancellable();
         void setContentView(@NonNull android.view.View view);

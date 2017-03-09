@@ -17,7 +17,7 @@ public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
         implements AccountTypeContract.Presenter {
 
     private final @NonNull UserType type;
-    private PublishSubject<UserType> subject;
+    private @NonNull PublishSubject<UserType> subject;
 
     public AccountTypePresenter(@NonNull UserType type) {
         this.type = type;
@@ -38,7 +38,7 @@ public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
     }
 
     @Override
-    public Observable<UserType> observeOnCardPickedEvent() {
+    public @NonNull Observable<UserType> observeOnCardPickedEvent() {
         return subject;
     }
 

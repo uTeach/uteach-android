@@ -73,6 +73,7 @@ public class BaseDialogView extends FrameLayout implements BaseDialogContract.Vi
         this.cancellable = cancellable;
     }
 
+    @NonNull
     @Override
     public Observable<Void> observeOnCancelEvent() {
         if (listener == null) {

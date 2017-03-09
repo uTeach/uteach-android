@@ -65,6 +65,7 @@ public class LoginDialogView extends LinearLayout implements LoginContract.View 
         throw new IllegalStateException("This view doesnt support xml injection. Use is programatical only");
     }
 
+    @NonNull
     @Override
     public Observable<Void> observeOnTermsAndConditionsClick() {
         if (termsAndConditionsListener == null) {
@@ -74,11 +75,13 @@ public class LoginDialogView extends LinearLayout implements LoginContract.View 
         return termsAndConditionsListener;
     }
 
+    @NonNull
     @Override
     public Observable<Void> observeOnFacebookLoginClick() {
         return RxView.clicks(facebookButton);
     }
 
+    @NonNull
     @Override
     public Observable<Void> observeOnGoogleLoginClick() {
         return RxView.clicks(googleButton);

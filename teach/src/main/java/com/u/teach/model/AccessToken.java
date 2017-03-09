@@ -43,6 +43,46 @@ public final class AccessToken implements Serializable {
         return userType;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AccessToken)) {
+            return false;
+        }
+
+        final AccessToken that = (AccessToken) o;
+
+        if (createdAt != that.createdAt) {
+            return false;
+        }
+        if (expiresIn != that.expiresIn) {
+            return false;
+        }
+        if (!tokenType.equals(that.tokenType)) {
+            return false;
+        }
+        if (!accessToken.equals(that.accessToken)) {
+            return false;
+        }
+        if (!refreshToken.equals(that.refreshToken)) {
+            return false;
+        }
+        return userType == that.userType;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = tokenType.hashCode();
+        result = 31 * result + accessToken.hashCode();
+        result = 31 * result + refreshToken.hashCode();
+        result = 31 * result + (int) (createdAt ^ (createdAt >>> 32));
+        result = 31 * result + (int) (expiresIn ^ (expiresIn >>> 32));
+        result = 31 * result + userType.hashCode();
+        return result;
+    }
+
     public enum UserType implements Serializable {
         @SerializedName("Student")
         STUDENT,

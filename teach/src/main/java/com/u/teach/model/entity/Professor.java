@@ -68,6 +68,52 @@ public class Professor extends User implements Serializable {
         return new Builder(this);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Professor)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        final Professor professor = (Professor) o;
+
+        if (Double.compare(professor.fee, fee) != 0) {
+            return false;
+        }
+        if (!location.equals(professor.location)) {
+            return false;
+        }
+        if (!rating.equals(professor.rating)) {
+            return false;
+        }
+        if (!expertise.equals(professor.expertise)) {
+            return false;
+        }
+        if (!pendingRequests.equals(professor.pendingRequests)) {
+            return false;
+        }
+        return tags.equals(professor.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        long temp;
+        result = 31 * result + location.hashCode();
+        result = 31 * result + rating.hashCode();
+        result = 31 * result + expertise.hashCode();
+        temp = Double.doubleToLongBits(fee);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + pendingRequests.hashCode();
+        result = 31 * result + tags.hashCode();
+        return result;
+    }
+
     public static class Builder extends User.Builder<Professor> {
 
         @Nullable Location location;

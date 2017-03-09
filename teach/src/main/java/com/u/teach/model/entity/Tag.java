@@ -42,6 +42,34 @@ public class Tag extends Entity implements Serializable {
         return new Builder(this);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Tag)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        final Tag tag = (Tag) o;
+
+        if (!name.equals(tag.name)) {
+            return false;
+        }
+        return levels.equals(tag.levels);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + levels.hashCode();
+        return result;
+    }
+
     public static class Builder extends Entity.Builder<Tag> {
 
         @Nullable String name;

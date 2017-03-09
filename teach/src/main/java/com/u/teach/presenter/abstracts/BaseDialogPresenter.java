@@ -24,7 +24,7 @@ public class BaseDialogPresenter extends Presenter<BaseDialogContract.View> impl
 
     private boolean cancellable;
 
-    BaseDialogPresenter(Builder builder) {
+    BaseDialogPresenter(@NonNull Builder builder) {
         super();
         this.severity = builder.severity;
         this.title = builder.title;
