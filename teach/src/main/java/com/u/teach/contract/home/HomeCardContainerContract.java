@@ -14,7 +14,7 @@ public interface HomeCardContainerContract {
 
     interface View extends ContractView {
 
-        void setData(final @NonNull List<GenericAdapter.ItemRenderer> cards);
+        void setData(final @NonNull List<GenericAdapter.ItemSupplier> cards);
 
     }
 

@@ -1,4 +1,4 @@
-package com.u.teach.list.home.renderer;
+package com.u.teach.list.home.supplier;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,11 +11,11 @@ import com.u.teach.view.home.cards.ProfessorCardView;
  * Created by saguilera on 3/9/17.
  */
 
-public class ProfessorCardRenderer extends GenericAdapter.ItemRenderer<ProfessorCardView> {
+public class ProfessorCardSupplier extends GenericAdapter.ItemSupplier<ProfessorCardView> {
 
     private @NonNull Professor professor;
 
-    public ProfessorCardRenderer(@NonNull Context context, @NonNull Professor professor) {
+    public ProfessorCardSupplier(@NonNull Context context, @NonNull Professor professor) {
         super(context);
         this.professor = professor;
     }
@@ -33,14 +33,14 @@ public class ProfessorCardRenderer extends GenericAdapter.ItemRenderer<Professor
     }
 
     @Override
-    public boolean isSameItem(@NonNull final GenericAdapter.ItemRenderer renderer) {
-        return renderer.type() == type() &&
-            professor.id() == ((ProfessorCardRenderer) renderer).professor.id();
+    public boolean isSameItem(@NonNull final GenericAdapter.ItemSupplier supplier) {
+        return supplier.type() == type() &&
+            professor.id() == ((ProfessorCardSupplier) supplier).professor.id();
     }
 
     @Override
-    public boolean isSameContent(@NonNull final GenericAdapter.ItemRenderer renderer) {
-        return isSameItem(renderer) &&
-            professor.equals((((ProfessorCardRenderer) renderer).professor));
+    public boolean isSameContent(@NonNull final GenericAdapter.ItemSupplier supplier) {
+        return isSameItem(supplier) &&
+            professor.equals((((ProfessorCardSupplier) supplier).professor));
     }
 }

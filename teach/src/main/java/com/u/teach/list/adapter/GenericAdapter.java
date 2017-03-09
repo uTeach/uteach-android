@@ -20,15 +20,15 @@ import java.util.Map;
  */
 public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemViewHolder> {
 
-    @NonNull List<ItemRenderer> array;
-    final @NonNull Map<Integer, ItemRenderer> typeFactory;
+    @NonNull List<ItemSupplier> array;
+    final @NonNull Map<Integer, ItemSupplier> typeFactory;
 
     public GenericAdapter() {
         array = new ArrayList<>();
         typeFactory = new HashMap<>();
     }
 
-    public void data(@NonNull List<ItemRenderer> cards) {
+    public void data(@NonNull List<ItemSupplier> cards) {
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ItemComparator<>(array, cards));
 
         array = cards;
@@ -44,14 +44,14 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
     @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
-        array.get(position).presenter().attach(holder.view());
+        array.get(position).presenter().attach(holder.itemView);
     }
 
     @Override
     public int getItemViewType(final int position) {
-        ItemRenderer renderer = array.get(position);
-        typeFactory.put(renderer.type(), renderer);
-        return renderer.type();
+        ItemSupplier supplier = array.get(position);
+        typeFactory.put(supplier.type(), supplier);
+        return supplier.type();
     }
 
     @Override
@@ -64,15 +64,8 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
      */
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private final @NonNull View view;
-
         public ItemViewHolder(@NonNull final View itemView) {
             super(itemView);
-            view = itemView;
-        }
-
-        public @NonNull View view() {
-            return view;
         }
 
     }
@@ -86,11 +79,11 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
     /**
      * Class that is able to link generic presenters with views
      */
-    public static abstract class ItemRenderer<VIEW extends View & ContractView> {
+    public static abstract class ItemSupplier<VIEW extends View & ContractView> {
 
         private @NonNull WeakReference<Context> context;
 
-        public ItemRenderer(@NonNull Context context) {
+        public ItemSupplier(@NonNull Context context) {
             this.context = new WeakReference<>(context);
         }
 
@@ -111,22 +104,22 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
         /**
          * For applying new changes.
          *
-         * @param renderer another renderer
+         * @param supplier another supplier
          * @return if the item is the same. This does not mean the contents are equals.
          * Eg I have User "John" safe and sound. If I get again "John" but with a broken leg,
          * this returns 'true'. If I got "Joe", it is 'false'
          */
-        public abstract boolean isSameItem(@NonNull ItemRenderer renderer);
+        public abstract boolean isSameItem(@NonNull ItemSupplier supplier);
 
         /**
          * For applying new changes
          *
          * @return true if they are the same item AND they have the same content, false otherwise
          */
-        public abstract boolean isSameContent(@NonNull ItemRenderer renderer);
+        public abstract boolean isSameContent(@NonNull ItemSupplier supplier);
 
         /**
-         * Presenter should be reusable since a renderer will always present
+         * Presenter should be reusable since a supplier will always present
          * only one view
          * @return presenter
          */
@@ -140,8 +133,8 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
         }
 
         /**
-         * Type of the renderer, this is used for knowing the type of the view in the recyclerview
-         * Each renderer has a single view type in the recyclerview!
+         * Type of the supplier, this is used for knowing the type of the view in the recyclerview
+         * Each supplier has a single view type in the recyclerview!
          */
         public int type() {
             return getClass().getName().hashCode();
@@ -152,7 +145,7 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
     /**
      * Comparator for doing changes in the adapter
      */
-    private static class ItemComparator<Object extends ItemRenderer> extends DiffUtil.Callback {
+    private static class ItemComparator<Object extends ItemSupplier> extends DiffUtil.Callback {
 
         private @NonNull List<Object> oldList;
         private @NonNull List<Object> newList;

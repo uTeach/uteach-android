@@ -39,7 +39,7 @@ public class HomeCardContainerView extends RecyclerView implements HomeCardConta
     }
 
     @Override
-    public void setData(final @NonNull List<GenericAdapter.ItemRenderer> cards) {
+    public void setData(final @NonNull List<GenericAdapter.ItemSupplier> cards) {
         adapter.data(cards);
     }
 

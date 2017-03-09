@@ -1,4 +1,4 @@
-package com.u.teach.list.home.renderer;
+package com.u.teach.list.home.supplier;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,11 +9,11 @@ import com.u.teach.view.home.cards.HeaderCardView;
 /**
  * Created by saguilera on 3/8/17.
  */
-public class HeaderCardRenderer extends GenericAdapter.ItemRenderer<HeaderCardView> {
+public class HeaderCardSupplier extends GenericAdapter.ItemSupplier<HeaderCardView> {
 
     private final @NonNull String title;
 
-    public HeaderCardRenderer(final @NonNull Context context, final @NonNull String title) {
+    public HeaderCardSupplier(final @NonNull Context context, final @NonNull String title) {
         super(context);
         this.title = title;
     }
@@ -31,18 +31,18 @@ public class HeaderCardRenderer extends GenericAdapter.ItemRenderer<HeaderCardVi
     }
 
     @Override
-    public boolean isSameItem(@NonNull final GenericAdapter.ItemRenderer renderer) {
-        return type() == renderer.type();
+    public boolean isSameItem(@NonNull final GenericAdapter.ItemSupplier supplier) {
+        return type() == supplier.type();
     }
 
     @Override
-    public boolean isSameContent(@NonNull final GenericAdapter.ItemRenderer renderer) {
-        boolean same = isSameItem(renderer);
+    public boolean isSameContent(@NonNull final GenericAdapter.ItemSupplier supplier) {
+        boolean same = isSameItem(supplier);
 
         if (!same) return false;
 
-        HeaderCardRenderer cardRenderer = (HeaderCardRenderer) renderer;
-        return (title.contentEquals(cardRenderer.title));
+        HeaderCardSupplier cardSupplier = (HeaderCardSupplier) supplier;
+        return (title.contentEquals(cardSupplier.title));
     }
 
 }
