@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import java.util.Map;
  */
 public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemViewHolder> {
 
+    public static final int MAX_SPAN_SIZE = 4;
+
     @NonNull List<ItemSupplier> array;
     final @NonNull Map<Integer, ItemSupplier> typeFactory;
 
@@ -34,6 +37,17 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
         array = cards;
 
         diffResult.dispatchUpdatesTo(this);
+    }
+
+    public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
+        return new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(final int position) {
+                return position >= 0 && position < array.size() ?
+                    MAX_SPAN_SIZE / array.get(position).spanSize() :
+                    GridLayoutManager.DEFAULT_SPAN_COUNT;
+            }
+        };
     }
 
     @Override
@@ -100,6 +114,16 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericAdapter.ItemView
          */
         public abstract @NonNull VIEW createView();
         public abstract @NonNull ItemPresenter createPresenter();
+
+        /**
+         * Get the size of the span this view should have
+         * Eg, if the view renders in a list like this:
+         * A A A => Span size of A => 3
+         * B B  => Span size of B => 2
+         * C => Span size of C =>1
+         * @return spanSize
+         */
+        public abstract int spanSize();
 
         /**
          * For applying new changes.

@@ -6,6 +6,8 @@ import com.u.teach.list.adapter.GenericAdapter;
 import com.u.teach.presenter.home.cards.HeaderCardPresenter;
 import com.u.teach.view.home.cards.HeaderCardView;
 
+import static com.u.teach.list.adapter.GenericAdapter.MAX_SPAN_SIZE;
+
 /**
  * Created by saguilera on 3/8/17.
  */
@@ -28,6 +30,11 @@ public class HeaderCardSupplier extends GenericAdapter.ItemSupplier<HeaderCardVi
     @Override
     public GenericAdapter.ItemPresenter createPresenter() {
         return new HeaderCardPresenter(title);
+    }
+
+    @Override
+    public int spanSize() {
+        return 1;
     }
 
     @Override

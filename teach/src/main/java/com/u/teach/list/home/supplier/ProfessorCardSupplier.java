@@ -33,6 +33,11 @@ public class ProfessorCardSupplier extends GenericAdapter.ItemSupplier<Professor
     }
 
     @Override
+    public int spanSize() {
+        return 2;
+    }
+
+    @Override
     public boolean isSameItem(@NonNull final GenericAdapter.ItemSupplier supplier) {
         return supplier.type() == type() &&
             professor.id() == ((ProfessorCardSupplier) supplier).professor.id();

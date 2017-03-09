@@ -3,6 +3,7 @@ package com.u.teach.view.home;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -31,11 +32,14 @@ public class HomeCardContainerView extends RecyclerView implements HomeCardConta
 
         setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
 
-        LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        manager.setInitialPrefetchItemCount(4);
-        setLayoutManager(manager);
+        adapter = new GenericAdapter();
 
-        setAdapter(adapter = new GenericAdapter());
+        GridLayoutManager manager = new GridLayoutManager(context, GenericAdapter.MAX_SPAN_SIZE);
+        manager.setInitialPrefetchItemCount(4);
+        manager.setSpanSizeLookup(adapter.getSpanSizeLookup());
+
+        setLayoutManager(manager);
+        setAdapter(adapter);
     }
 
     @Override
