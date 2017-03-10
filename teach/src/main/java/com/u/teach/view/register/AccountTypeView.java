@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.u.teach.R;
 import com.u.teach.contract.register.AccountTypeContract;
-import com.u.teach.utils.MetricsUtils;
 import rx.Observable;
 
 /**

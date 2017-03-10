@@ -1,23 +1,13 @@
 package com.u.teach.view.home.cards;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.u.teach.R;
 import com.u.teach.contract.home.cards.NoAccountCardContract;
-import com.u.teach.contract.home.cards.ProfessorCardContract;
-import com.u.teach.model.entity.Tag;
-import com.u.teach.view.misc.ExpertiseView;
-import com.u.teach.view.misc.RatingView;
-import java.util.List;
 import rx.Observable;
 
 /**

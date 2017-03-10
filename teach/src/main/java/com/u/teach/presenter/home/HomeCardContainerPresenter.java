@@ -4,12 +4,12 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.list.home.card.supplier.HeaderCardSupplier;
 import com.u.teach.list.home.card.supplier.NoAccountCardSupplier;
+import com.u.teach.list.home.card.supplier.ProfessorCardSupplier;
 import com.u.teach.list.home.card.supplier.TrendingProfessorsCardSupplier;
 import com.u.teach.model.entity.Professor;
 import com.u.teach.presenter.Presenter;
-import com.u.teach.list.home.card.supplier.ProfessorCardSupplier;
-import com.u.teach.list.home.card.supplier.HeaderCardSupplier;
 import java.util.ArrayList;
 import java.util.List;
 
