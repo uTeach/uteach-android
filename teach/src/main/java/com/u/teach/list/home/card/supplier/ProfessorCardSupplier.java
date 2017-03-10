@@ -1,4 +1,4 @@
-package com.u.teach.list.home.supplier;
+package com.u.teach.list.home.card.supplier;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,6 @@ import com.u.teach.view.home.cards.ProfessorCardView;
 /**
  * Created by saguilera on 3/9/17.
  */
-
 public class ProfessorCardSupplier extends GenericAdapter.ItemSupplier<ProfessorCardView> {
 
     private @NonNull Professor professor;

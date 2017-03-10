@@ -1,12 +1,10 @@
-package com.u.teach.list.home.supplier;
+package com.u.teach.list.home.card.supplier;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import com.u.teach.list.adapter.GenericAdapter;
 import com.u.teach.presenter.home.cards.HeaderCardPresenter;
 import com.u.teach.view.home.cards.HeaderCardView;
-
-import static com.u.teach.list.adapter.GenericAdapter.MAX_SPAN_SIZE;
 
 /**
  * Created by saguilera on 3/8/17.

@@ -4,10 +4,11 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.list.adapter.GenericAdapter;
-import com.u.teach.list.home.supplier.HeaderCardSupplier;
-import com.u.teach.list.home.supplier.ProfessorCardSupplier;
+import com.u.teach.list.home.card.supplier.NoAccountCardSupplier;
 import com.u.teach.model.entity.Professor;
 import com.u.teach.presenter.Presenter;
+import com.u.teach.list.home.card.supplier.ProfessorCardSupplier;
+import com.u.teach.list.home.card.supplier.HeaderCardSupplier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class HomeCardContainerPresenter extends Presenter<HomeCardContainerContr
         Professor professor = new Gson().fromJson(PROFESSOR_MOCK_STRING, Professor.class);
 
         List<GenericAdapter.ItemSupplier> mocks = new ArrayList<>();
-        mocks.add(new HeaderCardSupplier(getContext(), "Profesores Mock 1"));
+        mocks.add(new HeaderCardSupplier(getContext(), "No Account View Mock"));
+        mocks.add(new NoAccountCardSupplier(getContext()));
+        mocks.add(new HeaderCardSupplier(getContext(), "Professor Mock"));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
@@ -62,7 +65,7 @@ public class HomeCardContainerPresenter extends Presenter<HomeCardContainerContr
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new HeaderCardSupplier(getContext(), "Pofessors Mock 2"));
+        mocks.add(new HeaderCardSupplier(getContext(), "Professor Mock 2"));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
