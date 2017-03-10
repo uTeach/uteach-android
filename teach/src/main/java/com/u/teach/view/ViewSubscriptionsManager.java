@@ -12,7 +12,6 @@ import rx.subjects.BehaviorSubject;
 /**
  * Created by saguilera on 1/21/17.
  */
-
 public class ViewSubscriptionsManager {
 
     private @NonNull List<Subscription> subscriptions;

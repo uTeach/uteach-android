@@ -9,8 +9,7 @@ import android.util.AttributeSet;
 import com.u.teach.R;
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.list.adapter.GenericAdapter;
-import com.u.teach.utils.MetricsUtils;
-import com.u.teach.view.home.recyclerview.SpacesItemDecoration;
+import com.u.teach.view.home.recyclerview.BaseHomeItemDecorator;
 import java.util.List;
 
 /**
@@ -33,7 +32,7 @@ public class HomeCardContainerView extends RecyclerView implements HomeCardConta
 
         setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
 
-        addItemDecoration(new SpacesItemDecoration((int) getResources().getDimensionPixelSize(R.dimen.home_item_paddings)));
+        addItemDecoration(new BaseHomeItemDecorator(getResources().getDimensionPixelSize(R.dimen.home_item_paddings)));
 
         adapter = new GenericAdapter();
 

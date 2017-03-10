@@ -12,6 +12,8 @@ import com.u.teach.view.home.cards.ProfessorCardView;
  */
 public class ProfessorCardSupplier extends GenericAdapter.ItemSupplier<ProfessorCardView> {
 
+    public static final int PROFESSORS_PER_ROW = 2;
+
     private @NonNull Professor professor;
 
     public ProfessorCardSupplier(@NonNull Context context, @NonNull Professor professor) {
@@ -33,7 +35,7 @@ public class ProfessorCardSupplier extends GenericAdapter.ItemSupplier<Professor
 
     @Override
     public int spanSize() {
-        return 2;
+        return PROFESSORS_PER_ROW;
     }
 
     @Override

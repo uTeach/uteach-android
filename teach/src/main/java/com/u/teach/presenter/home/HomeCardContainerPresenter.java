@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.u.teach.contract.home.HomeCardContainerContract;
 import com.u.teach.list.adapter.GenericAdapter;
 import com.u.teach.list.home.card.supplier.NoAccountCardSupplier;
+import com.u.teach.list.home.card.supplier.TrendingProfessorsCardSupplier;
 import com.u.teach.model.entity.Professor;
 import com.u.teach.presenter.Presenter;
 import com.u.teach.list.home.card.supplier.ProfessorCardSupplier;
@@ -24,8 +25,11 @@ public class HomeCardContainerPresenter extends Presenter<HomeCardContainerContr
 
         List<GenericAdapter.ItemSupplier> mocks = new ArrayList<>();
         mocks.add(new HeaderCardSupplier(getContext(), "No Account View Mock"));
+
         mocks.add(new NoAccountCardSupplier(getContext()));
+
         mocks.add(new HeaderCardSupplier(getContext(), "Professor Mock"));
+
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
@@ -65,42 +69,48 @@ public class HomeCardContainerPresenter extends Presenter<HomeCardContainerContr
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
         mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new HeaderCardSupplier(getContext(), "Professor Mock 2"));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
-        mocks.add(new ProfessorCardSupplier(getContext(), professor));
+
+        mocks.add(new HeaderCardSupplier(getContext(), "Trending Professor Mock 2"));
+
+        List<GenericAdapter.ItemSupplier> trendingMocks = new ArrayList<>();
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        trendingMocks.add(new ProfessorCardSupplier(getContext(), professor));
+        mocks.add(new TrendingProfessorsCardSupplier(getContext(), trendingMocks));
+
         view.setData(mocks);
     }
 

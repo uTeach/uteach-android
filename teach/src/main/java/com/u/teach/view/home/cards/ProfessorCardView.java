@@ -1,17 +1,21 @@
 package com.u.teach.view.home.cards;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.u.teach.R;
 import com.u.teach.contract.home.cards.ProfessorCardContract;
+import com.u.teach.list.home.card.supplier.ProfessorCardSupplier;
 import com.u.teach.model.entity.Tag;
 import com.u.teach.view.misc.ExpertiseView;
 import com.u.teach.view.misc.RatingView;
@@ -22,6 +26,8 @@ import java.util.List;
  */
 public class ProfessorCardView extends CardView
         implements ProfessorCardContract.View {
+
+    private static int bestWidth = 0;
 
     private @NonNull TextView nameView;
     private @NonNull ImageView imageView;
@@ -43,7 +49,7 @@ public class ProfessorCardView extends CardView
         inflate(context, R.layout.view_card_professor, this);
 
         RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
+            computeBestWidth(),
             getResources().getDimensionPixelSize(R.dimen.view_card_professor_height));
         setLayoutParams(params);
 
@@ -83,6 +89,22 @@ public class ProfessorCardView extends CardView
     @Override
     public void setTags(@NonNull final List<Tag> tags) {
         // TODO
+    }
+
+    private int computeBestWidth() {
+        if (bestWidth != 0) return bestWidth;
+
+        WindowManager wm = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenWidth = size.x;
+        int columns = ProfessorCardSupplier.PROFESSORS_PER_ROW;
+
+        screenWidth -= (2 * getResources().getDimensionPixelSize(R.dimen.home_item_paddings));
+        screenWidth -= ((columns + 1) * getResources().getDimensionPixelSize(R.dimen.home_item_paddings));
+
+        return bestWidth = (screenWidth / columns);
     }
 
 }
