@@ -14,4 +14,9 @@
     <dimen name="dialog_logging_text_size">13sp</dimen>
     <dimen name="dialog_logging_text_padding">4dp</dimen>
 
+    <!-- view_account_type -->
+    <dimen name="view_account_type_radius">2dp</dimen>
+    <dimen name="view_account_type_elevation">8dp</dimen>
+    <dimen name="view_account_type_padding">8dp</dimen>
+
 </resources>

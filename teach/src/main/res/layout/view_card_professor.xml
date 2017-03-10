@@ -9,8 +9,9 @@
             android:id="@+id/view_card_professor_image"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/view_card_professor_image_height"
 
+            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
 
             android:layout_centerHorizontal="true"
@@ -44,6 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/view_card_professor_name_height"
 
+            android:gravity="center_vertical"
+
             android:layout_below="@+id/view_card_professor_image"
             android:layout_marginLeft="@dimen/view_card_professor_name_margin_left" />
 
@@ -51,7 +54,7 @@
             android:id="@+id/view_card_professor_tags"
 
             android:layout_width="match_parent"
-            android:layout_height="@dimen/view_card_professor_tags_height"
+            android:layout_height="match_parent"
 
             android:layout_below="@+id/view_card_professor_name"
             android:layout_alignParentBottom="true"

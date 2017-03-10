@@ -3,6 +3,7 @@ package com.u.teach.view.home.cards;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.u.teach.R;
 import com.u.teach.contract.home.cards.ProfessorCardContract;
 import com.u.teach.model.entity.Tag;
-import com.u.teach.utils.MetricsUtils;
 import com.u.teach.view.misc.ExpertiseView;
 import com.u.teach.view.misc.RatingView;
 import java.util.List;
@@ -22,9 +22,6 @@ import java.util.List;
  */
 public class ProfessorCardView extends CardView
         implements ProfessorCardContract.View {
-
-    private static final float VIEW_WIDTH_DP = 46;
-    private static final float VIEW_HEIGHT_DP = 120;
 
     private @NonNull TextView nameView;
     private @NonNull ImageView imageView;
@@ -45,9 +42,13 @@ public class ProfessorCardView extends CardView
 
         inflate(context, R.layout.view_card_professor, this);
 
-        setLayoutParams(new ViewGroup.LayoutParams(
-            (int) MetricsUtils.convertDpToPixel(VIEW_WIDTH_DP),
-            (int) MetricsUtils.convertDpToPixel(VIEW_HEIGHT_DP)));
+        RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            getResources().getDimensionPixelSize(R.dimen.view_card_professor_height));
+        setLayoutParams(params);
+
+        setRadius(getResources().getDimensionPixelSize(R.dimen.view_card_professor_radius));
+        setCardElevation(getResources().getDimensionPixelSize(R.dimen.view_card_professor_elevation));
 
         nameView = (TextView) findViewById(R.id.view_card_professor_name);
         imageView = (ImageView) findViewById(R.id.view_card_professor_image);

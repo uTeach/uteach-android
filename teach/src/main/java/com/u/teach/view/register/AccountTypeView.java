@@ -18,10 +18,6 @@ import rx.Observable;
  */
 public class AccountTypeView extends CardView implements AccountTypeContract.View {
 
-    private static final int RADIUS_DP = 2;
-    private static final int ELEVATION_DP = 8;
-    private static final int PADDING_DP = 8;
-
     private static final int TYPE_NAN = 0;
     private static final int TYPE_STUDENT = 1;
     private static final int TYPE_PROFESSOR = 2;
@@ -39,10 +35,10 @@ public class AccountTypeView extends CardView implements AccountTypeContract.Vie
 
         inflate(context, R.layout.view_card_pick_user_type, this);
 
-        setRadius(MetricsUtils.convertDpToPixel(RADIUS_DP));
-        setCardElevation(MetricsUtils.convertDpToPixel(ELEVATION_DP));
+        setRadius(getResources().getDimensionPixelSize(R.dimen.view_account_type_radius));
+        setCardElevation(getResources().getDimensionPixelSize(R.dimen.view_account_type_elevation));
 
-        int contentPadding = (int) MetricsUtils.convertDpToPixel(PADDING_DP);
+        int contentPadding = getResources().getDimensionPixelSize(R.dimen.view_account_type_padding);
         setContentPadding(contentPadding,
             contentPadding,
             contentPadding,
