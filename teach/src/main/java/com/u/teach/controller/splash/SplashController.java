@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.rxlifecycle.ControllerEvent;
+import com.facebook.drawee.view.DraweeView;
 import com.u.teach.R;
 import com.u.teach.controller.FlowController;
 import com.u.teach.controller.register.RegisterController;
@@ -14,6 +15,7 @@ import com.u.teach.model.entity.User;
 import com.u.teach.networking.AccessTokenManager;
 import com.u.teach.networking.RestClient;
 import com.u.teach.networking.services.user.UserService;
+import com.u.teach.utils.FrescoImageController;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -41,6 +43,11 @@ public class SplashController extends FlowController {
     @Override
     protected void onAttach(@NonNull final View view) {
         super.onAttach(view);
+
+        FrescoImageController.create()
+            .load(R.drawable.gif_loading_loop)
+            .autoPlayAnimations(true)
+            .into((DraweeView) view.findViewById(R.id.controller_splash_gif));
 
         if (AccessTokenManager.getInstance().read(getActivity()) != null) {
             // If we have an access token, get the user
