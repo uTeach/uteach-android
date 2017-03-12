@@ -1,8 +1,8 @@
-package com.u.teach.list.home.card.supplier;
+package com.u.teach.supplier.home.card;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.utils.adapter.GenericAdapter;
 import com.u.teach.presenter.home.cards.NoAccountCardPresenter;
 import com.u.teach.view.home.cards.NoAccountCardView;
 

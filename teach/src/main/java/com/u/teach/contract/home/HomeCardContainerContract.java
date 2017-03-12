@@ -3,7 +3,7 @@ package com.u.teach.contract.home;
 import android.support.annotation.NonNull;
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
-import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.utils.adapter.GenericAdapter;
 import java.util.List;
 
 /**

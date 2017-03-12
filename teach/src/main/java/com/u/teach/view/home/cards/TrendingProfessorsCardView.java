@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import com.u.teach.R;
 import com.u.teach.contract.home.cards.TrendingProfessorsCardContract;
-import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.utils.adapter.GenericAdapter;
 import com.u.teach.view.home.recyclerview.TrendingProfessorsItemDecorator;
 import java.util.List;
 

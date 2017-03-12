@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import com.u.teach.R;
 import com.u.teach.contract.home.HomeCardContainerContract;
-import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.utils.adapter.GenericAdapter;
 import com.u.teach.view.home.recyclerview.BaseHomeItemDecorator;
 import java.util.List;
 

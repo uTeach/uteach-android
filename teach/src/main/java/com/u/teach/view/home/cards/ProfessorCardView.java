@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.u.teach.R;
 import com.u.teach.contract.home.cards.ProfessorCardContract;
-import com.u.teach.list.home.card.supplier.ProfessorCardSupplier;
+import com.u.teach.supplier.home.card.ProfessorCardSupplier;
 import com.u.teach.model.entity.Tag;
 import com.u.teach.view.misc.ExpertiseView;
 import com.u.teach.view.misc.RatingView;

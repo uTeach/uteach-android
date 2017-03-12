@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import com.u.teach.contract.home.cards.NoAccountCardContract;
 import com.u.teach.controller.register.LoginDialogController;
-import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.utils.adapter.GenericAdapter;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 

@@ -2,7 +2,7 @@ package com.u.teach.presenter.home.cards;
 
 import android.support.annotation.NonNull;
 import com.u.teach.contract.home.cards.HeaderCardContract;
-import com.u.teach.list.adapter.GenericAdapter;
+import com.u.teach.utils.adapter.GenericAdapter;
 
 /**
  * Created by saguilera on 3/8/17.

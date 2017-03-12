@@ -1,4 +1,4 @@
-package com.u.teach.list.adapter;
+package com.u.teach.utils.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
