@@ -1,5 +1,6 @@
 package com.u.teach.contract.register;
 
+import android.support.annotation.NonNull;
 import com.u.teach.contract.ContractPresenter;
 import com.u.teach.contract.ContractView;
 import com.u.teach.model.AccessToken.UserType;
@@ -12,14 +13,14 @@ public interface AccountTypeContract {
 
     interface View extends ContractView {
 
-        Observable<Void> observeOnCardPickedEvent();
+        @NonNull Observable<Void> observeOnCardPickedEvent();
 
     }
 
-    interface Presenter extends ContractPresenter<View> {
+    interface Presenter extends ContractPresenter {
 
         void onCardPicked();
-        Observable<UserType> observeOnCardPickedEvent();
+        @NonNull Observable<UserType> observeOnCardPickedEvent();
 
     }
 

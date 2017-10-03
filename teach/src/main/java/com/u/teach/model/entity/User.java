@@ -56,6 +56,46 @@ public abstract class User extends Entity implements Serializable {
         return name;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        final User user = (User) o;
+
+        if (!name.equals(user.name)) {
+            return false;
+        }
+        if (!email.equals(user.email)) {
+            return false;
+        }
+        if (gender != user.gender) {
+            return false;
+        }
+        if (!birthday.equals(user.birthday)) {
+            return false;
+        }
+        return picture.equals(user.picture);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + gender.hashCode();
+        result = 31 * result + birthday.hashCode();
+        result = 31 * result + picture.hashCode();
+        return result;
+    }
+
     public static class Builder<T extends User> extends Entity.Builder<T> {
 
         @Nullable String name;

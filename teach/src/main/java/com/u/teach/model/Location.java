@@ -34,6 +34,34 @@ public final class Location implements Serializable {
         return new Builder(this);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Location)) {
+            return false;
+        }
+
+        final Location location = (Location) o;
+
+        if (Double.compare(location.latitude, latitude) != 0) {
+            return false;
+        }
+        return Double.compare(location.longitude, longitude) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(latitude);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(longitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
     public static class Builder implements Preconditions<Location> {
 
         double latitude = NO_VALUE;

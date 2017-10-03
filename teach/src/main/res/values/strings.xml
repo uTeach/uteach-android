@@ -3,6 +3,10 @@
 
     <!-- Toolbar -->
     <string name="toolbar_register">Registro</string>
+    <string name="toolbar_home">@string/app_name</string>
+
+    <!-- Menu -->
+    <string name="menu_home_search">Buscar</string>
 
 </resources>
 

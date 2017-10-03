@@ -49,6 +49,7 @@ dependencies {
     compile support.cardView
 
     compile misc.gif
+    compile misc.fresco
 
     compile rx.java
     compile rx.android
@@ -61,6 +62,7 @@ dependencies {
     compile http.core
     compile http.parser
     compile http.rx
+    compile http.fresco
 
     debugCompile misc.leakCanary
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Home -->
+    <dimen name="home_item_paddings">8dp</dimen>
+
+    <!-- view_card_header -->
+    <dimen name="view_card_header_text_size">16sp</dimen>
+
+    <!-- view_card_professor -->
+    <dimen name="view_card_professor_height">180dp</dimen>
+    <dimen name="view_card_professor_radius">0dp</dimen>
+    <dimen name="view_card_professor_elevation">4dp</dimen>
+    <dimen name="view_card_professor_expertise_margin_bottom">8dp</dimen>
+    <dimen name="view_card_professor_expertise_margin_right">16dp</dimen>
+    <dimen name="view_card_professor_name_margin_left">@dimen/view_card_professor_expertise_margin_right</dimen>
+    <dimen name="view_card_professor_expertise_height">30dp</dimen>
+    <dimen name="view_card_professor_name_height">@dimen/view_card_professor_expertise_height</dimen>
+    <dimen name="view_card_professor_rating_margin">12dp</dimen>
+    <dimen name="view_card_professor_image_height">100dp</dimen>
+
+    <!-- view_card_no_account -->
+    <dimen name="view_card_no_account_height">120dp</dimen>
+    <dimen name="view_card_no_account_radius">0dp</dimen>
+    <dimen name="view_card_no_account_elevation">4dp</dimen>
+    <dimen name="view_card_no_account_title_text_size">18sp</dimen>
+    <dimen name="view_card_no_account_description_text_size">14sp</dimen>
+    <dimen name="view_card_no_account_title_margin_bottom">12dp</dimen>
+    <string name="view_card_no_account_title_text">Queres dar o recibir clases?</string>
+    <string name="view_card_no_account_description_text">Haz click aqui y no esperes mas!</string>
+
+</resources>

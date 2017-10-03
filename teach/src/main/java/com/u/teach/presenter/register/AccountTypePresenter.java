@@ -2,7 +2,6 @@ package com.u.teach.presenter.register;
 
 import android.support.annotation.NonNull;
 import android.view.View;
-import com.bluelinelabs.conductor.Router;
 import com.u.teach.contract.register.AccountTypeContract;
 import com.u.teach.model.AccessToken.UserType;
 import com.u.teach.presenter.Presenter;
@@ -17,17 +16,15 @@ public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
         implements AccountTypeContract.Presenter {
 
     private final @NonNull UserType type;
-    private PublishSubject<UserType> subject;
+    private @NonNull PublishSubject<UserType> subject;
 
-    public AccountTypePresenter(@NonNull Router router,
-        @NonNull UserType type) {
-        super(router);
+    public AccountTypePresenter(@NonNull UserType type) {
         this.type = type;
         subject = PublishSubject.create();
     }
 
     @Override
-    public void onAttach(@NonNull AccountTypeContract.View view) {
+    protected void onAttach(@NonNull AccountTypeContract.View view) {
         view.observeOnCardPickedEvent()
             .take(1)
             .compose(this.<Void>bindToLifecycle((View) view))
@@ -40,7 +37,7 @@ public class AccountTypePresenter extends Presenter<AccountTypeContract.View>
     }
 
     @Override
-    public Observable<UserType> observeOnCardPickedEvent() {
+    public @NonNull Observable<UserType> observeOnCardPickedEvent() {
         return subject;
     }
 

@@ -38,6 +38,34 @@ public class Student extends User implements Serializable {
         return new Builder(this);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Student)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        final Student student = (Student) o;
+
+        if (!availableProfessors.equals(student.availableProfessors)) {
+            return false;
+        }
+        return pendingProfessors.equals(student.pendingProfessors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + availableProfessors.hashCode();
+        result = 31 * result + pendingProfessors.hashCode();
+        return result;
+    }
+
     public static class Builder extends User.Builder<Student> {
 
         @Nullable List<Professor> availableProfessors;

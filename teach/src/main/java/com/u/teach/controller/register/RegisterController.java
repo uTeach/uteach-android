@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.bluelinelabs.conductor.Router;
 import com.squareup.coordinators.Coordinator;
 import com.squareup.coordinators.CoordinatorProvider;
 import com.u.teach.R;
@@ -29,33 +28,37 @@ public class RegisterController extends FlowController {
     @NonNull
     @Override
     protected View onCreateView(@NonNull final LayoutInflater inflater, @NonNull final ViewGroup container) {
-        final ViewGroup view = (ViewGroup) inflater.inflate(R.layout.controller_register, container, false);
-        final PresenterGraph graph = new PresenterGraph(getRouter());
+        return inflater.inflate(R.layout.controller_register, container, false);
+    }
+
+    @Override
+    protected void onAttach(@NonNull final View view) {
+        super.onAttach(view);
+
+        final PresenterGraph graph = new PresenterGraph();
 
         Observable.merge(graph.cardPickEventObservables())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<UserType>bindToLifecycle())
-                .first()
-                .subscribe(new Action1<UserType>() {
-                    @Override
-                    public void call(final UserType userType) {
-                        //TODO
-                        // We have the selected usertype, do something.
-                        Log.w("RegisterController", userType.name());
-                        showDialog(new LoginDialogController());
-                    }
-                });
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .compose(this.<UserType>bindToLifecycle())
+            .take(1)
+            .subscribe(new Action1<UserType>() {
+                @Override
+                public void call(final UserType userType) {
+                    //TODO
+                    // We have the selected usertype, do something.
+                    Log.w("RegisterController", userType.name());
+                    showDialog(new LoginDialogController());
+                }
+            });
 
-        CoordinatorsInstaller.installBinder(view, new CoordinatorProvider() {
+        CoordinatorsInstaller.installBinder((ViewGroup) view, new CoordinatorProvider() {
             @Nullable
             @Override
             public Coordinator provideCoordinator(final View view) {
                 return graph.present(view);
             }
         });
-
-        return view;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -69,9 +72,9 @@ public class RegisterController extends FlowController {
         private static final int KEY_STUDENT = 0;
         private static final int KEY_PROFESSOR = 1;
 
-        public PresenterGraph(@NonNull Router router) {
-            add(KEY_STUDENT, new AccountTypePresenter(router, UserType.STUDENT));
-            add(KEY_PROFESSOR, new AccountTypePresenter(router, UserType.PROFESSOR));
+        public PresenterGraph() {
+            add(KEY_STUDENT, new AccountTypePresenter(UserType.STUDENT));
+            add(KEY_PROFESSOR, new AccountTypePresenter(UserType.PROFESSOR));
         }
 
         @SuppressWarnings({ "unchecked", "ConstantConditions" })

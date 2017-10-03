@@ -38,6 +38,25 @@ public abstract class Entity implements Serializable {
         return id;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Entity)) {
+            return false;
+        }
+
+        final Entity entity = (Entity) o;
+
+        return id == entity.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
+
     public static class Builder<T extends Entity> implements Preconditions<T> {
 
         long id = NO_VALUE;

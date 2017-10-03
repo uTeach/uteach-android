@@ -6,28 +6,41 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import com.bluelinelabs.conductor.Router;
+import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.squareup.coordinators.Coordinator;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.u.teach.contract.ContractView;
+import com.u.teach.controller.abstracts.BaseDialogController;
+import com.u.teach.utils.RouterInteractor;
 
 /**
  * Created by saguilera on 1/21/17.
  */
 public abstract class Presenter<VIEW extends ContractView> extends Coordinator {
 
-    private @NonNull Router router;
-
-    public Presenter(@NonNull Router router) {
-        this.router = router;
-    }
+    public Presenter() {}
 
     protected @Nullable Context getContext() {
-        return router.getActivity();
+        return RouterInteractor.instance().mainRouter().getActivity();
     }
 
-    protected @NonNull Router getRouter() {
-        return router;
+    protected @NonNull Router getMainRouter() {
+        return RouterInteractor.instance().mainRouter();
+    }
+
+    protected @NonNull Router getAuxiliaryRouter() {
+        return RouterInteractor.instance().auxRouter();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    protected void showDialog(@NonNull BaseDialogController controller) {
+        RouterInteractor.instance().auxRouter()
+            .setPopsLastView(true)
+            .setRoot(RouterTransaction.with(controller)
+                .popChangeHandler(new FadeChangeHandler())
+                .pushChangeHandler(new FadeChangeHandler()));
     }
 
     @NonNull
@@ -38,19 +51,19 @@ public abstract class Presenter<VIEW extends ContractView> extends Coordinator {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void attach(final View view) {
+    public void attach(@NonNull final View view) {
         super.attach(view);
         onAttach((VIEW) view);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void detach(final View view) {
+    public void detach(@NonNull final View view) {
         super.detach(view);
         onDetach((VIEW) view);
     }
 
-    protected abstract void onAttach(final VIEW view);
-    protected void onDetach(final VIEW view) {}
+    protected abstract void onAttach(final @NonNull VIEW view);
+    protected void onDetach(final @NonNull VIEW view) {}
 
 }

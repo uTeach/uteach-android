@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/view_card_professor_image"
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_card_professor_image_height"
+
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+        <com.u.teach.view.misc.ExpertiseView
+            android:id="@+id/view_card_professor_expertise"
+
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/view_card_professor_expertise_height"
+
+            android:layout_below="@+id/view_card_professor_image"
+            android:layout_marginBottom="@dimen/view_card_professor_expertise_margin_bottom"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/view_card_professor_expertise_margin_right" />
+        
+        <com.u.teach.view.misc.RatingView
+            android:id="@+id/view_card_professor_rating"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/view_card_professor_rating_margin"
+            android:layout_marginTop="@dimen/view_card_professor_rating_margin" />
+
+        <TextView
+            android:id="@+id/view_card_professor_name"
+
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/view_card_professor_name_height"
+
+            android:gravity="center_vertical"
+
+            android:layout_below="@+id/view_card_professor_image"
+            android:layout_marginLeft="@dimen/view_card_professor_name_margin_left" />
+
+        <FrameLayout
+            android:id="@+id/view_card_professor_tags"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_below="@+id/view_card_professor_name"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+
+            android:background="@color/black" />
+
+    </RelativeLayout>
+
+</merge>
